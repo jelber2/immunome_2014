@@ -48,7 +48,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/clean-sort-addRG/
 6.Find INDEL regions within individual BAM files
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T RealignerTargetCreator \
-        -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I ../clean-sort-addRG-markdup/Sample-CL2-MD.bam \
         --minReadsAtLocus 4 \
         -o ../realign-around-indels/Sample.merged.intervals
@@ -56,7 +56,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/clean-sort-addRG/
 7.Realign the BAM based on indel intervals:
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T IndelRealigner \
-        -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I ../clean-sort-addRG-markdup/Sample-CL2-MD.bam \
         -targetIntervals ../realign-around-indels/Sample.merged.intervals \
         -LOD 3.0 \
@@ -142,14 +142,14 @@ else:
 
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T RealignerTargetCreator \
-        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I ../clean-sort-addRG-markdup/%s-CL2-MD.bam \
         --minReadsAtLocus 4 \
         -o ../realign-around-indels/%s.merged.intervals
 
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T IndelRealigner \
-        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I ../clean-sort-addRG-markdup/%s-CL2-MD.bam \
         -targetIntervals ../realign-around-indels/%s.merged.intervals \
         -LOD 3.0 \
