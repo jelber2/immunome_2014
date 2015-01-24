@@ -15,7 +15,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal02
 1.Analyze patterns of covariation in the sequence dataset
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T BaseRecalibrator \
-    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I Sample-recal02.bam \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -knownSites ALL-samples-recal02-Q30-SNPs.vcf \
@@ -24,7 +24,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal02
 2.Do a second pass to analyze covariation remaining after recalibration
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T BaseRecalibrator \
-    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I Sample-recal02.bam \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -knownSites ../call-SNPs-recal02/ALL-samples-recal02-Q30-SNPs.vcf \
@@ -34,7 +34,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal02
 3.Generate before/after plots
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T AnalyzeCovariates \
-    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -before ../call-SNPs-recal03/Sample-recal-data.table \
     -after ../call-SNPs-recal03/Sample-post-recal-data.table \
     -plots ../call-SNPs-recal03/Sample-recalibration_plots.pdf
@@ -42,7 +42,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal02
 4.Apply the recalibration to your sequence data
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T PrintReads \
-    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I Sample-recal02.bam \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -BQSR ../call-SNPs-recal03/Sample-recal-data.table \
@@ -95,7 +95,7 @@ else:
         Command ="""
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T BaseRecalibrator \
-        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I %s-recal02.bam \
         -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
         -knownSites ALL-samples-recal02-Q30-SNPs.vcf \
@@ -103,7 +103,7 @@ else:
 
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T BaseRecalibrator \
-        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I %s-recal02.bam \
         -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
         -knownSites ../call-SNPs-recal02/ALL-samples-recal02-Q30-SNPs.vcf \
@@ -112,14 +112,14 @@ else:
 
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T AnalyzeCovariates \
-        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -before ../call-SNPs-recal03/%s-recal-data.table \
         -after ../call-SNPs-recal03/%s-post-recal-data.table \
         -plots ../call-SNPs-recal03/%s-recalibration_plots.pdf
 
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T PrintReads \
-        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I %s-recal02.bam \
         -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
         -BQSR ../call-SNPs-recal03/%s-recal-data.table \

@@ -12,7 +12,7 @@
 #PBS -q single
 #PBS -A hpc_startup_jelber2
 #PBS -l nodes=1:ppn=4
-#PBS -l walltime=02:00:00
+#PBS -l walltime=04:00:00
 #PBS -o /work/jelber2/reference
 #PBS -j oe
 #PBS -N makes_indexes
@@ -56,5 +56,5 @@ GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna
 # Build a hash (.sthash) file:
 
 python ~/bin/stampy-1.0.23/stampy.py \
--g GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
--H GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna
+-g GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
+-H GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic

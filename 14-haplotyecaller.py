@@ -15,7 +15,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
 1.Analyze patterns of covariation in the sequence dataset
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T HaplotypeCaller \
-        -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I InDir/Sample-recal03.bam \
         --emitRefConfidence GVCF \
         --variant_index_type LINEAR \
@@ -70,7 +70,7 @@ else:
         Command ="""
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T HaplotypeCaller \
-        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I %s/%s-recal03.bam \
         --emitRefConfidence GVCF \
         --variant_index_type LINEAR \

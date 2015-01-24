@@ -37,8 +37,8 @@ cd InDir = /work/jelber2/immunome_2014/run1/bwa-alignment
 
 6.Map the bam files using stampy
         ~/bin/parallel-20150122/src/parallel 'python ~/bin/stampy-1.0.23/stampy.py \
-        -g RefDir/C_picta-3.0.3 \
-        -h RefDir/C_picta-3.0.3 \
+        -g RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
+        -h RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
         -f sam \
         -t 1 \
         --bamkeepgoodreads \
@@ -55,7 +55,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/bwa-alignment
 9.Convert sam2bam then remove sam from filename
         ~/bin/parallel-20150122/src/parallel '~/bin/samtools-1.1/samtools view \
         -bS \
-        -t RefDir/C_picta-3.0.3.fai {} > {}.bam' ::: Sample-*.stampy.sam
+        -t RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fai {} > {}.bam' ::: Sample-*.stampy.sam
         ~/bin/parallel-20150122/src/parallel 'rename .sam "" {}' ::: Sample-*stampy.sam.bam
 
 10.Concatenate bam files
@@ -154,8 +154,8 @@ else:
         ~/bin/parallel-20150122/src/parallel 'rename .sam "" {}' ::: %s-*.sam.bwa.bam
 
         ~/bin/parallel-20150122/src/parallel 'python ~/bin/stampy-1.0.23/stampy.py \
-        -g %s/C_picta-3.0.3 \
-        -h %s/C_picta-3.0.3 \
+        -g %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
+        -h %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
         -f sam \
         -t 1 \
         --bamkeepgoodreads \

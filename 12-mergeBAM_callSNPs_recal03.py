@@ -25,7 +25,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
 2.Call SNPs
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T UnifiedGenotyper \
-    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -maxAltAlleles 19 \
@@ -37,7 +37,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
 3.Call Indels
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T UnifiedGenotyper \
-    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -maxAltAlleles 19 \
@@ -50,7 +50,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
 4.Filter SNP calls around indels
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T VariantFiltration \
-    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -V ALL-samples-recal03-Q30-rawSNPS.vcf \
     --mask ALL-samples-recal03-Q30-indels.vcf \
@@ -118,7 +118,7 @@ else:
 
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T UnifiedGenotyper \
-    -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -maxAltAlleles 19 \
@@ -129,7 +129,7 @@ else:
 
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T UnifiedGenotyper \
-    -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -maxAltAlleles 19 \
@@ -141,7 +141,7 @@ else:
 
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T VariantFiltration \
-    -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+    -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
     -V ALL-samples-recal03-Q30-rawSNPS.vcf \
     --mask ALL-samples-recal03-Q30-indels.vcf \

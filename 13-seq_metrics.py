@@ -19,7 +19,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
         #TARGET_INTERVALS=/work/jelber2/reference/immunome_targetregion_C_picta-3.0.3.list \ #Sample-baits-targets.hsmetrics.txt
         TARGET_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \ #Sample-baitsonly.hsmetrics.txt
         METRIC_ACCUMULATION_LEVEL=SAMPLE \
-        R=/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        R=/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         I=Sample.bam \
         O=Sample-baitsonly.hsmetrics.txt
 
@@ -60,7 +60,7 @@ else:
         BAIT_SET_NAME=Immunome \
         TARGET_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
         METRIC_ACCUMULATION_LEVEL=SAMPLE \
-        R=/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3.fna \
+        R=/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         I=%s.bam \
         O=%s-baitsonly.hsmetrics.txt""" % (Sample, Sample)
 

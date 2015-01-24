@@ -15,7 +15,7 @@ Command:
     ~/bin/bwa-0.7.12/bwa mem \
     -M \
     -t16 \
-    RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3 \
+    RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
     Sample-R1-unmerged.trim.fastq.gz \
     Sample-R2-unmerged.trim.fastq.gz > ../bwa-alignment/Sample-paired.bwa.sam
 
@@ -23,7 +23,7 @@ Command:
     ~/bin/bwa-0.7.12/bwa mem \
     -M \
     -t16 \
-    RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3 \
+    RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
     Sample-singlesANDmerged.trim.fastq.gz > ../bwa-alignment/Sample-singlesANDmerged.bwa.sam
 
 
@@ -75,14 +75,14 @@ else:
         ~/bin/bwa-0.7.12/bwa mem \
         -M \
         -t16 \
-        %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3 \
+        %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
         %s-R1-unmerged.trim.fastq.gz \
         %s-R2-unmerged.trim.fastq.gz > ../bwa-alignment/%s-paired.bwa.sam
 
         ~/bin/bwa-0.7.12/bwa mem \
         -M \
         -t16 \
-        %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3 \
+        %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic \
         %s-singlesANDmerged.trim.fastq.gz > ../bwa-alignment/%s-singlesANDmerged.bwa.sam""" % \
         (RefDir, Sample, Sample, Sample,
         RefDir, Sample, Sample)
