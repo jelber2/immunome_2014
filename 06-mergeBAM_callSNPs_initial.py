@@ -12,7 +12,7 @@ Usage = """
 06-mergeBAM_callSNPs_initial.py - version 1.0
 
 Command:
-cd InDir = /work/jelber2/immunome_2014/run1/realign-around-indels
+cd InDir = /work/jelber2/immunome_2014/combined/realign-around-indels
 1.Merge Bam files
     java -Xmx8g -jar ~/bin/picard-tools-1.128/picard.jar MergeSamFiles \
     SO=coordinate \
@@ -27,8 +27,8 @@ cd InDir = /work/jelber2/immunome_2014/run1/realign-around-indels
     -T UnifiedGenotyper \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ../call-SNPs-initial/ALL-samples-initial.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -stand_call_conf 30 \
     -stand_emit_conf 10 \
@@ -39,8 +39,8 @@ cd InDir = /work/jelber2/immunome_2014/run1/realign-around-indels
     -T UnifiedGenotyper \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ../call-SNPs-initial/ALL-samples-initial.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -glm INDEL \
     -stand_call_conf 30 \
@@ -51,7 +51,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/realign-around-indels
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T VariantFiltration \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
     -V ../call-SNPs-initial/ALL-samples-initial-Q30-rawSNPS.vcf \
     --mask ../call-SNPs-initial/ALL-samples-initial-Q30-indels.vcf \
     --maskExtension 5 \
@@ -71,9 +71,9 @@ cd InDir = /work/jelber2/immunome_2014/run1/realign-around-indels
 
 
 File Info:
-InDir = /work/jelber2/immunome_2014/run1/realign-around-indels
+InDir = /work/jelber2/immunome_2014/combined/realign-around-indels
 Input Files = *-realigned.bam
-OutDir = /work/jelber2/immunome_2014/run1/call-SNPs-initial
+OutDir = /work/jelber2/immunome_2014/combined/call-SNPs-initial
 Output Files = ALL-samples-initial.bam
                ALL-samples-initial-Q30-SNPs.vcf
 
@@ -98,7 +98,7 @@ else:
     IFileListString = '\n'.join(IFileList)
     FileList = sys.argv[1:]
     RefDir = "/work/jelber2/reference"
-    InDir = "/work/jelber2/immunome_2014/run1/realign-around-indels"
+    InDir = "/work/jelber2/immunome_2014/combined/realign-around-indels"
     OutDir1 = "call-SNPs-initial"
     os.chdir(InDir)
     os.chdir("..") # go up one directory
@@ -110,7 +110,7 @@ else:
     Allocation = "hpc_gopo02"
     Processors = "nodes=1:ppn=4"
     WallTime = "04:00:00"
-    LogOut = "/work/jelber2/immunome_2014/run1/call-SNPs-initial"
+    LogOut = "/work/jelber2/immunome_2014/combined/call-SNPs-initial"
     LogMerge = "oe"
     JobName = "mergeBAM_callSNPs_initial"
     Command ="""
@@ -125,8 +125,8 @@ else:
     -T UnifiedGenotyper \
     -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ../call-SNPs-initial/ALL-samples-initial.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -stand_call_conf 30 \
     -stand_emit_conf 10 \
@@ -136,8 +136,8 @@ else:
     -T UnifiedGenotyper \
     -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ../call-SNPs-initial/ALL-samples-initial.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -glm INDEL \
     -stand_call_conf 30 \
@@ -147,7 +147,7 @@ else:
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T VariantFiltration \
     -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
     -V ../call-SNPs-initial/ALL-samples-initial-Q30-rawSNPS.vcf \
     --mask ../call-SNPs-initial/ALL-samples-initial-Q30-indels.vcf \
     --maskExtension 5 \

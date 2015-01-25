@@ -11,13 +11,13 @@ Usage = """
 09-qual_score_recal02.py - version 1.0
 
 Command:
-cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal01
+cd InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal01
 1.Analyze patterns of covariation in the sequence dataset
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T BaseRecalibrator \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I Sample-recal01.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
     -knownSites ALL-samples-recal01-Q30-SNPs.vcf \
     -o ../call-SNPs-recal02/Sample-recal-data.table
 
@@ -26,7 +26,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal01
     -T BaseRecalibrator \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I Sample-recal01.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
     -knownSites ../call-SNPs-recal01/ALL-samples-recal01-Q30-SNPs.vcf \
     -BQSR ../call-SNPs-recal02/Sample-recal-data.table \
     -o ../call-SNPs-recal02/Sample-post-recal-data.table
@@ -44,17 +44,17 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal01
     -T PrintReads \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I Sample-recal01.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
     -BQSR ../call-SNPs-recal02/Sample-recal-data.table \
     -o ../call-SNPs-recal02/Sample-recal02.bam
 
 
 File Info
-InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal01
+InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal01
 Input Files =
        Sample-recal01.bam
        ../call-SNPs-recal01/ALL-samples-recal01-Q30-SNPs.vcf
-OutDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal02
+OutDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal02
 Output Files = Sample-recal02.bam
 
 
@@ -72,7 +72,7 @@ if len(sys.argv)<2:
 else:
     FileList = sys.argv[1:]
     RefDir = "/work/jelber2/reference"
-    InDir = "/work/jelber2/immunome_2014/run1/call-SNPs-recal01"
+    InDir = "/work/jelber2/immunome_2014/combined/call-SNPs-recal01"
     OutDir1 = "call-SNPs-recal02"
     os.chdir(InDir)
     os.chdir("..") # go up one directory
@@ -89,7 +89,7 @@ else:
         Allocation = "hpc_gopo02"
         Processors = "nodes=1:ppn=4"
         WallTime = "01:00:00"
-        LogOut = "/work/jelber2/immunome_2014/run1/call-SNPs-recal02"
+        LogOut = "/work/jelber2/immunome_2014/combined/call-SNPs-recal02"
         LogMerge = "oe"
         JobName = "qual_score_recal02-%s" % (Sample)
         Command ="""
@@ -97,7 +97,7 @@ else:
         -T BaseRecalibrator \
         -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I %s-recal01.bam \
-        -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+        -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
         -knownSites ALL-samples-recal01-Q30-SNPs.vcf \
         -o ../call-SNPs-recal02/%s-recal-data.table
 
@@ -105,7 +105,7 @@ else:
         -T BaseRecalibrator \
         -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I %s-recal01.bam \
-        -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+        -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
         -knownSites ../call-SNPs-recal01/ALL-samples-recal01-Q30-SNPs.vcf \
         -BQSR ../call-SNPs-recal02/%s-recal-data.table \
         -o ../call-SNPs-recal02/%s-post-recal-data.table
@@ -121,7 +121,7 @@ else:
         -T PrintReads \
         -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         -I %s-recal01.bam \
-        -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+        -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
         -BQSR ../call-SNPs-recal02/%s-recal-data.table \
         -o ../call-SNPs-recal02/%s-recal02.bam""" % \
         (RefDir, Sample, Sample,

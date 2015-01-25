@@ -12,7 +12,7 @@ Usage = """
 12-mergeBAM_callSNPs_recal03.py - version 1.0
 
 Command:
-cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
+cd InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal03
 1.Merge Bam files
     java -Xmx8g -jar ~/bin/picard-tools-1.128/picard.jar MergeSamFiles \
     SO=coordinate \
@@ -27,8 +27,8 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
     -T UnifiedGenotyper \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -stand_call_conf 30 \
     -stand_emit_conf 10 \
@@ -39,8 +39,8 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
     -T UnifiedGenotyper \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -glm INDEL \
     -stand_call_conf 30 \
@@ -51,7 +51,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T VariantFiltration \
     -R RefDir/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
     -V ALL-samples-recal03-Q30-rawSNPS.vcf \
     --mask ALL-samples-recal03-Q30-indels.vcf \
     --maskExtension 5 \
@@ -71,7 +71,7 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
 
 
 File Info:
-InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
+InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal03
 Input Files = *-recal03.bam
 OutDir = InDir
 Output Files = ALL-samples-recal03.bam
@@ -98,14 +98,14 @@ else:
     IFileListString = '\n'.join(IFileList)
     FileList = sys.argv[1:]
     RefDir = "/work/jelber2/reference"
-    InDir = "/work/jelber2/immunome_2014/run1/call-SNPs-recal03"
+    InDir = "/work/jelber2/immunome_2014/combined/call-SNPs-recal03"
     os.chdir(InDir)
     # Customize your options here
     Queue = "single"
     Allocation = "hpc_gopo02"
     Processors = "nodes=1:ppn=4"
     WallTime = "04:00:00"
-    LogOut = "/work/jelber2/immunome_2014/run1/call-SNPs-recal03"
+    LogOut = "/work/jelber2/immunome_2014/combined/call-SNPs-recal03"
     LogMerge = "oe"
     JobName = "mergeBAM_callSNPs_recal03"
     Command ="""
@@ -120,8 +120,8 @@ else:
     -T UnifiedGenotyper \
     -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -stand_call_conf 30 \
     -stand_emit_conf 10 \
@@ -131,8 +131,8 @@ else:
     -T UnifiedGenotyper \
     -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -I ALL-samples-recal03.bam \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
-    -maxAltAlleles 19 \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
+    -maxAltAlleles 32 \
     -gt_mode DISCOVERY \
     -glm INDEL \
     -stand_call_conf 30 \
@@ -142,7 +142,7 @@ else:
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T VariantFiltration \
     -R %s/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
-    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+    -L /work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
     -V ALL-samples-recal03-Q30-rawSNPS.vcf \
     --mask ALL-samples-recal03-Q30-indels.vcf \
     --maskExtension 5 \

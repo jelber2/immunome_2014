@@ -11,7 +11,7 @@ Usage = """
 14-hc_per_sample.py - version 1.0
 
 Command:
-cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
+cd InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal03
 1.Analyze patterns of covariation in the sequence dataset
         java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
         -T HaplotypeCaller \
@@ -20,16 +20,16 @@ cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
         --emitRefConfidence GVCF \
         --variant_index_type LINEAR \
         --variant_index_parameter 128000 \
-        -L RefDir/immunome_baits_C_picta-3.0.3.list \
+        -L RefDir/immunome_baits_C_picta-3.0.3.interval.list \
         -stand_call_conf 30 \
         -stand_emit_conf 10 \
         -o Sample-raw-snps-indels.vcf
 
 File Info
-InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
+InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal03
 Input Files =
        Sample-recal03.bam
-OutDir = /work/jelber2/immunome_2014/run1/hc
+OutDir = /work/jelber2/immunome_2014/combined/hc
 Output Files = Sample-raw-snps-indels.vcf
 
 
@@ -47,7 +47,7 @@ if len(sys.argv)<2:
 else:
     FileList = sys.argv[1:]
     RefDir = "/work/jelber2/reference"
-    InDir = "/work/jelber2/immunome_2014/run1/call-SNPs-recal03"
+    InDir = "/work/jelber2/immunome_2014/combined/call-SNPs-recal03"
     OutDir1 = "hc"
     os.chdir(InDir)
     os.chdir("..") # go up one directory
@@ -64,7 +64,7 @@ else:
         Allocation = "hpc_gopo01"
         Processors = "nodes=1:ppn=4"
         WallTime = "01:00:00"
-        LogOut = "/work/jelber2/immunome_2014/run1/hc"
+        LogOut = "/work/jelber2/immunome_2014/combined/hc"
         LogMerge = "oe"
         JobName = "hc_per_sample-%s" % (Sample)
         Command ="""
@@ -75,7 +75,7 @@ else:
         --emitRefConfidence GVCF \
         --variant_index_type LINEAR \
         --variant_index_parameter 128000 \
-        -L %s/immunome_baits_C_picta-3.0.3.list \
+        -L %s/immunome_baits_C_picta-3.0.3.interval.list \
         -stand_call_conf 30 \
         -stand_emit_conf 10 \
         -o ../hc/%s-raw-snps-indels.vcf""" % \

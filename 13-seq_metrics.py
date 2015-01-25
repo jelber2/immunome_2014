@@ -11,19 +11,19 @@ Usage = """
 13-seq_metrics.py - version 1.0
 
 Command:
-cd InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
+cd InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal03
 1.CalculateHSMetrics:
         java -Xmx2g -jar ~/bin/picard-tools-1.118/CalculateHsMetrics.jar \
-        BAIT_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+        BAIT_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
         BAIT_SET_NAME=Immunome \
         #TARGET_INTERVALS=/work/jelber2/reference/immunome_targetregion_C_picta-3.0.3.list \ #Sample-baits-targets.hsmetrics.txt
-        TARGET_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \ #Sample-baitsonly.hsmetrics.txt
+        TARGET_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \ #Sample-baitsonly.hsmetrics.txt
         METRIC_ACCUMULATION_LEVEL=SAMPLE \
         R=/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         I=Sample.bam \
         O=Sample-baitsonly.hsmetrics.txt
 
-InDir = /work/jelber2/immunome_2014/run1/call-SNPs-recal03
+InDir = /work/jelber2/immunome_2014/combined/call-SNPs-recal03
 Input Files = *.bam
 
 
@@ -56,9 +56,9 @@ else:
         JobName = "seq-metrics-%s" % (Sample)
         Command ="""
         java -Xmx2g -jar ~/bin/picard-tools-1.118/CalculateHsMetrics.jar \
-        BAIT_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+        BAIT_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
         BAIT_SET_NAME=Immunome \
-        TARGET_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.list \
+        TARGET_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
         METRIC_ACCUMULATION_LEVEL=SAMPLE \
         R=/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
         I=%s.bam \
