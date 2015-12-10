@@ -1,12 +1,17 @@
 #immunome_2014
 ========
 ###README.md for analytical methods for following manuscript:
-###Elbers, J.P., R.W. Clostio, and S.S. Taylor (2016) Population genetic
-###inferences using immune gene SNPs mirror patterns inferred by microsatellites.
-###Intended for Molecular Ecology.
+    Elbers, J.P., R.W. Clostio, and S.S. Taylor (2016) Population genetic
+    inferences using immune gene SNPs mirror patterns inferred by microsatellites.
+    Intended for Molecular Ecology.
 ####Python scripts for running PBS job submissions on LSU's SuperMikeII cluster.
 ####Also bash code for analyzing resulting data on a CentOS 6.5 machine.
-
+#####NOTE:
+    Microsatellite data used the following population abbreviations:
+    FGP, SD, GG, FL
+    For simplicity, we renamed population abbreviations to follow the state they
+    occurred in, so populations are renamed (in order):
+    LA, AL, GA, FL respectively.
 ========
 #STEPS FOR QUALITY CONTROL, MAPPING, & SNP CALLING
 ##Download fastq.gz.zip files for the two MiSeq runs from BaseSpace
