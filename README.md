@@ -3,7 +3,7 @@
 ###README.md for analytical methods for following manuscript:
     Elbers, J.P., R.W. Clostio, and S.S. Taylor (2016) Population genetic
     inferences using immune gene SNPs mirror patterns inferred by microsatellites.
-    Intended for Molecular Ecology.
+    Molecular Ecology Resources.
 ####Python scripts for running PBS job submissions on LSU's SuperMikeII cluster.
 ####Also bash code for analyzing resulting data on a CentOS 6.5 machine.
 #####NOTE:
@@ -838,47 +838,37 @@
 ####Used CLUMPAK web to visualize population assignments
     http://clumpak.tau.ac.il/
 ###Calculated basic genetic stats and performed pca with r package hierfstat
-    #analyses detailed in hierfstat.r
+    #analyses detailed in hierfstat-snps-correct.R
 ##For msats
-###Create input files
+###Create input files for full and parital microsatellite dataset
 ####Original
-    cd /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats
+    cd /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/
     #original file = 11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-alldata-jpe-2015-02-25.arp
 ####Same msats populations as for SNPs
     #kept only LA,SD,GG,FL populations, named file as:
     #11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp
+    # = full microsatellite dataset in /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review/
 ####Same msats populations and individuals as for SNPs
     #used only same individuals (minus GG population, which contained GG462 but did not contain GG1044, GG1435, GG1835)
     #so used random selection of 3 others from within GG
     grep -Po "GG\d+" \
     11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp | \
     sort -R | head -n 3 > GG.3random
-    #, named file as:
+    # named file as:
     #11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp
-####Same populations for msats and SNPs but 4 random individuals per pop
-    grep -Po "LA\d+" \
-    11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp | \
-    sort -R | head -n 4 > LA.4random
-    grep -Po "SD\d+" \
-    11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp | \
-    sort -R | head -n 4 > SD.4random
-    grep -Po "GG\d+" \
-    11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp | \
-    sort -R | head -n 4 > GG.4random
-    grep -Po "FL\d+" \
-    11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp | \
-    sort -R | head -n 4 > FL.4random
+    # = partial microsatellite dataset in /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/
 ###Get only polymorphic loci
     #they are all polymorphic
 ###Check loci for linkage disequilibrium and Hardy-Weinberg Equilibrium
-    #see Rachel's paper that the loci are in linkage equilibrium and HWE
+    # used Arlequin - see below, but all were in HWE and linkage equilibrium for both partial and full microsatellite datasets
 ###Convert msat loci from ARLEQUIN to FSTAT,STRUCTURE FORMATS
 ####ARLEQUIN to FSTAT
+#####remaining conversion steps only shown for partial microsatellite dataset, but the same was done for the full microsatellite dataset
     #first created template_SPID file
-    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.7.4/PGDSpider2-cli.jar \
-    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp \
+    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.8.3/PGDSpider2-cli.jar \
+    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp \
     -inputformat ARLEQUIN \
-    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/fstat-msat-input.txt \
+    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/fstat-msat-input.txt \
     -outputformat FSTAT
     #edited template_ARLEQUIN_FSTAT.spid
     #saved the followin as arlequin2fstat.spid (minus the leading spaces)
@@ -891,25 +881,25 @@
         # Specify which data type should be included in the FSTAT file  (FSTAT can only analyze one data type per file):
         FSTAT_WRITER_DATA_TYPE_QUESTION=MICROSAT
         # Save label file
-        FSTAT_WRITER_LABEL_FILE_QUESTION=/media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/fstat-msats-populations.txt
+        FSTAT_WRITER_LABEL_FILE_QUESTION=/media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/fstat-msats-populations.txt
         # Do you want to save an additional file with labels (population names)?
         FSTAT_WRITER_INCLUDE_LABEL_QUESTION=true
         # Specify the locus/locus combination you want to write to the FSTAT file:
         FSTAT_WRITER_LOCUS_COMBINATION_QUESTION=
     #convert the file
-    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.7.4/PGDSpider2-cli.jar \
-    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp \
-    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/fstat-msats-input.txt \
-    -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/arlequin2fstat.spid > arlequin2fstat.log
+    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.8.3/PGDSpider2-cli.jar \
+    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp \
+    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/fstat-msats-input.txt \
+    -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/arlequin2fstat.spid > arlequin2fstat.log
 ####ARLEQUIN to STRUCTURE
-    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.7.4/PGDSpider2-cli.jar \
-    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp \
+    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.8.3/PGDSpider2-cli.jar \
+    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp \
     -inputformat ARLEQUIN \
-    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/structure-msats-input.txt \
+    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/structure-msats-input.txt \
     -outputformat STRUCTURE
     #replace the FSTAT section of arlequin2fstat.spid with the following for STRUCTURE
     #minus the leading spaces
-    nano /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/arlequin2fstat.spid
+    nano /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/arlequin2fstat.spid
         # STRUCTURE Writer questions
         WRITER_FORMAT=STRUCTURE
         # Save more specific fastSTRUCTURE format?
@@ -922,36 +912,32 @@
         STRUCTURE_WRITER_LOCI_DISTANCE_QUESTION=false
     #saved files as arlequin2structure.spid
     #convert the file
-    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.7.4/PGDSpider2-cli.jar \
-    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp \
-    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/structure-msats-input.txt \
-    -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/arlequin2structure.spid > arlequin2structure.log
+    java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.8.3/PGDSpider2-cli.jar \
+    -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp \
+    -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/structure-msats-input.txt \
+    -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/arlequin2structure.spid > arlequin2structure.log
     #add loci names
     sed -i 1i"\\\t\t1 2 3 4 5 6 7 8 9 10" structure-msats-input.txt
 ###Look at population structure with structure
     #copy mainparams files
-    cp ../popgen/mainparams.test.0* .
+    cp ../popgen-msats-review/mainparams.test.0* .
     #modify the directory and number of loci with perl
-    perl -pi -e "s/popgen/popgen-msats/g" mainparams.test.0*
-    perl -pi -e "s/structure-input/structure-msats-input/g" mainparams.test.0*
-    perl -pi -e "s/structure-results-/structure-results-msats-/g" mainparams.test.0*
-    perl -pi -e "s/17901/10/g" mainparams.test.0*
-    perl -pi -e "s/\/work/\/media\/immunome_2014\/work/g" mainparams.test.0*
-    perl -pi -e "s/16/101/g" mainparams.test.0*
-####Ran structure using the following command for k1,k2,k3,k4
-    cd /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats/
-    ls mainparams.test.0* > params
-    while read i
-    do
+    perl -pi -e "s/popgen-msats-review/popgen-msats-review2/g" mainparams.test.0*
+    perl -pi -e "s/101/16/g" mainparams.test.0*
+####Ran structure using the following command for k1,k2,k3,k4,k5 on SuperMikeII
+    cd /work/jelber2/immunome_2014/combined/popgen-msats-review2/
     ~/bin/structure/structure_kernel_src/structure \
-    -m $i \
-    -e ~/bin/structure/structure_kernel_src/extraparams
-    done < params
-####Used STRUCTURE HARVESTER web v0.6.94 to select best K values
+    -m mainparams.test.0* \
+    -e ~/bin/structure/structure_kernel_src/extraparams####Used STRUCTURE HARVESTER web v0.6.94 to select best K values
+    #implemented in using 16-structure-msats.py
 ####Used CLUMPAK web to visualize population assignments
     http://clumpak.tau.ac.il/
 ###Calculated basic genetic stats with r package hierfstat and also pca
-    #analyses detailed in hierfstat-msats.r
+    #partial microsatellite dataset analyses detailed in hierfstat-part-msats.r saved results in hierfstat-part-msats.RData
+    #full microsatellite dataset analyses detailed in hierfstat-msats.r saved results in hierfstat_msats_correct_R_workspace.RData
+###Subsampling power analysis
+    #partial microsatellite dataset analyses detailed in power-analysis-part-msats.r saved results in power-analysis-part-msats.RData
+    #full microstatellite dataset analyses detailed in power_analysis.r saved results in power_analysis.RData
 ========
 #STEPS FOR GETTING NAMES OF GENES WITH POLYMORPHIC SNPs
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/
