@@ -353,8 +353,14 @@
     wc -l AL102.gene
     #total genes = 632 (after subtracting 2 header lines)
 #####count number of possible immune gene exons
-    wc -l AL102.exon
-    #total exons = 37275 (after subtracting 2 header lines)
+    grep -v "#" ALL.exon | \
+    grep -v "Geneid" | \
+    cut -f 2-4 | \
+    awk -v OFS='\t' '{a=$2-1;print $1,a,$3;}' - | \
+    sort -k 1,1 -k2,2n | \
+    ~/bin/bedtools-2.22.1/bin/bedtools merge | \
+    wc -l
+    #total exons = 5425
 #####how many different immune genes were captured
     grep -Pv "0$" ALL.gene | wc -l
     #558 (after subtracting 2 header lines)
@@ -795,8 +801,8 @@
         #define MISSING 
         #define PLOIDY 2
         #define MAXPOPS 1
-        #define BURNIN 50000
-        #define NUMREPS 100000
+        #define BURNIN 100000
+        #define NUMREPS 1000000
         #define NOADMIX 0
         #define LINKAGE 0
         #define USEPOPINFO 0
@@ -842,13 +848,13 @@
     #kept only LA,SD,GG,FL populations, named file as:
     #11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp
 ####Same msats populations and individuals as for SNPs
-    #used only same individuals (minus GG population, which did not contain GG1044, GG1435, GG1835)
-    #so used random selection of 3 others from within GG, named file as:
-    #11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp
-    #used following code to randomly choose 3 torts from GG
+    #used only same individuals (minus GG population, which contained GG462 but did not contain GG1044, GG1435, GG1835)
+    #so used random selection of 3 others from within GG
     grep -Po "GG\d+" \
     11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp | \
     sort -R | head -n 3 > GG.3random
+    #, named file as:
+    #11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp
 ####Same populations for msats and SNPs but 4 random individuals per pop
     grep -Po "LA\d+" \
     11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp | \
@@ -1087,3 +1093,19 @@
     -O v -m none \
      ../split-vcfs/*-snps-annotated.vcf.gz
 ========
+#STEPS for Number of Unpaired reads
+##Use statistics from Trimmomatic
+    cd /media/immunome_2014/work/jelber2/immunome_2014/run1/trimmed-data/
+    grep "Input Read Pairs" Trimmomatic-* > ~/Desktop/trimmomatic-data.txt
+    cd /media/immunome_2014/work/jelber2/immunome_2014/run2/trimmed-data/
+    grep "Input Read Pairs" Trimmomatic-* > ~/Desktop/trimmomatic-data2.txt
+    cd ~/Desktop/
+    cat trimmomatic-data.txt trimmomatic-data2.txt > trimmomatic.txt
+    perl -pe "s/\w+-\w+.\w+:Input Read Pairs: (\d+) Both Surviving: (\d+) .+/\1\t\2/" trimmomatic.txt > trimmomatic-calc.txt
+    R
+    df <- read.table("trimmomatic-calc.txt")
+    df$V3 <- df$V1 - df$V2
+    sum(df$V1)
+    # 65,724,672 total pairs of reads before trimming
+    sum(df$V3)
+    # 9,079,403 unpaired reads surviving trimming
