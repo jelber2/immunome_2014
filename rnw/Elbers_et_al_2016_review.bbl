@@ -1,0 +1,357 @@
+\begin{thebibliography}{58}
+\providecommand{\natexlab}[1]{#1}
+\input{babelbst.tex}
+\newcommand{\Capitalize}[1]{\uppercase{#1}}
+\newcommand{\capitalize}[1]{\expandafter\Capitalize#1}
+
+\bibitem[{Allendorf \emph{\bbletal{}}(2010)Allendorf, Hohenlohe, \&
+  Luikart}]{Allendorf_et_al_2010}
+Allendorf FW, Hohenlohe PA, Luikart G (2010) Genomics and the future of
+  conservation genetics.
+\newblock \emph{Nature Reviews Genetics}, \textbf{11}, 697--709.
+
+\bibitem[{Anderson \& Garza(2006)}]{Anderson_and_Garza_2006}
+Anderson EC, Garza JC (2006) The power of single-nucleotide polymorphisms for
+  large-scale parentage inference.
+\newblock \emph{Genetics}, \textbf{172}, 2567--2582.
+
+\bibitem[{Benjamini \& Hochberg(1995)}]{Benjamini_and_Hochberg_1995}
+Benjamini Y, Hochberg Y (1995) Controlling the false discovery rate: A
+  practical and powerful approach to multiple testing.
+\newblock \emph{Journal of the Royal Statistical Society. Series B
+  (Methodological)}, \textbf{57}, 289--300.
+
+\bibitem[{Bernatchez \& Landry(2003)}]{Bernatchez_and_Landry_2003}
+Bernatchez L, Landry C (2003) {MHC} studies in nonmodel vertebrates: what have
+  we learned about natural selection in 15 years?
+\newblock \emph{Journal of Evolutionary Biology}, \textbf{16}, 363--377.
+
+\bibitem[{Blanco-Bercial \& Bucklin(2016)}]{Blanco-Bercial_and_Bucklin_2016}
+Blanco-Bercial L, Bucklin A (2016) New view of population genetics of
+  zooplankton: {RAD}-seq analysis reveals population structure of the {N}orth
+  {A}tlantic planktonic copepod {C}entropages typicus.
+\newblock \emph{Molecular Ecology}, \textbf{25}, 1566--80.
+
+\bibitem[{Bolger \emph{\bbletal{}}(2014)Bolger, Lohse, \&
+  Usadel}]{Bolger_et_al_2014}
+Bolger AM, Lohse M, Usadel B (2014) {TRIMMOMATIC}: a flexible trimmer for
+  {I}llumina sequence data.
+\newblock \emph{Bioinformatics}, \bblp{} btu170.
+
+\bibitem[{Browning \& Browning(2007)}]{Browning_and_Browning_2007}
+Browning SR, Browning BL (2007) Rapid and accurate haplotype phasing and
+  missing-data inference for whole-genome association studies by use of
+  localized haplotype clustering.
+\newblock \emph{American Journal of Human Genetics}, \textbf{81}, 1084--97.
+
+\bibitem[{Clostio \emph{\bbletal{}}(2012)Clostio, Martinez, LeBlanc, \&
+  Anthony}]{Clostio_et_al_2012}
+Clostio RW, Martinez AM, LeBlanc KE, Anthony NM (2012) Population genetic
+  structure of a threatened tortoise across the south-eastern {U}nited
+  {S}tates: implications for conservation management.
+\newblock \emph{Animal Conservation}, \textbf{15}, 613--625.
+
+\bibitem[{Coates \emph{\bbletal{}}(2009)Coates, Sumerford, Miller
+  \emph{\bbletal{}}}]{Coates_et_al_2009}
+Coates BS, Sumerford DV, Miller NJ, \emph{\bbletal{}} (2009) Comparative
+  performance of single nucleotide polymorphism and microsatellite markers for
+  population genetic analysis.
+\newblock \emph{Journal of Heredity}, \textbf{100}, 556--564.
+
+\bibitem[{Danecek \emph{\bbletal{}}(2011)Danecek, Auton, Abecasis
+  \emph{\bbletal{}}}]{Danecek_et_al_2011}
+Danecek P, Auton A, Abecasis G, \emph{\bbletal{}} (2011) The {V}ariant {C}all
+  {F}ormat and {VCF}tools.
+\newblock \emph{Bioinformatics}, \textbf{27}, 2156--8.
+
+\bibitem[{De~Wit \emph{\bbletal{}}(2012)De~Wit, Pespeni, Ladner
+  \emph{\bbletal{}}}]{De_Wit_et_al_2012}
+De~Wit P, Pespeni MH, Ladner JT, \emph{\bbletal{}} (2012) The simple fool's
+  guide to population genomics via {RNA}-{S}eq: an introduction to
+  high-throughput sequencing data analysis.
+\newblock \emph{Molecular Ecology Resources}, \textbf{12}, 1058--67.
+
+\bibitem[{DeFaveri \emph{\bbletal{}}(2013)DeFaveri, Viitaniemi, Leder, \&
+  Merilä}]{DeFaveri_et_al_2013}
+DeFaveri J, Viitaniemi H, Leder E, Merilä J (2013) Characterizing genic and
+  nongenic molecular markers: comparison of microsatellites and {SNP}s.
+\newblock \emph{Molecular Ecology Resources}, \textbf{13}, 377--392.
+
+\bibitem[{Do \emph{\bbletal{}}(2014)Do, Waples, Peel, Macbeth, Tillett, \&
+  Ovenden}]{Do_et_al_2014}
+Do C, Waples RS, Peel D, Macbeth G, Tillett BJ, Ovenden JR (2014) Ne{E}stimator
+  v2: re-implementation of software for the estimation of contemporary
+  effective population size ({N}e) from genetic data.
+\newblock \emph{Molecular Ecology Resources}, \textbf{14}, 209--214.
+
+\bibitem[{Earl \& vonHoldt(2012)}]{Earl_and_vonHoldt_2012}
+Earl DA, vonHoldt BM (2012) {STRUCTURE HARVESTER}: a website and program for
+  visualizing {STRUCTURE} output and implementing the {E}vanno method.
+\newblock \emph{Conservation Genetics Resources}, \textbf{4}, 359--361.
+
+\bibitem[{Elbers \& Taylor(2015)}]{Elbers_and_Taylor_2015}
+Elbers JP, Taylor SS (2015) {GO2TR}: a gene ontology-based workflow to generate
+  target regions for target enrichment experiments.
+\newblock \emph{Conservation Genetics Resources}, \textbf{7}, 851--857.
+
+\bibitem[{Enge \emph{\bbletal{}}(2006)Enge, Berish, Bolt, Dziergowski, \&
+  Musinsky}]{Enge_et_al_2006}
+Enge K, Berish J, Bolt R, Dziergowski A, Musinsky H (2006) Biological status
+  report gopher tortoise.
+\newblock Report, Florida Fish and Wildlife Conservation Commission.
+
+\bibitem[{Ennen \emph{\bbletal{}}(2010)Ennen, Kreiser, \&
+  Qualls}]{Ennen_et_al_2010}
+Ennen JR, Kreiser BR, Qualls CP (2010) Low genetic diversity in several gopher
+  tortoise ({G}opherus polyphemus) populations in the {D}esoto {N}ational
+  {F}orest, {M}ississippi.
+\newblock \emph{Herpetologica}, \textbf{66}, 31--38.
+
+\bibitem[{Excoffier \& Lischer(2010)}]{Excoffier_and_Lischer_2010}
+Excoffier L, Lischer HE (2010) Arlequin suite ver 3.5: a new series of programs
+  to perform population genetics analyses under {L}inux and {W}indows.
+\newblock \emph{Molecular Ecology Resources}, \textbf{10}, 564--7.
+
+\bibitem[{Foll \& Gaggiotti(2008)}]{Foll_and_Gaggiotti_2008}
+Foll M, Gaggiotti O (2008) A genome-scan method to identify selected loci
+  appropriate for both dominant and codominant markers: a {B}ayesian
+  perspective.
+\newblock \emph{Genetics}, \textbf{180}, 977--993.
+
+\bibitem[{Frankham \emph{\bbletal{}}(2010)Frankham, Ballou, \&
+  Briscoe}]{Frankham_et_al_2010}
+Frankham R, Ballou JD, Briscoe DA (2010) \emph{Introduction to conservation
+  genetics}.
+\newblock Cambridge University Press, Cambridge, \bblsecondo{} \bbledn{}.
+
+\bibitem[{Garke \emph{\bbletal{}}(2012)Garke, Ytournel, Bedhom
+  \emph{\bbletal{}}}]{Garke_et_al_2012}
+Garke C, Ytournel F, Bedhom B, \emph{\bbletal{}} (2012) Comparison of {SNP}s
+  and microsatellites for assessing the genetic structure of chicken
+  populations.
+\newblock \emph{Animal Genetics}, \textbf{43}, 419--428.
+
+\bibitem[{Glover \emph{\bbletal{}}(2010)Glover, Hansen, Lien, Als, Hoyheim, \&
+  Skaala}]{Glover_et_al_2010}
+Glover KA, Hansen MM, Lien S, Als TD, Hoyheim B, Skaala O (2010) A comparison
+  of {SNP} and {STR} loci for delineating population structure and performing
+  individual genetic assignment.
+\newblock \emph{BMC Genetics}, \textbf{11}, 1--12.
+
+\bibitem[{Goudet(2005)}]{Goudet_2005}
+Goudet J (2005) {HIERFSTAT}, a package for {R} to compute and test hierarchical
+  {F}-statistics.
+\newblock \emph{Molecular Ecology Notes}, \textbf{5}, 184--186.
+
+\bibitem[{Gupta \emph{\bbletal{}}(2001)Gupta, Roy, \&
+  Prasad}]{Gupta_et_al_2001}
+Gupta P, Roy J, Prasad M (2001) Single nucleotide polymorphisms {SNPs}: a new
+  paradigm in molecular marker technology and {DNA} polymorphism detection with
+  emphasis on their use in plants.
+\newblock \emph{Current Science}, \textbf{80}, 524--535.
+
+\bibitem[{Hauser \emph{\bbletal{}}(2011)Hauser, Baird, Hilborn, Seeb, \&
+  Seeb}]{Hauser_et_al_2011}
+Hauser L, Baird M, Hilborn RAY, Seeb LW, Seeb JE (2011) An empirical comparison
+  of {SNP}s and microsatellites for parentage and kinship assignment in a wild
+  sockeye salmon ({O}ncorhynchus nerka) population.
+\newblock \emph{Molecular Ecology Resources}, \textbf{11}, 150--161.
+
+\bibitem[{Hohenlohe \emph{\bbletal{}}(2010)Hohenlohe, Bassham, Etter, Stiffler,
+  Johnson, \& Cresko}]{Hohenlohe_et_al_2010}
+Hohenlohe PA, Bassham S, Etter PD, Stiffler N, Johnson EA, Cresko WA (2010)
+  Population genomics of parallel adaptation in threespine stickleback using
+  sequenced {RAD} tags.
+\newblock \emph{PLoS Genetics}, \textbf{6}, e1000862.
+
+\bibitem[{Hubisz \emph{\bbletal{}}(2009)Hubisz, Falush, Stephens, \&
+  Pritchard}]{Hubisz_et_al_2009}
+Hubisz MJ, Falush D, Stephens M, Pritchard JK (2009) Inferring weak population
+  structure with the assistance of sample group information.
+\newblock \emph{Molecular Ecology Resources}, \textbf{9}, 1322--32.
+
+\bibitem[{Jeffries \emph{\bbletal{}}(2016)Jeffries, Copp, Lawson~Handley,
+  Olsen, Sayer, \& Hanfling}]{Jeffries_et_al_2016}
+Jeffries DL, Copp GH, Lawson~Handley L, Olsen KH, Sayer CD, Hanfling B (2016)
+  Comparing {RAD}seq and microsatellites to infer complex phylogeographic
+  patterns, an empirical perspective in the {C}rucian carp, {C}arassius
+  carassius, {L}.
+\newblock \emph{Molecular Ecology}, \bblp{} in press.
+
+\bibitem[{Kopelman \emph{\bbletal{}}(2015)Kopelman, Mayzel, Jakobsson,
+  Rosenberg, \& Mayrose}]{Kopelman_et_al_2015}
+Kopelman NM, Mayzel J, Jakobsson M, Rosenberg NA, Mayrose I (2015) {CLUMPAK}: a
+  program for identifying clustering modes and packaging population structure
+  inferences across k.
+\newblock \emph{Molecular Ecology Resources}, \textbf{15}, 1179--91.
+
+\bibitem[{Langefors \emph{\bbletal{}}(2001)Langefors, Lohm, Grahn, Andersen, \&
+  von Schantz}]{Langefors_et_al_2001}
+Langefors A, Lohm J, Grahn M, Andersen O, von Schantz T (2001) Association
+  between major histocompatibility complex class iib alleles and resistance to
+  {A}eromonas salmonicida in atlantic salmon.
+\newblock \emph{Proceedings of the Royal Society of London B}, \textbf{268},
+  479--485.
+
+\bibitem[{Lemay \& Russello(2015)}]{Lemay_and_Russello_2015}
+Lemay MA, Russello MA (2015) Genetic evidence for ecological divergence in
+  kokanee salmon.
+\newblock \emph{Molecular Ecology}, \textbf{24}, 798--811.
+
+\bibitem[{Li(2013)}]{Li_2013}
+Li H (2013) Aligning sequence reads, clone sequences and assembly contigs with
+  {BWA-MEM}.
+\newblock \emph{arXiv}, \textbf{1303.3997}.
+
+\bibitem[{Li \& Durbin(2009)}]{Li_and_Durbin_2009}
+Li H, Durbin R (2009) Fast and accurate short read alignment with
+  {B}urrows-{W}heeler transform.
+\newblock \emph{Bioinformatics}, \textbf{25}, 1754--60.
+
+\bibitem[{Li \emph{\bbletal{}}(2009)Li, Handsaker, Wysoker
+  \emph{\bbletal{}}}]{Li_et_al_2009}
+Li H, Handsaker B, Wysoker A, \emph{\bbletal{}} (2009) The {S}equence
+  {A}lignment/{M}ap format and {SAM}tools.
+\newblock \emph{Bioinformatics}, \textbf{25}, 2078--9.
+
+\bibitem[{Liao \emph{\bbletal{}}(2014)Liao, Smyth, \& Shi}]{Liao_et_al_2014}
+Liao Y, Smyth GK, Shi W (2014) feature{C}ounts: an efficient general purpose
+  program for assigning sequence reads to genomic features.
+\newblock \emph{Bioinformatics}, \textbf{30}, 923--30.
+
+\bibitem[{Lischer \& Excoffier(2012)}]{Lischer_and_Excoffier_2012}
+Lischer H, Excoffier L (2012) {PGDS}pider: an automated data conversion tool
+  for connecting population genetics and genomics programs.
+\newblock \emph{Bioinformatics}, \textbf{28}, 298--299.
+
+\bibitem[{Lozier(2014)}]{Lozier_2014}
+Lozier JD (2014) Revisiting comparisons of genetic diversity in stable and
+  declining species: assessing genome-wide polymorphism in {N}orth {A}merican
+  bumble bees using {RAD} sequencing.
+\newblock \emph{Molecular Ecology}, \textbf{23}, 788--801.
+
+\bibitem[{Lunter \& Goodson(2011)}]{Lunter_and_Goodson_2011}
+Lunter G, Goodson M (2011) {STAMPY}: a statistical algorithm for sensitive and
+  fast mapping of {I}llumina sequence reads.
+\newblock \emph{Genome Research}, \textbf{21}, 936--9.
+
+\bibitem[{McKenna \emph{\bbletal{}}(2010)McKenna, Hanna, Banks
+  \emph{\bbletal{}}}]{McKenna_et_al_2010}
+McKenna A, Hanna M, Banks E, \emph{\bbletal{}} (2010) The {G}enome {A}nalysis
+  {T}oolkit: a {M}ap{R}educe framework for analyzing next-generation {DNA}
+  sequencing data.
+\newblock \emph{Genome Research}, \textbf{20}, 1297--1303.
+
+\bibitem[{Miller \emph{\bbletal{}}(2008)Miller, Miller, \&
+  Daugherty}]{Miller_et_al_2008}
+Miller HC, Miller KA, Daugherty CH (2008) Reduced {MHC} variation in a
+  threatened tuatara species.
+\newblock \emph{Animal Conservation}, \textbf{11}, 206--214.
+
+\bibitem[{Morin \emph{\bbletal{}}(2012)Morin, Archer, Pease
+  \emph{\bbletal{}}}]{Morin_et_al_2012}
+Morin PA, Archer FI, Pease VL, \emph{\bbletal{}} (2012) An empirical comparison
+  of {SNP}s and microsatellites for population structure, assignment, and
+  demographic analyses of bowhead whale populations.
+\newblock \emph{Endangered Species Research}, \textbf{19}, 129--147.
+
+\bibitem[{Morin \emph{\bbletal{}}(2009)Morin, Martien, \&
+  Taylor}]{Morin_et_al_2009}
+Morin PA, Martien KK, Taylor BL (2009) Assessing statistical power of {SNP}s
+  for population structure and conservation studies.
+\newblock \emph{Molecular Ecology Resources}, \textbf{9}, 66--73.
+
+\bibitem[{Moritz(1994)}]{Moritz_1994}
+Moritz C (1994) Applications of mitochondrial {DNA} analysis in conservation: a
+  critical review.
+\newblock \emph{Molecular Ecology}, \textbf{3}, 401--411.
+
+\bibitem[{Narum \emph{\bbletal{}}(2008)Narum, Banks, Beacham
+  \emph{\bbletal{}}}]{Narum_et_al_2008}
+Narum SR, Banks M, Beacham TD, \emph{\bbletal{}} (2008) Differentiating salmon
+  populations at broad and fine geographical scales with microsatellites and
+  single nucleotide polymorphisms.
+\newblock \emph{Molecular Ecology}, \textbf{17}, 3464--3477.
+
+\bibitem[{Nomura(2008)}]{Nomura_2008}
+Nomura T (2008) Estimation of effective number of breeders from molecular
+  coancestry of single cohort sample.
+\newblock \emph{Evolutionary Applications}, \textbf{1}, 462--474.
+
+\bibitem[{Ortutay \& Vihinen(2006)}]{Ortutay_and_Vihinen_2006}
+Ortutay C, Vihinen M (2006) Immunome: a reference set of genes and proteins for
+  systems biology of the human immune system.
+\newblock \emph{Cellular Immunology}, \textbf{244}, 87--89.
+
+\bibitem[{Pritchard \emph{\bbletal{}}(2000)Pritchard, Stephens, \&
+  Donnelly}]{Pritchard_et_al_2000}
+Pritchard JK, Stephens M, Donnelly P (2000) Inference of population structure
+  using multilocus genotype data.
+\newblock \emph{Genetics}, \textbf{155}, 945--959.
+
+\bibitem[{{R Core Team}(2015)}]{R_Core_Team}
+{R Core Team} (2015) \emph{R: A Language and Environment for Statistical
+  Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+
+\bibitem[{Ryynanen \emph{\bbletal{}}(2007)Ryynanen, Tonteri, Vasemagi, \&
+  Primmer}]{Ryynanen_et_al_2007}
+Ryynanen HJ, Tonteri A, Vasemagi A, Primmer CR (2007) A comparison of biallelic
+  markers and microsatellites for the estimation of population and conservation
+  genetic parameters in {A}tlantic salmon ({S}almo salar).
+\newblock \emph{Journal of Heredity}, \textbf{98}, 692--704.
+
+\bibitem[{Shaffer \emph{\bbletal{}}(2013)Shaffer, Minx, Warren
+  \emph{\bbletal{}}}]{Shaffer_et_al_2013}
+Shaffer HB, Minx P, Warren DE, \emph{\bbletal{}} (2013) The western painted
+  turtle genome, a model for the evolution of extreme physiological adaptations
+  in a slowly evolving lineage.
+\newblock \emph{Genome Biology}, \textbf{14}, R28.
+
+\bibitem[{Sommer(2005)}]{Sommer_2005}
+Sommer S (2005) The importance of immune gene variability ({MHC}) in
+  evolutionary ecology and conservation.
+\newblock \emph{Frontiers in Zoology}, \textbf{2}, 16--16.
+
+\bibitem[{Taylor \emph{\bbletal{}}(2012)Taylor, Jenkins, \&
+  Arcese}]{Taylor_et_al_2012}
+Taylor SS, Jenkins DA, Arcese P (2012) Loss of {MHC} and neutral variation in
+  {P}eary caribou: genetic drift is not mitigated by balancing selection or
+  exacerbated by {MHC} allele distributions.
+\newblock \emph{PLoS One}, \textbf{7}, e36748.
+
+\bibitem[{Vali \emph{\bbletal{}}(2008)Vali, Einarsson, Waits, \&
+  Ellegren}]{Vali_et_al_2008}
+Vali U, Einarsson A, Waits L, Ellegren H (2008) To what extent do
+  microsatellite markers reflect genome-wide genetic diversity in natural
+  populations?
+\newblock \emph{Molecular Ecology}, \textbf{17}, 3808--3817.
+
+\bibitem[{Vasquez-Carrillo \emph{\bbletal{}}(2014)Vasquez-Carrillo, Friesen,
+  Hall, \& Peery}]{Vasquez-Carrillo_et_al_2014}
+Vasquez-Carrillo C, Friesen V, Hall L, Peery MZ (2014) Variation in {MHC} class
+  {II} {B} genes in marbled murrelets: implications for delineating
+  conservation units.
+\newblock \emph{Animal Conservation}, \textbf{17}, 244--255.
+
+\bibitem[{Waples \& Do(2008)}]{Waples_and_Do_2008}
+Waples RS, Do C (2008) {LDNE}: a program for estimating effective population
+  size from data on linkage disequilibrium.
+\newblock \emph{Molecular Ecology Resources}, \textbf{8}, 753--756.
+
+\bibitem[{Weber \emph{\bbletal{}}(2004)Weber, Stewart, Schienman, \&
+  Lehman}]{Weber_et_al_2004}
+Weber DS, Stewart BS, Schienman J, Lehman N (2004) Major histocompatibility
+  complex variation at three class {II} loci in the northern elephant seal.
+\newblock \emph{Molecular Ecology}, \textbf{13}, 711--718.
+
+\bibitem[{Wright(1931)}]{Wright_1931}
+Wright S (1931) Evolution in mendelian populations.
+\newblock \emph{Genetics}, \textbf{16}, 97--159.
+
+\bibitem[{Zhdanova \& Pudovkin(2008)}]{Zhdanova_and_Pudovkin_2008}
+Zhdanova OL, Pudovkin AI (2008) Nb\_{H}et{E}x: a program to estimate the
+  effective number of breeders.
+\newblock \emph{Journal of Heredity}, \textbf{99}, 694--695.
+
+\end{thebibliography}

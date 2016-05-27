@@ -1,4 +1,53 @@
-\documentclass[english]{article}
+\documentclass[english]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage[margin=3cm]{geometry}
@@ -20,31 +69,12 @@ inferences using immune gene SNPs mirror patterns \\
 inferred by microsatellites. Molecular Ecology Resources.}
 \date{}
 \author{}
-
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
 \maketitle
 
-<<echo=FALSE>>=
-library("ggplot2")
-library("xtable")
-seqMetrics = read.table(file = "ALL-samples-recal03-baitsonly.hsmetrics.txt", header = T) #read in the sequencing metrics
 
-# calculate mean and sd number of genes per sample
-genes <- read.table("gene.counts.per.sample")
-
-# calculate mean and sd number of exons per sample
-exons <- read.table("exon.counts.per.sample")
-df3 <- as.data.frame(cbind("Sample" = paste(exons$V1),
-                           "Total reads" = seqMetrics$TOTAL_READS[-1],
-                           "Percent unique reads" = seqMetrics$PCT_PF_UQ_READS[-1]*100,
-                           "Percent unique reads alignable" = seqMetrics$PCT_PF_UQ_READS_ALIGNED[-1]*100, 
-                           "Mean coverage" = seqMetrics$MEAN_BAIT_COVERAGE[-1], 
-                           "Percent bases greater than 20x coverage" = seqMetrics$PCT_TARGET_BASES_20X[-1]*100,
-                           "Number of genes" = genes$V2,
-                           "Number of exons" = exons$V2))
-#xtable(df3)
-@
 
 \noindent
 \textbf{Table S1} Sequencing metrics for \textit{Gopherus polyphemus} samples. Percent UR for percent of total reads that were unique, Percent URA for percent of unique reads that were alignable, Mean coverage for mean number of reads across the target region, Percent 20x for percent of bases in target region with greater than 20x coverage, No. genes for number of genes, and No. exons for number of exons.\\
@@ -588,109 +618,22 @@ zona pellucida sperm-binding protein 4-like \\
 
 \pagebreak{}
 \noindent
-<<Figure-2, echo=FALSE>>=
-#FROM http://gettinggeneticsdone.blogspot.com/2014/03/visualize-coverage-exome-targeted-ngs-bedtools.html #
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/Figure-2-1} 
 
-# Get a list of the bedtools output files you'd like to read in
-files <- list.files(pattern="all.txt$")
-
-# Split files into list <= 8 samples per list
-files <- split(files,ceiling(seq_along(files)/8))
-
-# Optional, create short sample names from the filenames. 
-# For example, in this experiment, my sample filenames might look like this:
-# AL102.baitcoverage.all.txt
-# AL103.baitcoverage.all.txt
-# This regular expression leaves me with "AL102" and "AL103" in the legend.
-
-# for set1
-labs1 <- paste("", gsub("\\.baitcoverage\\.all\\.txt", "",
-                             files$'1', perl=TRUE), sep="")
-
-labs2 <- paste("", gsub("\\.baitcoverage\\.all\\.txt", "",
-                              files$'2', perl=TRUE), sep="")
-
-
-# Create lists to hold coverage and cumulative coverage for each alignment,
-# and read the data into these lists.
-cov1 <- list()
-cov2 <- list()
-cov_cumul1 <- list()
-cov_cumul2 <- list()
-
-for (i in 1:length(files$`1`)) {
-  cov1[[i]] <- read.table(files$`1`[i])
-  cov_cumul1[[i]] <- 1-cumsum(cov1[[i]][,5])
-}
-
-for (i in 1:length(files$`2`)) {
-  cov2[[i]] <- read.table(files$`2`[i])
-  cov_cumul2[[i]] <- 1-cumsum(cov2[[i]][,5])
-}
-
-# Pick some colors
-library(RColorBrewer)
-cols1 <- brewer.pal(length(cov1), "Dark2")
-cols2 <- brewer.pal(length(cov2), "Dark2")
-
-#Figure 2
-
-# Create plot area, but do not plot anything. Add gridlines and axis labels.
-plot(cov1[[1]][2:201, 2],
-     cov_cumul1[[1]][1:200],
-     type='n',
-     xlab="Depth",
-     ylab="Fraction of capture target bases > depth",
-     ylim=c(0,1.0))
-abline(v = 20, col = "gray60")
-abline(v = 50, col = "gray60")
-abline(v = 80, col = "gray60")
-abline(v = 100, col = "gray60")
-abline(h = 0.50, col = "gray60")
-abline(h = 0.90, col = "gray60")
-axis(1, at=c(20,50,80), labels=c(20,50,80))
-axis(2, at=c(0.90), labels=c(0.90))
-axis(2, at=c(0.50), labels=c(0.50))
-
-# Actually plot the data for each of the alignments (stored in the lists).
-for (i in 1:length(cov1)) points(cov1[[i]][2:201, 2],
-                                cov_cumul1[[i]][1:200], type='l', lwd=3, col=cols1[i])
-
-# Add a legend using the nice sample labeles rather than the full filenames.
-legend("topright", legend=labs1, col=cols1, lty=1, lwd=4)
-@
+\end{knitrout}
 \noindent
 \textbf{Fig. S1} Coverage plots for first eight \textit{Gopherus polyphemus} samples showing number of sequencing reads at or above specified proportions. A value at 100 Depth and 0.5 fraction means 50 percent of bases were at or above 100X coverage.\\
 
 
 \pagebreak{}
 \noindent
-<<Figure-3, echo=FALSE>>=
-# figure 3
-# Create plot area, but do not plot anything. Add gridlines and axis labels.
-plot(cov2[[1]][2:201, 2],
-     cov_cumul2[[1]][1:200],
-     type='n',
-     xlab="Depth",
-     ylab="Fraction of capture target bases > depth",
-     ylim=c(0,1.0))
-abline(v = 20, col = "gray60")
-abline(v = 50, col = "gray60")
-abline(v = 80, col = "gray60")
-abline(v = 100, col = "gray60")
-abline(h = 0.50, col = "gray60")
-abline(h = 0.90, col = "gray60")
-axis(1, at=c(20,50,80), labels=c(20,50,80))
-axis(2, at=c(0.90), labels=c(0.90))
-axis(2, at=c(0.50), labels=c(0.50))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/Figure-3-1} 
 
-# Actually plot the data for each of the alignments (stored in the lists).
-for (i in 1:length(cov2)) points(cov2[[i]][2:201, 2],
-                                 cov_cumul2[[i]][1:200], type='l', lwd=3, col=cols2[i])
-
-# Add a legend using the nice sample labeles rather than the full filenames.
-legend("topright", legend=labs2, col=cols2, lty=1, lwd=4)
-@
+\end{knitrout}
 \noindent
 \textbf{Fig. S2} Coverage plots for last eight \textit{Gopherus polyphemus} samples showing number of sequencing reads at or above specified proportions.\\
 
@@ -715,230 +658,30 @@ legend("topright", legend=labs2, col=cols2, lty=1, lwd=4)
 
 \pagebreak{}
 \noindent
-<<Figure-S6, echo=FALSE>>=
-#Observed het
-load("power_analysis.RData") # created by power_analysis.R
-Ho <- ggplot(df4.snps, aes(reorder(Size, Num), Ho)) +
-  geom_boxplot() + 
-  geom_hline(aes(yintercept=0.05), colour="#990000", linetype="dashed") +
-  theme_bw() + 
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +  
-  ylab("") + 
-  xlab(expression(paste("Number of randomly chosen SNPs - H", scriptstyle("O")))) +
-  theme(axis.text = element_text(size = rel(1.2))) + 
-  theme(axis.title = element_text(size = rel(1.4))) +
-  annotate("text", label = "(A)", x = 11, y = 0.7, size = 7, colour = "black")
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/Figure-S6-1} 
 
-
-# Expected het
-He <- ggplot(df4.snps, aes(reorder(Size, Num), He)) +
-  geom_boxplot() + 
-  geom_hline(aes(yintercept=0.05), colour="#990000", linetype="dashed") +
-  theme_bw() + 
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +  
-  ylab(expression(paste("Pearson's r ",italic("P"), " value"))) +
-  xlab(expression(paste("Number of randomly chosen SNPs - H", scriptstyle("E")))) +
-  theme(axis.text = element_text(size = rel(1.2))) + 
-  theme(axis.title = element_text(size = rel(1.4))) +
-  annotate("text", label = "(B)", x = 11, y = 0.7, size = 7, colour = "black")
-
-# Fst
-Fst <- ggplot(df4.snps, aes(reorder(Size, Num), Fst)) +
-  geom_boxplot() + 
-  geom_hline(aes(yintercept=0.05), colour="#990000", linetype="dashed") +
-  theme_bw() + 
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +  
-  ylab("") +
-  xlab(expression(paste("Number of randomly chosen SNPs - F", scriptstyle("ST")))) +
-  theme(axis.text = element_text(size = rel(1.2))) + 
-  theme(axis.title = element_text(size = rel(1.4))) +
-  annotate("text", label = "(C)", x = 11, y = 0.55, size = 7, colour = "black")
-
-
-#Define multiplot function from:
-# http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_%28ggplot2%29/
-multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
-  library(grid)
-
-  # Make a list from the ... arguments and plotlist
-  plots <- c(list(...), plotlist)
-
-  numPlots = length(plots)
-
-  # If layout is NULL, then use 'cols' to determine layout
-  if (is.null(layout)) {
-    # Make the panel
-    # ncol: Number of columns of plots
-    # nrow: Number of rows needed, calculated from # of cols
-    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
-                    ncol = cols, nrow = ceiling(numPlots/cols))
-  }
-
- if (numPlots==1) {
-    print(plots[[1]])
-
-  } else {
-    # Set up the page
-    grid.newpage()
-    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
-
-    # Make each plot, in the correct location
-    for (i in 1:numPlots) {
-      # Get the i,j matrix positions of the regions that contain this subplot
-      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
-
-      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
-                                      layout.pos.col = matchidx$col))
-    }
-  }
-}
-
-multiplot(Ho, He, Fst, cols = 1)
-@
+\end{knitrout}
 \noindent
 \textbf{Fig. S6} Subsampling analysis showing how many randomly sampled SNP loci out of the total of 17,901 are needed in comparison to the full microsatellite dataset (101 \textit{Gopherus polyphemus} genotyed at 10 microsatellite loci) for Pearon's r correlation coefficient to be significant at 0.05 level (dotted line) for (A) observed heterozygosity; (B) expected heterozygosity; and (C) \textsc{Fst}. There were 10 simulations for each size class of SNPs. \textsc{Ho} for observed heterozygosity, \textsc{He} for expected heterozygosity.\\
 
 \pagebreak{}
 \noindent
-<<Figure-S7, echo=FALSE>>=
-#Allelic richness
-load("power-analysis-part-msats.RData") # created by power-analysis-part-msats.R
-part.AR <- ggplot(part.df4.snps, aes(reorder(Size, Num), AR)) +
-  geom_boxplot() + 
-  geom_hline(aes(yintercept=0.05), colour="#990000", linetype="dashed") +
-  theme_bw() + 
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +  
-  ylab("") + 
-  xlab(expression(paste("Number of randomly chosen SNPs - A", scriptstyle("R")))) +
-  theme(axis.text = element_text(size = rel(1.2))) + 
-  theme(axis.title = element_text(size = rel(1.4))) +
-  annotate("text", label = "(A)", x = 11, y = 0.5, size = 7, colour = "black")
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/Figure-S7-1} 
 
-
-# Expected het
-part.He <- ggplot(part.df4.snps, aes(reorder(Size, Num), He)) +
-  geom_boxplot() + 
-  geom_hline(aes(yintercept=0.05), colour="#990000", linetype="dashed") +
-  theme_bw() + 
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +  
-  ylab(expression(paste("Pearson's r ",italic("P"), " value"))) +
-  xlab(expression(paste("Number of randomly chosen SNPs - H", scriptstyle("E")))) +
-  theme(axis.text = element_text(size = rel(1.2))) + 
-  theme(axis.title = element_text(size = rel(1.4))) +
-  annotate("text", label = "(B)", x = 11, y = 0.7, size = 7, colour = "black")
-
-# Fst
-part.Fst <- ggplot(part.df4.snps, aes(reorder(Size, Num), Fst)) +
-  geom_boxplot() + 
-  geom_hline(aes(yintercept=0.05), colour="#990000", linetype="dashed") +
-  theme_bw() + 
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +  
-  ylab("") +
-  xlab(expression(paste("Number of randomly chosen SNPs - F", scriptstyle("ST")))) +
-  theme(axis.text = element_text(size = rel(1.2))) + 
-  theme(axis.title = element_text(size = rel(1.4))) +
-  annotate("text", label = "(C)", x = 11, y = 0.35, size = 7, colour = "black")
-
-
-#Define multiplot function from:
-# http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_%28ggplot2%29/
-multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
-  library(grid)
-
-  # Make a list from the ... arguments and plotlist
-  plots <- c(list(...), plotlist)
-
-  numPlots = length(plots)
-
-  # If layout is NULL, then use 'cols' to determine layout
-  if (is.null(layout)) {
-    # Make the panel
-    # ncol: Number of columns of plots
-    # nrow: Number of rows needed, calculated from # of cols
-    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
-                    ncol = cols, nrow = ceiling(numPlots/cols))
-  }
-
- if (numPlots==1) {
-    print(plots[[1]])
-
-  } else {
-    # Set up the page
-    grid.newpage()
-    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
-
-    # Make each plot, in the correct location
-    for (i in 1:numPlots) {
-      # Get the i,j matrix positions of the regions that contain this subplot
-      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
-
-      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
-                                      layout.pos.col = matchidx$col))
-    }
-  }
-}
-
-multiplot(part.AR, part.He, part.Fst, cols = 1)
-@
+\end{knitrout}
 \noindent
 \textbf{Fig. S7} Subsampling analysis showing how many randomly sampled SNP loci out of the total of 17,901 are needed in comparison to the partial microsatellite dataset (16 \textit{Gopherus polyphemus} genotyed at 10 microsatellite loci) for Pearon's r correlation coefficient to be significant at 0.05 level (dotted line) for (A) allelic richness; (B) expected heterozygosity; and (C) \textsc{Fst}. There were 10 simulations for each size class of SNPs. \textsc{Ar} for allelic richness, \textsc{He} for expected heterozygosity.\\ 
 
 
-<<Figure S8, echo=FALSE>>=
-ne <- read.table("ne_estimates.txt", header=T)
-ne$Population <- gsub("GG", "GA", ne$Population)
-ne$Method <- gsub("HET-0.05", "HET", ne$Method)
-ne$Method <- gsub("LD-0.05", "LD", ne$Method)
-ne$Method <- gsub("MolCoan", "MOL", ne$Method)
-ne_snps <- ne[ne$Marker=="snps",]
-ne_msats<- ne[ne$Marker=="msats",]
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/Figure_S8-1} 
 
-# snps useful except LD goes to infinity (leave it out?)
-snps <- ggplot(ne_snps, aes(Method, Ne)) +
-  geom_pointrange(aes(colour=Population,
-                           ymin = Lower95.CI, ymax = Upper95.CI),
-                       position = position_dodge(width = 0.5)) + 
-  theme_bw() +
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank()) +
-  theme(axis.text = element_text(size = rel(1.6))) +
-  theme(axis.title = element_text(size = rel(2))) +
-  scale_y_continuous(breaks = c(0,50,100,150,200,250,300,350,400)) +
-  expand_limits(y = c(0,Inf)) +
-  ylab("Ne SNPs")
-
-
-# comments microsatellites not very useful, all were very high with upper confidence intervals to infinity except molecular coancestry
-msats <- ggplot(ne_msats, aes(Method, Ne)) +
-  geom_pointrange(aes(colour=Population,
-                           ymin = Lower95.CI, ymax = Upper95.CI),
-                       position = position_dodge(width = 0.5)) + 
-  theme_bw() +
-  theme(panel.border = element_rect(linetype = "solid", colour = "black"),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank()) +
-  theme(axis.text = element_text(size = rel(1.6))) +
-  theme(axis.title = element_text(size = rel(2))) +
-  scale_y_continuous(breaks = c(0,500,1000,1500,2000,2500,3000,3500)) +
-  expand_limits(y = c(0,Inf)) +
-  ylab("Ne Microsatellites")
-
-#graph figures S8A-S8B plots
-multiplot(msats, snps,cols = 1)
-@
+\end{knitrout}
 \noindent
 \textbf{Fig. S8} Effective population sizes per generation (Ne) along with 95 \% confidence intervals for \textit{Gopherus polyphemus} samples estimated with the program NeEstimator using (A) the full microsatellite dataset (101 \textit{G. polyphemus} genotyed at 10 microsatellite loci) or (B) the SNP dataset (16 \textit{G. polyphemus} sequenced at 17,901 immune gene SNPs). Dots that are on the top of the graph represent Ne estimates of infinity, and lines that extend to the top of the graph represent upper 95 \% confidence limits of infinity. LD for linkage disequilibrium method of Waples \& Do (2008), HET for heterozygote-excess method of Zhdanova \& Pudovkin (2008), and MOL for the molecular coancestry method of Nomura (2008). Note that the HET and MOL methods estimate the effective number of breeders per year (Nb), which were converted to Ne by multiplying Nb by the generation time of 31 years for \textit{G. polyphemus} (Enge et al. 2006).\\
 

@@ -1,0 +1,757 @@
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[margin=3cm]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=3cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{0}
+\usepackage{url, indentfirst}
+\usepackage{tabularx, booktabs, multirow, array, caption, color, longtable}
+\usepackage{graphicx, fancyhdr, babel, xcolor, csquotes}
+\usepackage{hyperref, lineno, setspace, pdflscape}
+\usepackage[round]{natbib}
+\graphicspath{ {C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/} }
+
+\linenumbers
+\doublespacing
+\renewcommand\linenumberfont{\small\textnormal}
+
+\title{Population genetic inferences using immune gene SNPs mirror patterns inferred by microsatellites}
+\date{}
+\author{\\
+JEAN P. ELBERS$^{1,3}$, RACHEL W. CLOSTIO$^{2}$, SABRINA S. TAYLOR$^{1}$\\\\
+$^{1}$School of Renewable Natural Resources, 227 RNR Bldg., Louisiana State University and AgCenter, \\ Baton Rouge, Louisiana, 70803, USA\\
+$^{2}$Department of Biology, 300 E. St. Mary Blvd., University of Louisiana at Lafayette, \\ Lafayette, Louisiana, 70503, USA\\
+Keywords: microsatellites, target enrichment, sequence capture, \\ next-generation sequencing, immunogenetics, population genomics \\\\
+$^{3}$Corresponding author: Fax: 225-578-4227, Email: \underline{jean.elbers@gmail.com}\\\\
+Running title: Immune gene SNPs mirror microsatellites\\\\
+}
+
+\begin{document}
+<<echo=FALSE>>=
+#set the working directory to find seqmetrics file
+#setwd("C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/")
+load("snps_gene_names.RData") # created using snps_gene_names.R
+seqMetrics = read.table(file = "ALL-samples-recal03-baitsonly.hsmetrics.txt", header = T) #read in the sequencing metrics
+seqMean = function(x){mean(seqMetrics[2:17,x])} #create function seqMean to call later
+seqSD = function(x){sqrt(var(seqMetrics[2:17,x]))} #create function seqSD to call later
+
+# calculate the number of possible immune genes
+genes.possible <- read.table("ALL.gene", header=TRUE, comment.char = "#")
+colnames(genes.possible)[7] <- "overlap"
+genes.possible2 <- length(genes.possible$overlap)
+genes.covered <- genes.possible[genes.possible$overlap != 0,]
+genes.covered2 <- length(genes.covered$overlap)
+
+# calculate the number of possible immune gene exons
+exons.possible <- read.table("ALL.exon", header=TRUE, comment.char = "#")
+colnames(exons.possible)[7] <- "overlap"
+exons.possible2 <- length(exons.possible$overlap)
+exons.covered <- exons.possible[exons.possible$overlap != 0,]
+exons.covered2 <- length(exons.covered$overlap)
+
+# calculate mean and sd number of genes per sample
+genes <- read.table("gene.counts.per.sample")
+genes2 <- genes$V2-2 # subtract 2 from each to account for two header lines
+genes2.mean <- mean(genes2)
+genes2.sd <- sd(genes2)
+
+# calculate mean and sd number of exons per sample
+exons <- read.table("exon.counts.per.sample")
+exons2 <- exons$V2-2 # subtract 2 from each to account for two header lines
+exons2.mean <- mean(exons2)
+exons2.sd <- sd(exons2)
+
+
+
+load("hierfstat_snps_correct_R_workspace.RData") # created using hierfstat-snps-correct.R
+load("hierfstat_msats_correct_R_workspace.RData") # created using hierfstat-msats-correct.R
+load("hierfstat-part-msats.RData") # created using hierfstat-part-msats.R
+
+snp.div = cbind("Site"=c("AL","FL","GA","LA"),
+                "AR"=colMeans(tort.ar$Ar),
+                "Ho"=colMeans(tort.div$Ho),
+                "He"=colMeans(tort.div$Hs),
+                "Marker"=rep("snps",4)) #create the data.frame snp.data
+
+msat.div = cbind("Site"=c("LA","AL","GA","FL"),
+                 "AR"=msat.AR,
+                 "Ho"=msat.Ho,
+                 "He"=msat.Hs,
+                 "Marker"=rep("msats",4)) #create the data.frame msat.div
+msat.div = as.data.frame(msat.div)
+
+part.msat.div = cbind("Site"=c("LA","AL","GA","FL"),
+                 "AR"=part.msat.AR,
+                 "Ho"=part.msat.Ho,
+                 "He"=part.msat.Hs,
+                 "Marker"=rep("msats-part",4)) #create the data.frame msat.div
+part.msat.div = as.data.frame(part.msat.div)
+
+
+div.data = rbind(msat.div,snp.div,part.msat.div)
+div.data$AR <- as.numeric(levels(div.data$AR)[div.data$AR])
+div.data$Ho <- as.numeric(levels(div.data$Ho)[div.data$Ho])
+div.data$He <- as.numeric(levels(div.data$He)[div.data$He])
+
+# do 1x1 linear comparisons of genetic diversity between msats and snps
+div.data.sort <-div.data[with(div.data, order(Marker,Site)), ] #sort the diversity data by Marker then Site
+
+
+
+#compares allelic richness linearly
+library("ggplot2")
+# for mfullvssnp (microsats full vs snps)
+AR.mfullvssnp.coef <- coef(lm(div.data.sort$AR[1:4]~div.data.sort$AR[5:8]))
+AR.mfullvssnp.cor.pval <- cor.test(div.data.sort$AR[1:4], div.data.sort$AR[5:8], 
+                                  method='pearson', alternative = "greater", 
+                                  exact = TRUE,conf.level = .95)
+AR.mfullvssnp.cor <- round(cor(div.data.sort$AR[1:4], div.data.sort$AR[5:8], 
+                              method='pearson'), digits =3)
+
+# for mpartvssnp (microsats part vs snps)
+AR.mpartvssnp.coef <- coef(lm(div.data.sort$AR[5:8]~div.data.sort$AR[9:12]))
+AR.mpartvssnp.cor.pval <- cor.test(div.data.sort$AR[5:8], div.data.sort$AR[9:12], 
+                                  method='pearson', alternative = "greater", 
+                                  exact = TRUE,conf.level = .95)
+AR.mpartvssnp.cor <- round(cor(div.data.sort$AR[5:8], div.data.sort$AR[9:12], 
+                              method='pearson'), digits =3)
+
+# Compare obs heterozygosity
+Ho.mfullvssnp.coef <- coef(lm(div.data.sort$Ho[1:4]~div.data.sort$Ho[5:8]))
+Ho.mfullvssnp.cor <- round(cor(div.data.sort$Ho[1:4], div.data.sort$Ho[5:8], 
+                              method='pearson'), digits=3)
+Ho.mfullvssnp.cor.pval <- cor.test(div.data.sort$Ho[1:4], div.data.sort$Ho[5:8],
+                                  method='pearson', alternative = "greater",
+                                  exact = TRUE,conf.level = .95)
+
+Ho.mpartvssnp.coef <- coef(lm(div.data.sort$Ho[5:8]~div.data.sort$Ho[9:12]))
+Ho.mpartvssnp.cor <- round(cor(div.data.sort$Ho[5:8], div.data.sort$Ho[9:12], 
+                              method='pearson'), digits=3)
+Ho.mpartvssnp.cor.pval <- cor.test(div.data.sort$Ho[5:8], div.data.sort$Ho[9:12],
+                                  method='pearson', alternative = "greater",
+                                  exact = TRUE,conf.level = .95)
+
+
+# Compare expected heterozygosity
+He.mfullvssnp.coef <- coef(lm(div.data.sort$He[1:4]~div.data.sort$He[5:8]))
+He.mfullvssnp.cor <- round(cor(div.data.sort$He[1:4], div.data.sort$He[5:8],
+                              method='pearson'), digits = 3)
+He.mfullvssnp.cor.pval <-cor.test(div.data.sort$He[1:4], div.data.sort$He[5:8],
+                                 method='pearson', alternative = "greater",
+                                 exact = TRUE,conf.level = .95)
+
+He.mpartvssnp.coef <- coef(lm(div.data.sort$He[5:8]~div.data.sort$He[9:12]))
+He.mpartvssnp.cor <- round(cor(div.data.sort$He[5:8], div.data.sort$He[9:12],
+                              method='pearson'), digits = 3)
+He.mpartvssnp.cor.pval <-cor.test(div.data.sort$He[5:8], div.data.sort$He[9:12],
+                                 method='pearson', alternative = "greater",
+                                 exact = TRUE,conf.level = .95)
+
+
+#compare FSTs
+
+part.fst.msat <- as.data.frame(cbind("Comparison"=c("LAxAL",
+                                                   "LAxGA",
+                                                   "ALxGA",
+                                                   "LAxFL",
+                                                   "ALxFL",
+                                                   "GAxFL"), #make column called "Comparison" with 6 values
+                                    "FST"=c(na.omit(part.msat.fst)), #make column called "FST", convert FST values into vector, discard na's values, end up with 6 values
+                                    "Marker"=c(rep("msats-part",6)))) #make column called "Marker" with 6 instances of "msats"
+part.fst.msat$FST <- as.numeric(levels(part.fst.msat$FST)[part.fst.msat$FST]) #convert FST values from factor to numeric
+
+
+fst.msat <- as.data.frame(cbind("Comparison"=c("LAxAL",
+                                                   "LAxGA",
+                                                   "ALxGA",
+                                                   "LAxFL",
+                                                   "ALxFL",
+                                                   "GAxFL"), #make column called "Comparison" with 6 values
+                                    "FST"=c(na.omit(msat.fst)), #make column called "FST", convert FST values into vector, discard na's values, end up with 6 values
+                                    "Marker"=c(rep("msats",6)))) #make column called "Marker" with 6 instances of "msats"
+fst.msat$FST <- as.numeric(levels(fst.msat$FST)[fst.msat$FST]) #convert FST values from factor to numeric
+
+fst.snp <- as.data.frame(cbind("Comparison"=c("ALxFL",
+                                              "ALxGA",
+                                              "GAxFL",
+                                              "LAxAL",
+                                              "LAxFL",
+                                              "LAxGA"), #make column called "Comparison" with 6 values
+                                "FST"=c(na.omit(as.vector(tort.fst$fst.pp))), #make column called "FST", convert FST values into vector, discard na's values, end up with 6 values
+                                "Marker"=c(rep("snp",6)))) #make column called "Marker" with 6 instances of "snp"
+fst.snp$FST <- as.numeric(levels(fst.snp$FST))[fst.snp$FST] #convert FST values from factor to numeric
+
+
+fst.data = rbind(fst.msat, fst.snp, part.fst.msat) #combine the data
+
+
+
+# do linear 1x1 comparisons of FST
+fst.data.sort <- fst.data[with(fst.data, order(Marker,Comparison)), ] #sort the data by Marker then Comparison
+
+fst.cor <- round(cor(fst.data.sort$FST[1:6], fst.data.sort$FST[7:12], 
+                     method='pearson'), digits = 3) #compute the Pearson correlation coefficient for msat and snp data, round to 3 digits
+fst.cor.pval <- cor.test(fst.data.sort$FST[1:6], fst.data.sort$FST[7:12], 
+                         method='pearson', alternative = "greater",
+                         exact = TRUE)
+
+part.fst.cor <- round(cor(fst.data.sort$FST[7:12], fst.data.sort$FST[13:18], 
+                     method='pearson'), digits = 3) #compute the Pearson correlation coefficient for msat and snp data, round to 3 digits
+part.fst.cor.pval <- cor.test(fst.data.sort$FST[7:12], fst.data.sort$FST[13:18], 
+                         method='pearson', alternative = "greater",
+                         exact = TRUE)
+
+
+
+#compare PCAs
+## SNPs - pop1=AL, pop2=FL, pop3=GA, pop4=LA
+tort.snp.ids <- c(rep("AL",4), rep("FL",4), rep("GA",4), rep("LA",4)) #create the snp labels
+tort.snp.pca.axis1.mean <- tortpca$ipca$li$Axis1 #get the X coordinates
+tort.snp.pca.axis2.mean <- tortpca$ipca$li$Axis2 #get the Y coordinates
+
+#create a dataframe so we can more easily plot the snp data
+tort.snp.pca.df <- as.data.frame(cbind("x" = c(tort.snp.pca.axis1.mean), #append X coordinates as column "Axis1"
+                                       "y" = c(tort.snp.pca.axis2.mean), #append Y coordinates as column "Axis2"
+                                       "Site" = c(tort.snp.ids))) #append the site labels
+tort.snp.pca.df$x <- as.numeric(levels(tort.snp.pca.df$x)[tort.snp.pca.df$x]) #convert Axis 1 to numeric
+tort.snp.pca.df$y <- as.numeric(levels(tort.snp.pca.df$y)[tort.snp.pca.df$y]) #convert Axis 2 to numeric
+tort.snp.pca.df <- tort.snp.pca.df[with(tort.snp.pca.df, order(Site)), ]
+
+
+
+# MSATS - pop1=LA, pop2=AL, pop3=GA, pop4=FL
+msat.ids <- gsub("SD", "AL",msat.ids)
+msat.ids <- gsub("GG", "GA",msat.ids)
+
+tort.msat.pca.df <- as.data.frame(cbind("x" = c(msat.pca$ipca$li$Axis1),
+                                       "y" = c(msat.pca$ipca$li$Axis2),
+                                       "Site" = c(msat.ids)))
+tort.msat.pca.df$x <- as.numeric(levels(tort.msat.pca.df$x)[tort.msat.pca.df$x])
+tort.msat.pca.df$y <- as.numeric(levels(tort.msat.pca.df$y)[tort.msat.pca.df$y])
+tort.msat.pca.df <- tort.msat.pca.df[with(tort.msat.pca.df, order(Site)), ]
+
+# Partial MSATS - pop1=LA, pop2=AL, pop3=GA, pop4=FL
+part.msat.ids <- gsub("SD", "AL",part.msat.ids)
+part.msat.ids <- gsub("GG", "GA",part.msat.ids)
+
+part.tort.msat.pca.df <- as.data.frame(cbind("x" = c(part.msat.pca$ipca$li$Axis1),
+                                       "y" = c(part.msat.pca$ipca$li$Axis2),
+                                       "Site" = c(part.msat.ids)))
+part.tort.msat.pca.df$x <- as.numeric(levels(part.tort.msat.pca.df$x)[part.tort.msat.pca.df$x])
+part.tort.msat.pca.df$y <- as.numeric(levels(part.tort.msat.pca.df$y)[part.tort.msat.pca.df$y])
+part.tort.msat.pca.df <- part.tort.msat.pca.df[with(part.tort.msat.pca.df, order(Site)), ]
+
+@
+
+
+\maketitle
+\pagebreak{}
+
+\section*{Abstract}
+Single nucleotide polymorphisms (SNPs) are replacing microsatellites for population genetic analyses, but it is not apparent how many SNPs are needed or how well SNPs correlate with microsatellites. We used data from the gopher tortoise, \textit{Gopherus polyphemus} - a species with small populations, to compare SNPs and microsatellites to estimate population genetic parameters. Specifically, we compared one SNP dataset (16 tortoises from 4 populations sequenced at 17,901 SNPs) to two microsatellite datasets, a full dataset of 101 tortoises and a partial dataset of 16 tortoises previously genotyped at 10 microsatellites. For the full microsatellite dataset, observed heterozygosity, expected heterozygosity, and \textsc{Fst} were correlated between SNPs and microsatellites; however, allelic richness was not. The same was true for the partial microsatellite dataset, except that allelic richness, but not observed heterozygosity, was correlated. The number of clusters estimated by Structure differed for each dataset (SNPs = 2; partial microsatellite = 3; full microsatellite = 4). PCA's showed four clusters for all datasets. More than 800 SNPs were needed to correlate with allelic richness, observed heterozygosity, and expected heterozygosity, but only 100 were needed for \textsc{Fst}. The number of SNPs typically obtained from NGS far exceeds the number of SNPs needed to correlate with microsatellite parameter estimates. Our study illustrates that diversity, \textsc{Fst}, and PCA results from microsatellites can mirror those obtained with SNPs. These results may be applicable to small populations, a defining feature of endangered and threatened species, because genetic drift will tend to outweigh any selection that may act on SNPs.
+
+\section*{Introduction}
+Molecular markers vary in their utility and application to population genetic studies, and geneticists use available markers suited to answering questions at hand. Initially, geneticists only had allozymes and used them to infer nucleotide changes underlying differences in protein migration during electrophoresis. Later, variable mitochondrial DNA markers were used because of the availability of conserved primers and the high copy number of mitochondria, but mitochondrial markers mostly provided information on broad-scale genetic patterns \citep{Moritz_1994}. Presently, markers such as microsatellites are commonly used in population genetics because most are presumed neutral, are found throughout genomes, and can elucidate fine-scale spatial genetic patterns \citep[e.g.,][]{Clostio_et_al_2012}.
+
+Genomic resources, hybridization arrays, fluorescent probes, and next-generation sequencing (NGS) have allowed researchers to access other types of genomic markers, and recently large arrays of single nucleotide polymorphisms (SNPs) have become particularly popular in population genetic studies of not only model but also non-model organisms \citep{Allendorf_et_al_2010}. SNPs are one of the most numerous molecular markers \citep{Gupta_et_al_2001}, and thousands to millions of them can be examined simultaneously using NGS techniques compared to dozens observed in traditional Sanger sequencing-based approaches. However, as the preferred tool shifts from microsatellites to genome-wide SNPs, it is important to understand new results in the context of previous research. 
+
+Prior research has shown that microsatellite-derived population genetic parameters generally correlate with parameters derived SNPs. Most data from pre-NGS SNP methods find correlations between microsatellites and SNPs \citep[e.g.,][]{Ryynanen_et_al_2007, Narum_et_al_2008, Coates_et_al_2009, Glover_et_al_2010, Garke_et_al_2012}, but there are some exceptions \citep[e.g.,][]{Vali_et_al_2008, DeFaveri_et_al_2013}. Considerably fewer studies have compared genetic inferences derived from microsatellites to inferences from thousands of NGS generated SNPs, but there are some examples from restriction site-associated DNA sequencing (RADseq) studies where correlations are present \citep{Jeffries_et_al_2016} between the two types of markers for population genetic parameters  or not \citep{Lozier_2014}. As more and more studies use NGS data, a better understanding of this relationship is imperative because many current management and recovery plans currently in effect are based on genetic data from microsatellites, and these plans may change if results from microsatellites and NGS data are substantively different.
+
+Microsatellites are presumed to be neutrally evolving and most likely influenced by neutral genetic processes while SNPs can be influenced by either neutral or adaptive genetic processes. SNPs can represent functional, coding regions of the genome, which on the one hand are under purifying selection to avoid deleterious changes and on the other under positive selection for advantageous changes. For example, SNPs present in genes that influence immune response are likely to be under strong positive selection as such changes could provide resilience to infectious disease \citep{Bernatchez_and_Landry_2003, Sommer_2005}.
+
+Although genes such as immune genes are predicted to be under strong selective pressure, small effective population sizes (Ne) can make genes influenced by selection behave like effectively neutral loci. In particular, loci under selection may be effectively neutral if their selection coefficient (\textit{s}) is less than or equal to (1/(2Ne)) \citep{Wright_1931}. For example, for alleles of immune response genes such as those of the major histocompatibility complex (MHC), which can have high selection coefficients of 1\%, such alleles could behave like effectively neutral loci if effective population sizes are less than 50 individuals \citep{Frankham_et_al_2010}. Empirical studies support these conclusions as MHC loci behave like effectively neutral loci for a variety of threatened vertebrates with small, bottlenecked populations \citep{Weber_et_al_2004, Miller_et_al_2008, Taylor_et_al_2012}.
+
+We recently applied genomic approaches to the threatened \textit{Gopherus polyphemus} (gopher tortoise) to isolate genes involved in immune responses to better understand susceptibility to a chronic and occasionally fatal infectious upper respiratory tract disease \citep{Elbers_and_Taylor_2015}. These samples were previously genotyped at 10 microsatellites by \citet{Clostio_et_al_2012} providing an excellent opportunity to compare population genetic parameters derived from presumably neutrally evolving microsatellites and presumably drift and/or selection-influenced immune gene SNPs from an organism with generally small population sizes.
+
+We leveraged the NGS \citep{Elbers_and_Taylor_2015} and microsatellite \citep{Clostio_et_al_2012} data already collected for \textit{G. polyphemus} to compare estimates of population genetic diversity, differentiation, and admixture derived from immune gene SNPs and microsatellites using samples from the same populations to better understand how NGS SNP inferences relate to those from microsatellites. We also subsample our SNPs to determine how many are needed to replace a given number of microsatellites for estimating genetic diversity and differentiation. Although immune gene SNPs are putatively under selection and microsatellites are presumably neutral, we predict inferences from all immune gene SNPs will mostly correlate with microsatellite inferences as there will be a preponderance of selectively neutral immune gene SNPs due to the generally small population sizes of \textit{G. polyphemus}. We also predict that not all of the discovered SNPs will be needed to replace microsatellites for estimating diversity and differentiation.
+
+\section*{Methods}
+\subsection*{Samples}
+Due to financial and logistical constraints, we were limited to analyzing SNPs from 16 tortoises, so we randomly chose 16 \textit{G. polyphemus} from 4 sample populations (4 per population, Fig. 1). These 4 sample populations were chosen out of the 24 used by \citet{Clostio_et_al_2012} because they were distributed along an east to west gradient and were likely representative of the genetic variability for the species. We compared the SNP dataset to two microsatellite datasets: (1) the full microsatellite dataset of 101 tortoises sampled by \citet{Clostio_et_al_2012} (Table 1); and, (2) a partial microsatellite dataset of 16 tortoises. We used two microsatellite datasets to: 1) equalize sample size (partial); 2) use a sample size representative of a typical microsatellite study (full).  Only 1 GA tortoise in the SNP dataset had been previously genotyped at 10 microsatellite loci by \citet{Clostio_et_al_2012}, so we randomly chose 3 additional tortoises from the GA population that had been genotyped at microsatellites for the partial microsatellite dataset. Thus, the SNP dataset and the partial microsatellite dataset only differed by 3 samples from the GA population.
+
+\subsection*{Target region for sequencing SNPs}
+The methods for acquiring SNP data are presented in \citet{Elbers_and_Taylor_2015}. Briefly, we created a target region to capture the immunome (i.e., genes involved in immune response, \textit{sensu amplo} \citet{Ortutay_and_Vihinen_2006}) of \textit{Chrysemys picta bellii} (western painted turtle) using the GO2TR workflow \citep{Elbers_and_Taylor_2015}. The workflow filtered the \textit{C. p. bellii} 3.0.1 genome assembly \citep{Shaffer_et_al_2013} annotated by the NCBI Eukaryotic Genome Annotation Pipeline (annotation release 100) using the gene ontology term "immune response" (i.e., genes that function in the immune system's response to internal or invasive threats). Jean-Marie Rouillard of MYcroarray Inc. (Ann Arbor, MI, USA) generated 120-bp bait sequences with 60-bp overlap to capture our 1.4Mbp target region.
+
+\subsection*{Library preparation and sequence capture}
+We used biotinylated RNA baits from MYcroarray in an in-solution hybridization experiment to capture the immunomes of 16 \textit{G. polyphemus}. We created 16 Illumina adaptor-ligated libraries using Agilent SureSelect XT2 Reagent Kits for the Illumina MiSeq (Agilent Technologies, Santa Clara, CA, USA), pooled 16 prepared libraries per capture reaction, and used MYcroarray reagents and protocols for sequence capture. We then sequenced post-capture amplification libraries on two Illumina MiSeq sequencer flow cells (i.e., all individuals sequenced twice) using MiSeq version 3 chemistry and 75-bp paired-end reads at Pennington Biomedical Research Center (Baton Rouge, LA, USA).
+
+\subsection*{Read quality control and mapping}
+We demultiplexed reads for each MiSeq run, allowing for up to one mismatch in the 8-bp barcode using \texttt{MiSeq Reporter} software. We used \texttt{TRIMMOMATIC} v0.32 \citep{Bolger_et_al_2014} default settings for adapter trimming, and for base quality filtering, we trimmed leading and trailing bases with quality scores less than 5 and 15, respectively. We also used sliding window scans to remove the 3' end of reads when average quality dropped below 15, and discarded reads with less than 40 bases. We next merged overlapping paired-ends reads with \texttt{BBMerge} v5.4 from the \texttt{BBMap} suite (\url{https://sourceforge.net/projects/bbmap/}) and then combined unpaired single reads (n=9.08 million) and merged paired reads for downstream analysis. Paired and single plus merged reads were first mapped separately to the \textit{C. p. bellii} 3.0.3 genome using the \texttt{BWA-MEM} algorithm \citep{Li_2013} implemented in \texttt{BWA} v0.7.12 \citep{Li_and_Durbin_2009}, and then less stringently using \texttt{STAMPY} v1.0.23 \citep{Lunter_and_Goodson_2011}. We used \texttt{SAMTOOLS} v1.1 \citep{Li_et_al_2009} to merge binary alignment map (BAM) files from paired reads and single plus merged reads. NCBI \texttt{remap} (\url{http://www.ncbi.nlm.nih.gov/genome/tools/remap}) was used to convert our bait intervals from \textit{C. p. bellii} 3.0.1 to \textit{C. p. bellii} 3.0.3 coordinates.
+
+\subsection*{Variant and genotype calling}
+Mapped reads were then processed using the \texttt{Genome Analysis Toolkit} v3.3.0 \citep[\texttt{GATK}]{McKenna_et_al_2010}, adhering to \texttt{GATK} best practices for exome sequencing and calling variants such as SNPs with \texttt{GATK}'s \texttt{Haplotype Caller} and \texttt{Unified Genotyper}.
+
+We then filtered variants to remove those with bad validation, low quality, low read depth, or low genotype quality to produce a high quality set of SNPs called by the \texttt{Unified Genotyper}. Next, we called variants from base-recalibrated BAM files using the \texttt{Haplotype Caller} and filtered variants in the same manner as before. We then looked for concordance between the two variant callers and used concordant SNPs for variant quality filtering of the \texttt{Haplotype Caller}'s call set. Finally, we used \texttt{BEAGLE} v4.0 r1398 \citep{Browning_and_Browning_2007} for genotype imputation on the variant-recalibrated SNP set. Following variant calling, we used \texttt{PICARD}'s v1.128 (\url{http://broadinstitute.github.io/picard/}) \texttt{CalculateHSMetrics} to estimate sequencing metrics, and \texttt{featureCounts} \citep{Liao_et_al_2014} to estimate the number of genes and exons covered by each sample.
+
+\subsection*{Population genomic analyses}
+For all population genomic analyses, we analyzed only di-allelic polymorphic SNP loci, as the tri- (n=758) and tetra-allelic (n=7) loci we obtained would influence SNP heterozygosity estimates. We used \texttt{VCFTOOLS} v0.1.12b \citep{Danecek_et_al_2011} to recalculate allele frequencies from our \texttt{Beagle}-imputated SNPs and then removed loci with allele frequencies of one. We then pruned SNP loci that were out of Hardy-Weinberg Equilibrium (HWE) or in Linkage Disequilibrium (LD) within each population using default settings in \texttt{VCFTOOLS}. We used the \texttt{p.adjust} function in \texttt{R} \citep{R_Core_Team} to correct \textit{P} values for HWE and LD tests using a false discovery rate \citep{Benjamini_and_Hochberg_1995} of 0.05. 
+
+We examined what polymorphic SNPs might be under selection with \texttt{BayeScan} v2.1 \citep{Foll_and_Gaggiotti_2008} with the intent of pruning those SNPs that were putatively under selection. We used the \texttt{make\_bayescan\_input.py} script to convert variant call format (VCF) to \texttt{BayeScan} input format \citep{De_Wit_et_al_2012} and a false discovery rate of 0.05. In order for a given SNP to be included in the analysis, we required at least four good quality genotypes from each population and at least one copy of the minor allele for a locus.
+
+For genetic diversity analyses and all subsequent file conversions, we used \texttt{PGDSpider} v2.0.7.4 \citep{Lischer_and_Excoffier_2012} and the \texttt{R} package \texttt{hierfstat} v0.04-10 \citep{Goudet_2005} to assess observed and expected heterozygosity and allelic richness. For population genomic differentiation, we estimated \textsc{Fst} values with \texttt{hierfstat}. For estimating admixture, we performed principle component analyses (PCA) with \texttt{hierfstat}, and we also assessed population admixture using \texttt{STRUCTURE} v2.3.4 \citep{Pritchard_et_al_2000, Hubisz_et_al_2009}. We ran \texttt{STRUCTURE} with 100,000 burnins and 1,000,000 replicates using correlated allele frequency and the admixture ancestry models from \textit{K}=1--5 with 20 replicates per \textit{K} value. We used \texttt{STRUCTURE HARVESTER} web v0.6.94 \citep{Earl_and_vonHoldt_2012} to select the best \textit{K} value and \texttt{CLUMPAK} web server \citep{Kopelman_et_al_2015} to average data from multiple runs and to visualize population assignments.
+
+\subsection*{Microsatellite analyses}
+We assessed HWE and LD for the full and partial microsatellite datasets using \texttt{ARLEQUIN} v3.5 \citep{Excoffier_and_Lischer_2010}. All 10 loci for both datasets were in HWE and linkage equilibrium. Genetic diversity, differentiation, and admixture were estimated in the same manner as SNPs using \texttt{hierfstat} and \texttt{STRUCTURE}.
+
+\subsection*{Random sampling of SNPs for subsampling analysis}
+We examined how many SNP loci would be needed to obtain \textit{P} values < 0.05 for Pearson's r correlation coefficient with the full and partial microsatellite datasets for allelic richness, heterozygosities, and \textsc{Fst} values by randomly subsampling our 17,901 SNPs. We did not include allelic richness when comparing the SNP and full microsatellite datasets because they were not correlated at the 0.05 level, and we did not include allelic richness and observed heterozygosity when comparing the SNP and partial microsatellite datasets because they were not correlated. We randomly chose SNPs among the following sample sizes using a custom \texttt{R} script: 10, 20, 40, 100, 200, 400, 800, 1,600, 3,200, 6,400, or 13,200 SNPs and calculated the \textit{P} value of the Pearson's correlation coefficient using the \texttt{cor.test} function in \texttt{R} for each sample size of SNP loci for allelic richness, observed heterozygosity, expected heterozygosity, and \textsc{Fst}. We repeated the process and chose 10 replicates for each sample size for both the full and partial microsatellite datasets.
+
+\subsection*{Effective population size}
+We estimated effective population size using the full microsatellite and SNP datasets with the program \texttt{NeEstimator} v2.01 \citep{Do_et_al_2014} and employed one single-sample estimator of Ne (i.e., the linkage disequilibrium method of \citet{Waples_and_Do_2008}), and two single-sample estimators of the number of effective breeders per year (i.e., Nb using the heterozygote-excess method of \citet{Zhdanova_and_Pudovkin_2008} and the molecular coancestry method of \citet{Nomura_2008}). We converted Nb to Ne by multiplying Nb by the generation time of 31 years for the gopher tortoise \citep{Enge_et_al_2006}.
+
+\section*{Results}
+From two Illumina MiSeq sequencer runs, we obtained \Sexpr{round(x = seqMetrics[1,7]/1000000, digits = 1)} million reads that passed quality control and were assignable to individuals. Each tortoise had \Sexpr{round(x = seqMean(6)/1000000, digits = 1)} \begin{math}\pm\end{math} \Sexpr{round(x = seqSD(6)/1000000, digits = 1)} (mean \begin{math}\pm\end{math} standard deviation) million reads of which \Sexpr{round(x = seqMean(10)*100, digits = 1)} \begin{math}\pm\end{math} \Sexpr{round(x = seqSD(10)*100, digits = 1)} \% were unique (i.e., were not PCR duplicates), and \Sexpr{round(x = seqMean(12)*100, digits = 1)} \begin{math}\pm\end{math} \Sexpr{round(x = seqSD(12)*100, digits = 1)} \% of these unique reads could be aligned to our target region (Table S1, Supporting information). Mean sample coverage over the entire target region was \Sexpr{round(x = seqMean(21), digits = 1)} \begin{math}\pm\end{math} \Sexpr{round(x = seqSD(21), digits = 1)} reads, and each sample had \Sexpr{round(x = seqMean(30)*100, digits = 1)} \begin{math}\pm\end{math} \Sexpr{round(x = seqSD(30)*100, digits = 1)} \% target bases with coverage greater than 20 reads (Fig. S2, Fig. S3, Supporting information). Only \Sexpr{round(x = seqMetrics[1,26]*100, digits = 1)} \% (\Sexpr{round(x = ((seqMetrics[1,26])*(seqMetrics[1,3]/1000)), digits = 1)} Kbp) of the \Sexpr{round(x = (seqMetrics[1,3]/1000000), digits = 1)} Mbp target region had coverage of less than 2 reads. Although our target region contained a total of \Sexpr{round(x = genes.possible2, digits = 1)} immune genes and 5,425 exons, only \Sexpr{round(x = genes.covered2, digits = 1)} genes and \Sexpr{formatC(exons.covered2, format="d", big.mark=",")} exons were represented by usable reads. Each sample had reads for \Sexpr{round(x = genes2.mean, digits = 1)} \begin{math}\pm\end{math} \Sexpr{round(x = genes2.sd, digits = 1)} genes and \Sexpr{formatC(exons2.mean, format="d", big.mark=",")} \begin{math}\pm\end{math} \Sexpr{round(x = exons2.sd, digits = 1)} exons (mean \begin{math}\pm\end{math} standard deviation).
+
+There were 17,901 di-allelic polymorphic SNP loci after filtering and imputation. None of these loci were out of HWE or in LD, but the lack of LD is unlikely given the close proximity of loci within the same exon. This may have occurred because we had to correct \textit{P} values to account for thousands of multiple tests. Polymorphic SNPs were present in 491 immune genes (Table S2, Supporting information) and included broad classes such as major histocompatibility and Toll-like receptor genes (Table 2).
+
+There were 66 SNP loci that may have been under selection, which represented 31 genes. Pruning these SNPs did not significantly influence results, so we chose to analyze the full SNP dataset when comparing genetic diversity, differentiation, or admixture between SNPs and microsatellites.
+
+SNP allelic richness was not posivitely correlated with values derived from the full microsatellite dataset (Fig. 2A, Pearson's r = \Sexpr{round(x = AR.mfullvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = AR.mfullvssnp.cor.pval$p.val, digits = 3)}); however, SNP and microsatellite observed (Fig. 2B, Pearson's r = \Sexpr{round(x = Ho.mfullvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = Ho.mfullvssnp.cor.pval$p.val, digits = 3)}) and expected heterozygosities (Fig. 2C, Pearson's r = \Sexpr{round(x = He.mfullvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = He.mfullvssnp.cor.pval$p.val, digits = 3)}) were highly correlated. Allelic richness was correlated between the SNP and partial microsatellite datasets (Fig. 2E, Pearson's r = \Sexpr{round(x = AR.mpartvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = AR.mpartvssnp.cor.pval$p.val, digits = 3)}). Observed heterozygosity was not correlated (Fig. 2F, Pearson's r = \Sexpr{round(x = Ho.mpartvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = Ho.mpartvssnp.cor.pval$p.val, digits = 3)}), but expected heterozygosity was (Fig. 2G, Pearson's r = \Sexpr{round(x = He.mpartvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = He.mpartvssnp.cor.pval$p.val, digits = 3)}). The LA population followed by FL then GA and AL populations had the lowest to highest heterozygosity and allelic richness for SNPs. This suggests lower genetic diversity in the western LA population versus eastern FL, GA, and AL populations based on SNPs, a similar result to that obtained with both microsatellite datasets.
+
+Pairwise \textsc{Fst} values were also positively correlated for SNP and the full (Fig. 2D, Pearson's r = \Sexpr{round(x = fst.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = fst.cor.pval$p.val, digits = 3)}) and partial (Fig. 2H, Pearson's r = \Sexpr{round(x = part.fst.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = part.fst.cor.pval$p.val, digits = 3)}) microsatellite datasets . However, LA and AL had the lowest differentiation for SNPs compared to second lowest for microsatellites.
+
+Population admixture inferred using SNPs suggested an optimum number of two clusters with \texttt{STRUCTURE}, the first consisting of AL, GA, and LA; the second with FL by itself (Fig. S3, Supporting information). For the full microsatellite dataset, there was an optimum of four clusters: one for each population examined (Fig. S4, Supporting information). The partial microsatellite dataset had three optimum clusters: the first with LA; the second with AL and GA; and the third with FL (Fig. S5, Supporting information). PCA analysis produced four clusters for SNPs and both microsatellite datasets (one for each population, Fig. 3A--3C).
+
+Random sampling of SNP loci showed that at least 1,600 SNPs were needed to obtain a significant correlation between SNP- and the full microsatellite dataset for allelic richness (Fig. S6A, Supporting information). Nearly 800 SNPs were needed for expected heterozygosity (Fig. S6B, Supporting information), but only 100 SNPs were needed for SNP- and microsatellite-derived \textsc{Fst} values to be correlated (Fig. S6C). There was a similar pattern for the partial microsatellite dataset for allelic richness, expected heterozygosity, and \textsc{Fst}, where at least 800, 800, and 100 SNPs were needed for significant correlations, respectively (Fig. S7A--7C, Supporting information). Parameter variability decreased as the number of randomly chosen SNPs increased, especially after 200, 100, 40, and 40 SNPs for allelic richness, observed and expected heterozygosity, and \textsc{Fst} values respectively (Fig. S6, Fig. S7, Supporting information).
+
+Effective population sizes estimated using the full microsatellite dataset were not particularly informative, especially the estimates of infinite population sizes from the heterozygous-excess and linkage disequilibrium methods (Fig. S8A, Supporting information). Minus the FL population's estimate of infinite effective population size, the molecular coancestry method suggested more reasonable estimates of effective population sizes between 34--589 individuals per population. Effective population sizes estimated using immune gene SNPs were more realistic with the heterozygous-excess method suggesting between 133--186 tortoises, and the molecular coancestry method suggesting between 319--427 tortoises per population (Fig. S8B, Supporting information). The linkage disequilibrium method was not informative as all effective population sizes were estimated to be infinite.
+
+The Ne estimates that ranged between 34--589 individuals (microsatellite and SNP molecular coancestry and SNP heterozygous-excess approaches) suggest that selection coefficients for SNPs would need to be less than 0.1\% for genetic drift to outweigh selection.
+
+\section*{Discussion}
+Estimates of genetic diversity derived from gopher tortoise immunome SNPs and both microsatellite datasets were typically correlated. Given that most gopher tortoise populations are small, immune gene SNPs may be behaving like effectively neutral loci. Thus, these correlations are theoretically reasonable and may hold true for other small populations, for example, endangered and threatened species generally.
+
+Other studies have observed similar and contrasting correlations between SNP versus microsatellite-derived estimates of genetic diversity. For example, previous work using 7 SNPs/indels and 14 microsatellites found that expected heterozygosity and allelic richness are positively correlated between the two types of markers in Atlantic salmon populations \citep{Ryynanen_et_al_2007}. On the contrary, SNP (n=1--46) and microsatellite (n=10--27) heterozygosities are not correlated for European and North American wolf populations \citep{Vali_et_al_2008}. Likewise, microsatellite-estimated diversity is different between \textit{Bombus} bumble bee species, but similar when using RADseq loci \citep{Lozier_2014}, thus diversity estimates from these two markers are not correlated.
+
+Although similar, the rank order for allelic richness and observed heterozygosity was not the same for immune gene SNPs and the full and partial microsatellite datasets, respectively. Similar observations have been made by other studies including those comparing SNPs and microsatellites in Atlantic salmon \citep{Ryynanen_et_al_2007}. Rank order may be skewed between the markers because microsatellites are poly-allelic while SNPs are di-allelic. In particular, for a microsatellite or SNP marker, there are \textit{n} ((\textit{n} - 1)/2) combinations that result in a heterozygote where \textit{n} is the number of alleles. Thus, for a di-allelic marker, there is only one combination of alleles that results in a heterozygote, and for a microsatellite that has at least 5 alleles (i.e., the average allelic richness for our 10 microsatellites in the full microsatellite dataset), there are 10 combinations of alleles that are heterozygous. This could explain why observed heterozygosity was not correlated between SNPs and microsatellites for the partial microsatellite dataset.
+
+Previous work with microsatellites showed that genetic variation was lower in western versus eastern \textit{G. polyphemus} populations \citep{Ennen_et_al_2010}, and our results support this finding. However, because we only sampled a single western population (Fig. 1), it is not appropriate to generalize all western populations as genetically depauperate. Ultimately, additional sampling and immunome sequencing from other western \textit{G. polyphemus} populations is warranted.
+
+\subsection*{Genetic differentiation}
+We also observed strong correlations between SNP and microsatellite-derived genetic differentiation, albeit the order of least to most differentiated comparisons varied. The same was observed for SNP- and microsatellite-derived \textsc{Fst} estimates from four populations of western corn rootworms \citep{Coates_et_al_2009}. The incongruence in rank order may have occurred in both scenarios because of homoplasy issues with microsatellites, where high mutation rates can cause repeat number to revert to a particular allele size, which can then inflate estimates of gene flow \citep{Coates_et_al_2009}.
+
+\subsection*{Genetic admixture}
+Population admixture assessments had few  inconsistencies between SNPs and microsatellites. Both PCAs suggested four clusters using either marker. We did observe differences in \texttt{STRUCTURE} admixture results with the optimum number of clusters being 2 for SNPs and 4 and 3 for the full and partial microsatellite datasets. \citet{Morin_et_al_2012} compared 42 SNPs versus 22 microsatellites in bowhead whales and also found that the optimum number of clusters is different when using \texttt{STRUCTURE}. SNPs and microsatellites may have suggested different estimates of the optimum number of clusters because some of the SNPs may represent functional rather than neutral genetic variation like the microsatellites, with both types of markers differing to what extent they have been influenced by selection and genetic drift. On the one hand, analysis of functional genetic variation may show pronounced population structure and may delineate populations worthy of separate management when on the other hand, analysis with neutral genetic variation suggests no meaningful structure \citep[e.g.,][]{Vasquez-Carrillo_et_al_2014}.
+
+\subsection*{Experimental design considerations}
+So far, we have discussed how population genetic parameters estimated from immune gene SNPs mirror patterns estimated from microsatellite loci, but marker choice also depends on additional considerations such as cost, number of loci, computational issues with NGS generated SNPs, and neutral versus selective processes. First, although sequencing costs are decreasing, NGS techniques can be more expensive than microsatellites on a per sample basis depending on availability of equipment. In particular, the NGS technique used in this paper, in-solution hybridization, requires synthesis of expensive RNA baits/probes, in the order of several thousand dollars (USD). Although tagged microsatellite primers are not trivial in cost, they are far cheaper than biotinylated RNA baits. Further, most genetics labs are not equipped for NGS workflows that require specialized equipment, so lab work must either be outsourced to commercial or non-commercial core facilities.
+
+The number of loci required to adequately address the genetic question at hand is also an important consideration when choosing between SNPs and microsatellites and will vary depending on the question being asked. In general, simulations suggest many more SNPs are needed than microsatellite loci when trying to achieve similar statistical power or parameter estimates. For example, between 60--100 SNP loci are needed for accurate parentage assignment \citep{Anderson_and_Garza_2006}, and empirical data from sockeye salmon suggest 80 SNPs have higher assignment success and are more accurate for parentage assignment than 11 microsatellites \citep{Hauser_et_al_2011}. Furthermore, a similar number of SNPs is needed for detecting low levels of divergence (i.e., \textsc{Fst} < 0.005) \citep{Morin_et_al_2009}. \citet{Ryynanen_et_al_2007} observed significant correlations between 7 SNPs/indels and 14 microsatellite loci when estimating \textsc{Fst}. Our data subsampling results suggest at least 100 SNP loci are needed for correlating SNP and microsatellite-derived \textsc{Fst}. For allelic richness and heterozygosities, our data suggest more than 800 SNP loci are needed to correlate with 10 microsatellite loci in \textit{G. polyphemus}, but \citet{Ryynanen_et_al_2007} only needed 7 SNP/indel loci to obtain similar correlations, possibly because they analyzed 21 populations. Acquiring data from a large number of SNPs is not a problem with NGS approaches, rather not all SNP loci are equally informative, and smaller SNP panels may occasionally perform well in comparison to much larger SNP arrays.
+
+Computational issues with NGS are also not trivial, as our own NGS analysis relied on high performance computing resources and required many gigabytes of data storage. This does not include the time or expertise required to write code and scripts to analyze the gigabytes of raw data.
+
+Neutral versus selective processes are also important to consider when deciding between SNPs and microsatellites. Markers such as microsatellites will be neutrally evolving while SNPs could represent both functional and neutral markers and be influenced by both neutral and adaptive processes. Our SNP data had very few SNPs that were putatively under selection (less than 1\%), which is in line with previous NGS studies \citep[e.g.,][]{Hohenlohe_et_al_2010, Lemay_and_Russello_2015, Blanco-Bercial_and_Bucklin_2016}. This along with the observed correlations with microsatellites suggests that most of our SNPs were effectively neutral. The gopher tortoise populations we surveyed appear to have small effective population sizes, likely less than 500 individuals per population, so perhaps the selection coefficients of many of the immune gene SNPs were small enough (i.e., less than 0.1 \%) that they behaved as effectively neutral loci.
+
+\section*{Conclusion}
+As more and more population genetic studies are publishing NGS generated SNPs as opposed to microsatellites, it would be useful to identify patterns between microsatellites and NGS derived SNPs and to appreciate the additional functional information commonly provided by SNPs. One apparent pattern is that high variation observed at microsatellites can translate into high SNP-estimates of genetic diversity \citep{Ryynanen_et_al_2007} and vice versa. Further, genetic diversity estimated by allelic richness between microsatellites and SNPs may be a less stable metric than diversity estimated by observed and/or expected heterozygosity as more alleles are present in microsatellites than SNPs. This does not mean allelic richness should be ignored especially for conservation purposes because some traits including disease resistance are associated with particular alleles \citep[e.g.,][]{Langefors_et_al_2001}, which is not accounted for by heterozygosity. Another important pattern that may be observed between microsatellites and SNP studies is presence/absence of genetic structure, with any potential inconsistencies resulting from different evolutionary forces acting on the markers. The addition of adaptive processes acting on SNPs can result in similar but disparate structure patterns between the two marker types. Finally, even SNPs that are putatively influenced by selection may behave as effectively neutral loci when effective population sizes are small, thus we recommend researchers consider when comparing population genetic results derived from potentially functional and neutral markers.
+
+\section*{Acknowledgements}
+\noindent
+This material is based upon work that is supported by the National Institute of Food and Agriculture, U.S. Department of Agriculture, McIntire Stennis project LAB04066 and LAB94169. The Lucius Gilbert Foundation provided support for sequencing and for J.P.E. We are grateful to Richard Carmouche of Pennington Biomedical Research Center's Genomic Core Facility for performing next-generation sequencing laboratory work. This project/work used Genomics core facilities that are supported in part by COBRE (NIH 8 P20 GM103528) and NORC (NIH 2P30DK072476) center grants from the National Institutes of Health. We used LSU High Performance Computing resources to analyze next-generation sequencing data.
+
+\singlespacing
+\bibliography{references}
+\bibliographystyle{molecularEcology}
+
+\doublespacing
+\section*{Data Accessibility}
+\noindent
+Raw sequencing data are available from the Sequence Read Archive (accession: SRP061247).
+BAM and VCF files are available from Dryad repository (doi: 10.5061/dryad.40c7c).
+Detailed analytical methods and scripts to create Tables and Figures are available from \url{https://github.com/jelber2/immunome_2014}.
+
+\section*{Author Contributions}
+\noindent
+J.P.E. designed the study and performed SNP analyses. R.W.C. performed microsatellite analyses. J.P.E. and S.S.T. wrote the paper.
+
+\section*{Supporting Information}
+\noindent
+Additional Supporting Information may be found in the online version of this article:\\
+\textbf{Table S1} Sequencing metrics for \textit{Gopherus polyphemus} samples. Percent UR for percent of total reads that were unique, Percent URA for percent of unique reads that were alignable, Mean coverage for mean number of reads across the target region, Percent 20x for percent of bases in target region with greater than 20x coverage, No. genes for number of genes, and No. exons for number of exons.\\
+\textbf{Table S2} All genes with di-allelic, polymorphic SNPs from 16 \textit{Gopherus polyphemus} samples.\\
+\textbf{Fig. S1} Coverage plots for first eight \textit{Gopherus polyphemus} samples showing number of sequencing reads at or above specified proportions. A value at 100 Depth and 0.5 fraction means 50 percent of bases were at or above 100X coverage.\\
+\textbf{Fig. S2} Coverage plots for last eight \textit{Gopherus polyphemus} samples showing number of sequencing reads at or above specified proportions.\\
+\textbf{Fig. S3} \texttt{STRUCTURE} plot for 16 \textit{Gopherus polyphemus} sequenced at 17,901 immune gene SNPs with optimum number of clusters \textit{K} = 2 determined by \texttt{STRUCTURE HARVESTER}.\\
+\textbf{Fig. S4} \texttt{STRUCTURE} plot for the full microsatellite dataset (101 \textit{Gopherus polyphemus} genotyed at 10 microsatellite loci) with optimum number of clusters \textit{K} = 4 determined by \texttt{STRUCTURE HARVESTER}.\\
+\textbf{Fig. S5} \texttt{STRUCTURE} plot for the partial microsatellite dataset (16 \textit{Gopherus polyphemus} genotyed at 10 microsatellite loci) with optimum number of clusters \textit{K} = 3 determined by \texttt{STRUCTURE HARVESTER}.\\
+\textbf{Fig. S6} Subsampling analysis showing how many randomly sampled SNP loci out of the total of 17,901 are needed in comparison to the full microsatellite dataset (101 \textit{Gopherus polyphemus} genotyed at 10 microsatellite loci) for Pearon's r correlation coefficient to be significant at 0.05 level (dotted line) for (A) observed heterozygosity; (B) expected heterozygosity; and (C) \textsc{Fst}. There were 10 simulations for each size class of SNPs. \textsc{Ho} for observed heterozygosity, \textsc{He} for expected heterozygosity.\\
+\textbf{Fig. S7} Subsampling analysis showing how many randomly sampled SNP loci out of the total of 17,901 are needed in comparison to the partial microsatellite dataset (16 \textit{Gopherus polyphemus} genotyed at 10 microsatellite loci) for Pearon's r correlation coefficient to be significant at 0.05 level (dotted line) for (A) allelic richness; (B) expected heterozygosity; and (C) \textsc{Fst}. There were 10 simulations for each size class of SNPs. \textsc{Ar} for allelic richness, \textsc{He} for expected heterozygosity.\\
+\textbf{Fig. S8} Effective population sizes per generation (Ne) along with 95 \% confidence intervals for \textit{Gopherus polyphemus} samples estimated with the program NeEstimator using (A) the full microsatellite dataset (101 \textit{G. polyphemus} genotyed at 10 microsatellite loci) or (B) the SNP dataset (16 \textit{G. polyphemus} sequenced at 17,901 immune gene SNPs). Dots that are on the top of the graph represent Ne estimates of infinity, and lines that extend to the top of the graph represent upper 95 \% confidence limits of infinity. LD for linkage disequilibrium method of Waples \& Do (2008), HET for heterozygote-excess method of Zhdanova \& Pudovkin (2008), and MOL for the molecular coancestry method of Nomura (2008). Note that the HET and MOL methods estimate the effective number of breeders per year (Nb), which were converted to Ne by multiplying Nb by the generation time of 31 years for \textit{G. polyphemus} (Enge et al. 2006).\\
+
+<<Table 1, echo=FALSE>>=
+snps.df <- div.data.sort[div.data.sort$Marker == "snps",]
+snps.mean.ar <- mean(snps.df$AR)
+snps.mean.ho <- mean(snps.df$Ho)
+snps.mean.he <- mean(snps.df$He)
+
+msats.df <- div.data.sort[div.data.sort$Marker == "msats",]
+msats.mean.ar <- mean(msats.df$AR)
+msats.mean.ho <- mean(msats.df$Ho)
+msats.mean.he <- mean(msats.df$He)
+
+pmsats.df <- div.data.sort[div.data.sort$Marker == "msats-part",]
+pmsats.mean.ar <- mean(pmsats.df$AR)
+pmsats.mean.ho <- mean(pmsats.df$Ho)
+pmsats.mean.he <- mean(pmsats.df$He)
+
+snps.fst <- fst.data.sort[fst.data.sort$Marker == "snp",]
+snps.fst.mean <- mean(snps.fst$FST)
+
+msats.fst <- fst.data.sort[fst.data.sort$Marker == "msats",]
+msats.fst.mean <- mean(msats.fst$FST)
+
+pmsats.fst <- fst.data.sort[fst.data.sort$Marker == "msats-part",]
+pmsats.fst.mean <- mean(pmsats.fst$FST)
+@
+
+\pagebreak
+\singlespacing
+\section*{Tables and Figures}
+\noindent
+\textbf{Table 1} Comparisons of full (101 individuals) and partial (16 individuals) microsatellite datasets with SNP dataset (16 individuals) for \textit{Gopherus polyphemus}. Values with decimals represent mean population genetic parameter values. \textsc{Ar} for allelic richness, \textsc{Ho} for observed heterozygosity, \textsc{He} for expected heterozygosity, No. pops for number of optimum populations determined with \texttt{STRUCTURE HARVESTER} for \texttt{STRUCTURE} or visually for \texttt{PCA}. \\
+\begin{table}[ht]
+\centering
+\begin{tabular}{llll}
+\hline
+Variable & SNP dataset & Full Microsatellite Dataset & Partial Microsatellite Dataset \\ 
+\hline
+\textsc{Ar}           & 1.541  & 5.487           & 2.900           \\
+Correlation with SNPs &        & not significant & not significant \\
+\hline
+\textsc{Ho}           & 0.267  & 0.495           & 0.469           \\
+Correlation with SNPs &        & significant     & not significant \\
+\hline
+\textsc{He}           & 0.228  & 0.543    & 0.531                  \\
+Correlation with SNPs &        & significant     & significant     \\
+\hline
+\textsc{Fst}          & 0.282  & 0.336    & 0.320                  \\
+Correlation with SNPs &        & significant     & significant     \\
+\hline
+No. pops \texttt{STRUCTURE} & 2 & 4 & 3                            \\
+\hline
+No. pops \texttt{PCA} & 4 & 4 & 4                                  \\
+\hline
+\end{tabular}
+\end{table}
+
+\pagebreak
+\noindent
+\textbf{Table 2} Histocompatibility and Toll-like Receptor Loci with di-allelic, polymorphic SNPs in the \textit{Gopherus polyphemus} SNP dataset (16 \textit{G. polyphemus} sequenced at 17,901 immune gene SNPs).\\
+\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+\hline
+Histocompatibility Loci \\ 
+\hline
+CD74 molecule, major histocompatibility complex, class II invariant chain \\ 
+Class I histocompatibility antigen, F10 alpha chain-like \\ 
+Class II histocompatibility antigen, M alpha chain \\ 
+Class II, major histocompatibility complex, transactivator \\ 
+DLA class II histocompatibility antigen, DR-1 beta chain-like \\ 
+H-2 class II histocompatibility antigen, A-R alpha chain-like \\ 
+H-2 class II histocompatibility antigen, E-S beta chain-like \\ 
+HLA class II histocompatibility antigen, DP alpha 1 chain-like \\ 
+HLA class II histocompatibility antigen, DR alpha chain-like \\ 
+HLA class II histocompatibility antigen, DR beta 5 chain-like \\ 
+HLA class II histocompatibility antigen, DRB1-15 beta chain-like \\ 
+Major histocompatibility complex class I-related gene protein-like \\ 
+Rano class II histocompatibility antigen, A beta chain-like \\ 
+\hline
+Toll-like Receptor Loci \\
+\hline
+Toll-like Receptor 13 \\ 
+Toll-like Receptor 2 \\ 
+Toll-like Receptor 7 \\ 
+Toll-like Receptor 8 \\ 
+Toll-like Receptor adaptor molecule 1 \\ 
+Toll-like Receptor adaptor molecule 2 \\ 
+\hline
+\end{tabular}
+\end{table}
+
+\pagebreak{}
+\noindent
+\includegraphics [scale=1.0]{range_map}
+\noindent
+\textbf{Fig. 1} \textit{Gopherus polyphemus} range map and sampling sites used in this study. Range of western \textit{G. polyphemus} populations darkly shaded on the left with eastern populations lightly shaded on the right. LA for Florida Gas Pipeline, Washington Parish, Louisiana, USA (latitude, longitude, sample size for full microsatellite dataset = 30.78, -90.00; \textit{N} = 36). AL for Solon Dixon, Andalusia, Alabama, USA (31.16, -86.70; \textit{N} = 20). GG for Jones Ecological Research Center, Georgia, USA. (31.23, -84.47; \textit{N} = 26). FL for Private Site, Nassau County, Florida, USA (30.59, -81.56; \textit{N} = 19).\\
+
+\pagebreak{}
+\noindent
+<<Figure-2, echo=FALSE>>=
+#Allelic richness
+div.data.sort$AR1to4 <- div.data.sort$AR[1:4]
+div.data.sort$AR5to8 <- div.data.sort$AR[5:8]
+div.data.sort$AR9to12 <- div.data.sort$AR[9:12]
+
+AR.mfullvssnp.plot <- qplot(AR1to4, AR5to8, data = div.data.sort) +
+  stat_smooth(method="lm", se=FALSE, color="black") +
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("A", scriptstyle("R"), " microsatellites"))) + 
+  ylab(expression(paste("A", scriptstyle("R"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) + 
+  geom_text(label = div.data.sort$Site, hjust=1, vjust=1) +
+  expand_limits(x = 2.3) +
+  expand_limits(y = 1.425) +
+  annotate("text", label = "(A)", x = 2.5, y = 1.6, size = 7, colour = "black") +
+  ggtitle("Full Microsatellite Dataset")
+
+AR.mpartvssnp.plot <- qplot(AR9to12, AR5to8, data = div.data.sort) +
+  stat_smooth(method="lm", se=FALSE, color="black") +
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("A", scriptstyle("R"), " microsatellites"))) + 
+  ylab(expression(paste("A", scriptstyle("R"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) + 
+  geom_text(label = div.data.sort$Site, hjust=1, vjust=1) +
+  expand_limits(x = 2.3) +
+  expand_limits(y = 1.425) +
+  annotate("text", label = "(E)", x = 2.35, y = 1.6, size = 7, colour = "black") +
+  ggtitle("Partial Microsatellite Dataset")
+
+
+#Observed Heterozygosity
+div.data.sort$Ho1to4 <- div.data.sort$Ho[1:4]
+div.data.sort$Ho5to8 <- div.data.sort$Ho[5:8]
+div.data.sort$Ho9to12 <- div.data.sort$Ho[9:12]
+
+Ho.mfullvssnp.plot <- qplot(Ho1to4, Ho5to8, data = div.data.sort) +
+  stat_smooth(method="lm", se=FALSE, color = "black") +
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("H", scriptstyle("O"), " microsatellites"))) + 
+  ylab(expression(paste("H", scriptstyle("O"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_text(label = div.data.sort$Site, hjust=1, vjust=1) +
+  expand_limits(y = 0.21) +
+  expand_limits(x = 0.25) +
+  annotate("text", label = "(B)", x = 0.265, y = 0.29, size = 7, colour = "black")
+
+Ho.mpartvssnp.plot <- qplot(Ho9to12, Ho5to8, data = div.data.sort) +
+  stat_smooth(method="lm", se=FALSE, color = "black") +
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("H", scriptstyle("O"), " microsatellites"))) + 
+  ylab(expression(paste("H", scriptstyle("O"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_text(label = div.data.sort$Site, hjust=1, vjust=1) +
+  expand_limits(y = 0.21) +
+  expand_limits(x = 0.25) +
+  annotate("text", label = "(F)", x = 0.265, y = 0.29, size = 7, colour = "black")
+
+
+#Expected Heterozygosity
+div.data.sort$He1to4 <- div.data.sort$He[1:4]
+div.data.sort$He5to8 <- div.data.sort$He[5:8]
+div.data.sort$He9to12 <- div.data.sort$He[9:12]
+
+He.mfullvssnp.plot <- qplot(He1to4, He5to8, data = div.data.sort) +
+  stat_smooth(method="lm", se=FALSE, color="black") +
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("H", scriptstyle("E"), " microsatellites"))) + 
+  ylab(expression(paste("H", scriptstyle("E"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_text(label = div.data.sort$Site, hjust=1, vjust=1) +
+  expand_limits(y = 0.18) +
+  expand_limits(x = 0.35) +
+  annotate("text", label = "(C)", x = 0.365, y = 0.25, size = 7, colour = "black")
+
+He.mpartvssnp.plot <- qplot(He9to12, He5to8, data = div.data.sort) +
+  stat_smooth(method="lm", se=FALSE, color="black") +
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("H", scriptstyle("E"), " microsatellites"))) + 
+  ylab(expression(paste("H", scriptstyle("E"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_text(label = div.data.sort$Site, hjust=1, vjust=1) +
+  expand_limits(y = 0.18) +
+  expand_limits(x = 0.35) +
+  annotate("text", label = "(G)", x = 0.365, y = 0.25, size = 7, colour = "black")
+
+
+#Fst
+fst.data.sort$fst1to6 <- fst.data.sort$FST[1:6]
+fst.data.sort$fst7to12 <- fst.data.sort$FST[7:12]
+fst.data.sort$fst13to18 <- fst.data.sort$FST[13:18]
+
+fst.cor.plot <- qplot(fst1to6, fst7to12, data = fst.data.sort) + #add layers to the plot
+  stat_smooth(method="lm", se=FALSE, color="black") + #add a best fit line
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("F", scriptstyle("ST"), " microsatellites"))) + 
+  ylab(expression(paste("F", scriptstyle("ST"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_text(label = fst.data.sort$Comparison, hjust=1, vjust=1) +
+  expand_limits(y = 0.1) +
+  expand_limits(x = 0.05) +
+  annotate("text", label = "(D)", x = 0.075, y = 0.40, size = 7, colour = "black")
+
+part.fst.cor.plot <- qplot(fst13to18, fst7to12, data = fst.data.sort) + #add layers to the plot
+  stat_smooth(method="lm", se=FALSE, color="black") + #add a best fit line
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab(expression(paste("F", scriptstyle("ST"), " microsatellites"))) + 
+  ylab(expression(paste("F", scriptstyle("ST"), " SNPs"))) + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_text(label = fst.data.sort$Comparison, hjust=1, vjust=1) +
+  expand_limits(y = 0.1) +
+  expand_limits(x = 0.05) +
+  annotate("text", label = "(H)", x = 0.075, y = 0.40, size = 7, colour = "black")
+
+
+#Define multiplot function from:
+# http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_%28ggplot2%29/
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
+#graph figures 2a-2d plots
+multiplot(AR.mfullvssnp.plot,
+          Ho.mfullvssnp.plot,
+          He.mfullvssnp.plot,
+          fst.cor.plot,
+          AR.mpartvssnp.plot,
+          Ho.mpartvssnp.plot,
+          He.mpartvssnp.plot,
+          part.fst.cor.plot,
+          cols = 2)
+@
+\noindent
+\textbf{Fig. 2} Correlations between 10 microsatellites and 17,901 immune gene SNPs for \textit{Gopherus polyphemus} samples. Left column for full microsatellite dataset (101 \textit{G. polyphemus} genotyped at 10 microsatellites) for (A) allelic richness, Pearson's r = \Sexpr{round(x = AR.mfullvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = AR.mfullvssnp.cor.pval$p.val, digits = 3)}; (B) observed heterozygosity, Pearson's r = \Sexpr{round(x = Ho.mfullvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = Ho.mfullvssnp.cor.pval$p.val, digits = 3)}; (C) expected heterozygosity, Pearson's r = \Sexpr{round(x = He.mfullvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = He.mfullvssnp.cor.pval$p.val, digits = 3)}; and (D) \textsc{Fst}, Pearson's r = \Sexpr{round(x = fst.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = fst.cor.pval$p.val, digits = 3)}. Right column for partial microsatellite dataset (16 \textit{G. polyphemus} genotyped at 10 microsatellites) for (E) allelic richness, Pearson's r = \Sexpr{round(x = AR.mpartvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = AR.mpartvssnp.cor.pval$p.val, digits = 3)}; (F) observed heterozygosity, Pearson's r = \Sexpr{round(x = Ho.mpartvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = Ho.mpartvssnp.cor.pval$p.val, digits = 3)}; (G) expected heterozygosity, Pearson's r = \Sexpr{round(x = He.mpartvssnp.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = He.mpartvssnp.cor.pval$p.val, digits = 3)}; and (H) \textsc{Fst}, Pearson's r = \Sexpr{round(x = part.fst.cor, digits = 3)}, \textit{P} = \Sexpr{round(x = part.fst.cor.pval$p.val, digits = 3)}. \textsc{Ar} for allelic richness, \textsc{Ho} for observed heterozygosity, \textsc{He} for expected heterozygosity. \\
+
+
+\pagebreak{}
+\noindent
+<<Figure-3, echo=FALSE>>=
+library("ellipse")
+# make two ellipse shapes
+df.ell1 <- as.data.frame(ellipse(0.001, scale = c(50,50), centre = c(-25,-25)))
+df.ell1$Site <- c(rep("site", 100))
+df.ell2 <- as.data.frame(ellipse(0.001, scale = c(5,5), centre = c(135,35)))
+df.ell2$Site <- c(rep("site", 100))
+
+#plot the snp data
+snp.pca.plot <-ggplot(tort.snp.pca.df, aes(x, y, group=Site)) + #set the dataset as tort.snp.pca.df, X=x, Y=y, by Site
+  geom_point(aes(colour = Site)) + #color the points by Site
+  theme_bw() + #make the theme black and white
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), #make the border solid black
+        panel.grid.major = element_blank(), #make major grid blank
+        panel.grid.minor = element_blank()) +   #make minor grid blank
+  xlab("Axis1") + #change the X axis label
+  ylab("Axis2") + #change the Y axis label
+  theme(axis.text = element_text(size = rel(1.2))) + #change the size of the axis text
+  theme(axis.title = element_text(size = rel(1.4))) +#change the size of the axis title
+  geom_path(data=df.ell1) + geom_path(data=df.ell2) + 
+  annotate("text", label = "(A)", x = -145, y = 85, size = 7, colour = "black")
+
+#msat pca plot
+df.ell3 <- as.data.frame(ellipse(-0.5, scale = c(1,0.9), centre = c(-2.7,2.2)))
+df.ell3$Site <- c(rep("site", 100))
+df.ell4 <- as.data.frame(ellipse(0.6, scale = c(1,1), centre = c(5,2.5)))
+df.ell4$Site <- c(rep("site", 100))
+df.ell5 <- as.data.frame(ellipse(-0.6, scale = c(1,1), centre = c(1.5,-3.9)))
+df.ell5$Site <- c(rep("site", 100))
+df.ell6 <- as.data.frame(ellipse(-0.6, scale = c(1,1), centre = c(-0.8,-2.5)))
+df.ell6$Site <- c(rep("site", 100))
+
+msat.pca.plot <-ggplot(tort.msat.pca.df, aes(x, y, group=Site)) + 
+  geom_point(aes(colour = Site)) + 
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab("Axis1") + 
+  ylab("Axis2") + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_path(data=df.ell3) + geom_path(data=df.ell4) + geom_path(data=df.ell5) + 
+  geom_path(data=df.ell6) +
+  annotate("text", label = "(B)", x = -5.0, y = 4, size = 7, colour = "black")
+
+#partial msat pca plot
+df.ell7 <- as.data.frame(ellipse(0.1, scale = c(0.4,0.5), centre = c(-3.8,-1.5)))
+df.ell7$Site <- c(rep("site", 100))
+df.ell8 <- as.data.frame(ellipse(0.1, scale = c(0.4,0.5), centre = c(5.75,-1.5)))
+df.ell8$Site <- c(rep("site", 100))
+df.ell9 <- as.data.frame(ellipse(0.6, scale = c(1,3), centre = c(-0.5,0.5)))
+df.ell9$Site <- c(rep("site", 100))
+
+
+part.msat.pca.plot <-ggplot(part.tort.msat.pca.df, aes(x, y, group=Site)) + 
+  geom_point(aes(colour = Site)) + 
+  theme_bw() + 
+  theme(panel.border = element_rect(linetype = "solid", colour = "black"), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +  
+  xlab("Axis1") + 
+  ylab("Axis2") + 
+  theme(axis.text = element_text(size = rel(1.2))) + 
+  theme(axis.title = element_text(size = rel(1.4))) +
+  geom_path(data=df.ell7) + geom_path(data=df.ell8) + geom_path(data=df.ell9) +
+  annotate("text", label = "(C)", x = -5.0, y = 7, size = 7, colour = "black")
+
+
+multiplot(snp.pca.plot, msat.pca.plot, part.msat.pca.plot, cols = 1)
+@
+\noindent
+\textbf{Fig. 3} Principle component analysis for \textit{Gopherus polyphemus} datasets: (A) the SNP dataset (16 \textit{G. polyphemus} sequenced at 17,901 immune gene SNPs); (B) full microsatellite dataset (101 \textit{G. polyphemus} genotyped at 10 microsatellites); and (C) partial microsatellite dataset (16 \textit{G. polyphemus} genotyped at 10 microsatellites). Circles indicate optimum clusters indentified using \texttt{STRUCTURE} and \texttt{STRUCTURE HARVESTER}.\\
+
+\end{document}
