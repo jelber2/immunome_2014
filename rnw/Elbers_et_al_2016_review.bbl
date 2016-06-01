@@ -1,4 +1,4 @@
-\begin{thebibliography}{58}
+\begin{thebibliography}{57}
 \providecommand{\natexlab}[1]{#1}
 \input{babelbst.tex}
 \newcommand{\Capitalize}[1]{\uppercase{#1}}
@@ -326,13 +326,6 @@ Vali U, Einarsson A, Waits L, Ellegren H (2008) To what extent do
   microsatellite markers reflect genome-wide genetic diversity in natural
   populations?
 \newblock \emph{Molecular Ecology}, \textbf{17}, 3808--3817.
-
-\bibitem[{Vasquez-Carrillo \emph{\bbletal{}}(2014)Vasquez-Carrillo, Friesen,
-  Hall, \& Peery}]{Vasquez-Carrillo_et_al_2014}
-Vasquez-Carrillo C, Friesen V, Hall L, Peery MZ (2014) Variation in {MHC} class
-  {II} {B} genes in marbled murrelets: implications for delineating
-  conservation units.
-\newblock \emph{Animal Conservation}, \textbf{17}, 244--255.
 
 \bibitem[{Waples \& Do(2008)}]{Waples_and_Do_2008}
 Waples RS, Do C (2008) {LDNE}: a program for estimating effective population

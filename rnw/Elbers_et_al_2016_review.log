@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.1.30)  27 MAY 2016 13:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.1.30)  1 JUN 2016 12:29
 entering extended mode
 **Elbers_et_al_2016_review.tex
 
@@ -649,16 +649,16 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [5]
 [6] [7] [8] [9] [10] [11] [12]
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review.bbl
+_et_al_2016_review.bbl [13]
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\babelb
 st.tex
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\englbs
-t.tex)) [13] [14] [15] [16])
+t.tex)) [14] [15] [16])
 Underfull \hbox (badness 10000) in paragraph at lines 204--216
 
  []
 
-[17] [18] [19] [20] <range_map.jpg, id=367, 541.3023pt x 420.6114pt>
+[17] [18] [19] [20] <range_map.jpg, id=362, 541.3023pt x 420.6114pt>
 File: range_map.jpg Graphic file (type jpg)
 
 <use range_map.jpg>
@@ -679,7 +679,7 @@ nge_map.jpg>]
 
 Package xcolor Warning: Incompatible color definition on input line 293.
 
-<figure/Figure-2-1.pdf, id=372, 505.89pt x 505.89pt>
+<figure/Figure-2-1.pdf, id=367, 505.89pt x 505.89pt>
 File: figure/Figure-2-1.pdf Graphic file (type pdf)
 
 <use figure/Figure-2-1.pdf>
@@ -700,7 +700,7 @@ gure/Figure-2-1.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 304.
 
-<figure/Figure-3-1.pdf, id=382, 505.89pt x 505.89pt>
+<figure/Figure-3-1.pdf, id=377, 505.89pt x 505.89pt>
 File: figure/Figure-3-1.pdf Graphic file (type pdf)
 
 <use figure/Figure-3-1.pdf>
@@ -730,13 +730,13 @@ d.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 10109 strings out of 493921
- 152415 string characters out of 3147276
- 257468 words of memory out of 3000000
- 13131 multiletter control sequences out of 15000+200000
+ 10105 strings out of 493921
+ 152278 string characters out of 3147276
+ 257380 words of memory out of 3000000
+ 13128 multiletter control sequences out of 15000+200000
  15314 words of font info for 36 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,9n,43p,1802b,674s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,9n,43p,1819b,666s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
 0\tcrm1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
 pen\ec\dpi600\ecbx1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\
@@ -753,9 +753,9 @@ TeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk><C:/Program Files/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb>
-Output written on Elbers_et_al_2016_review.pdf (23 pages, 431702 bytes).
+Output written on Elbers_et_al_2016_review.pdf (23 pages, 431005 bytes).
 PDF statistics:
- 825 PDF objects out of 1000 (max. 8388607)
- 108 named destinations out of 1000 (max. 500000)
+ 820 PDF objects out of 1000 (max. 8388607)
+ 107 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
