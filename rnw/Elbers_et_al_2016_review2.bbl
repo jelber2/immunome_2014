@@ -1,4 +1,4 @@
-\begin{thebibliography}{57}
+\begin{thebibliography}{66}
 \providecommand{\natexlab}[1]{#1}
 \input{babelbst.tex}
 \newcommand{\Capitalize}[1]{\uppercase{#1}}
@@ -143,6 +143,13 @@ Goudet J (2005) {HIERFSTAT}, a package for {R} to compute and test hierarchical
   {F}-statistics.
 \newblock \emph{Molecular Ecology Notes}, \textbf{5}, 184--186.
 
+\bibitem[{Grueber \emph{\bbletal{}}(2013)Grueber, Wallis, \&
+  Jamieson}]{Grueber_et_al_2013}
+Grueber CE, Wallis GP, Jamieson IG (2013) Genetic drift outweighs natural
+  selection at toll-like receptor ({TLR}) immunity loci in a re-introduced
+  population of a threatened species.
+\newblock \emph{Molecular Ecology}, \textbf{22}, 4470--82.
+
 \bibitem[{Gupta \emph{\bbletal{}}(2001)Gupta, Roy, \&
   Prasad}]{Gupta_et_al_2001}
 Gupta P, Roy J, Prasad M (2001) Single nucleotide polymorphisms {SNPs}: a new
@@ -156,6 +163,10 @@ Hauser L, Baird M, Hilborn RAY, Seeb LW, Seeb JE (2011) An empirical comparison
   of {SNP}s and microsatellites for parentage and kinship assignment in a wild
   sockeye salmon ({O}ncorhynchus nerka) population.
 \newblock \emph{Molecular Ecology Resources}, \textbf{11}, 150--161.
+
+\bibitem[{Hedrick(1999)}]{Hedrick_1999}
+Hedrick PW (1999) Balancing selection and {MHC}.
+\newblock \emph{Genetica}, \textbf{104}, 207--214.
 
 \bibitem[{Hohenlohe \emph{\bbletal{}}(2010)Hohenlohe, Bassham, Etter, Stiffler,
   Johnson, \& Cresko}]{Hohenlohe_et_al_2010}
@@ -185,6 +196,11 @@ Kopelman NM, Mayzel J, Jakobsson M, Rosenberg NA, Mayrose I (2015) {CLUMPAK}: a
   inferences across k.
 \newblock \emph{Molecular Ecology Resources}, \textbf{15}, 1179--91.
 
+\bibitem[{Kuo \emph{\bbletal{}}(2009)Kuo, Moran, \& Ochman}]{Kuo_et_al_2009}
+Kuo CH, Moran NA, Ochman H (2009) The consequences of genetic drift for
+  bacterial genome complexity.
+\newblock \emph{Genome Research}, \textbf{19}, 1450--1454.
+
 \bibitem[{Langefors \emph{\bbletal{}}(2001)Langefors, Lohm, Grahn, Andersen, \&
   von Schantz}]{Langefors_et_al_2001}
 Langefors A, Lohm J, Grahn M, Andersen O, von Schantz T (2001) Association
@@ -197,6 +213,11 @@ Langefors A, Lohm J, Grahn M, Andersen O, von Schantz T (2001) Association
 Lemay MA, Russello MA (2015) Genetic evidence for ecological divergence in
   kokanee salmon.
 \newblock \emph{Molecular Ecology}, \textbf{24}, 798--811.
+
+\bibitem[{Li \emph{\bbletal{}}(2014)Li, Sun, Huang, \& Cannon}]{Li_et_al_2014}
+Li C, Sun Y, Huang HW, Cannon CH (2014) Footprints of divergent selection in
+  natural populations of {C}astanopsis fargesii ({F}agaceae).
+\newblock \emph{Heredity}, \textbf{113}, 533--41.
 
 \bibitem[{Li(2013)}]{Li_2013}
 Li H (2013) Aligning sequence reads, clone sequences and assembly contigs with
@@ -213,6 +234,12 @@ Li H, Durbin R (2009) Fast and accurate short read alignment with
 Li H, Handsaker B, Wysoker A, \emph{\bbletal{}} (2009) The {S}equence
   {A}lignment/{M}ap format and {SAM}tools.
 \newblock \emph{Bioinformatics}, \textbf{25}, 2078--9.
+
+\bibitem[{Li \emph{\bbletal{}}(2002)Li, Korol, Fahima, Beiles, \&
+  Nevo}]{Li_et_al_2002}
+Li YC, Korol AB, Fahima T, Beiles A, Nevo E (2002) Microsatellites: genomic
+  distribution, putative functions and mutational mechanisms: a review.
+\newblock \emph{Molecular Ecology}, \textbf{11}, 2453--2465.
 
 \bibitem[{Liao \emph{\bbletal{}}(2014)Liao, Smyth, \& Shi}]{Liao_et_al_2014}
 Liao Y, Smyth GK, Shi W (2014) feature{C}ounts: an efficient general purpose
@@ -235,12 +262,25 @@ Lunter G, Goodson M (2011) {STAMPY}: a statistical algorithm for sensitive and
   fast mapping of {I}llumina sequence reads.
 \newblock \emph{Genome Research}, \textbf{21}, 936--9.
 
+\bibitem[{Lynch \emph{\bbletal{}}(2011)Lynch, Bobay, Catania, Gout, \&
+  Rho}]{Lynch_et_al_2011}
+Lynch M, Bobay LM, Catania F, Gout JF, Rho M (2011) The repatterning of
+  eukaryotic genomes by random genetic drift.
+\newblock \emph{Annual Review of Genomics and Human Genetics}, \textbf{12},
+  347--366.
+
 \bibitem[{McKenna \emph{\bbletal{}}(2010)McKenna, Hanna, Banks
   \emph{\bbletal{}}}]{McKenna_et_al_2010}
 McKenna A, Hanna M, Banks E, \emph{\bbletal{}} (2010) The {G}enome {A}nalysis
   {T}oolkit: a {M}ap{R}educe framework for analyzing next-generation {DNA}
   sequencing data.
 \newblock \emph{Genome Research}, \textbf{20}, 1297--1303.
+
+\bibitem[{Miller \& Lambert(2004)}]{Miller_and_Lambert_2004}
+Miller HC, Lambert DM (2004) Genetic drift outweighs balancing selection in
+  shaping post‐bottleneck major histocompatibility complex variation in {N}ew
+  {Z}ealand robins ({P}etroicidae).
+\newblock \emph{Molecular Ecology}, \textbf{13}, 3709--3721.
 
 \bibitem[{Miller \emph{\bbletal{}}(2008)Miller, Miller, \&
   Daugherty}]{Miller_et_al_2008}
@@ -272,6 +312,13 @@ Narum SR, Banks M, Beacham TD, \emph{\bbletal{}} (2008) Differentiating salmon
   populations at broad and fine geographical scales with microsatellites and
   single nucleotide polymorphisms.
 \newblock \emph{Molecular Ecology}, \textbf{17}, 3464--3477.
+
+\bibitem[{Niskanen \emph{\bbletal{}}(2014)Niskanen, Kennedy, Ruokonen
+  \emph{\bbletal{}}}]{Niskanen_et_al_2014}
+Niskanen AK, Kennedy LJ, Ruokonen M, \emph{\bbletal{}} (2014) Balancing
+  selection and heterozygote advantage in major histocompatibility complex loci
+  of the bottlenecked {F}innish wolf population.
+\newblock \emph{Molecular Ecology}, \textbf{23}, 875--89.
 
 \bibitem[{Nomura(2008)}]{Nomura_2008}
 Nomura T (2008) Estimation of effective number of breeders from molecular
@@ -326,6 +373,14 @@ Vali U, Einarsson A, Waits L, Ellegren H (2008) To what extent do
   microsatellite markers reflect genome-wide genetic diversity in natural
   populations?
 \newblock \emph{Molecular Ecology}, \textbf{17}, 3808--3817.
+
+\bibitem[{Vasemagi \emph{\bbletal{}}(2005)Vasemagi, Gross, Paaver, Koljonen,
+  Säisä, \& Nilsson}]{Vasemagi_et_al_2005}
+Vasemagi A, Gross R, Paaver T, Koljonen ML, Säisä M, Nilsson J (2005)
+  Analysis of gene associated tandem repeat markers in atlantic salmon (salmo
+  salar l.) populations: implications for restoration and conservation in the
+  baltic sea.
+\newblock \emph{Conservation Genetics}, \textbf{6}, 385--397.
 
 \bibitem[{Waples \& Do(2008)}]{Waples_and_Do_2008}
 Waples RS, Do C (2008) {LDNE}: a program for estimating effective population

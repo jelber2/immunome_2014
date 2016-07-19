@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.1.30)  1 JUN 2016 12:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.1.19)  18 JUL 2016 19:53
 entering extended mode
-**Elbers_et_al_2016_review.tex
+**Elbers_et_al_2016_review2.tex
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review.tex
+_et_al_2016_review2.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -72,7 +72,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\framed\framed.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\framed\framed.sty"
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip43
 \fb@frw=\dimen105
@@ -126,7 +126,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks17
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\url\url.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -152,7 +152,7 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \TX@cols=\count91
 \TX@ftn=\toks19
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\booktabs\booktabs.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty"
 Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \heavyrulewidth=\dimen124
 \lightrulewidth=\dimen125
@@ -175,10 +175,10 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 ("C:\Program Files\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
 \bigstrutjot=\dimen137
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption.sty"
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption3.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen138
@@ -209,7 +209,7 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count101
 \LT@p@ftn=\toks20
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\fancyhdr\fancyhdr.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
 \fancy@headwidth=\skip50
 \f@ncyO@elh=\skip51
 \f@ncyO@erh=\skip52
@@ -241,7 +241,7 @@ File: babel.def 2008/07/08 v3.8m Babel common definitions
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
 ))
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\xcolor\xcolor.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
@@ -259,10 +259,10 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\csquotes\csquotes.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\csquotes\csquotes.sty"
 Package: csquotes 2011/10/22 v5.1d context-sensitive quotations
 
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\etoolbox\etoolbox.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty"
 Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\misc\etex.sty"
@@ -279,13 +279,13 @@ Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
 \csq@tshold=\count110
 \csq@ltx@everypar=\toks21
 
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\csquotes\csquotes.def
+("C:\Program Files\MiKTeX 2.9\tex\latex\csquotes\csquotes.def"
 File: csquotes.def 2011/10/22 v5.1d csquotes generic definitions
 )
 Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
 
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\csquotes\csquotes.cfg
+("C:\Program Files\MiKTeX 2.9\tex\latex\csquotes\csquotes.cfg"
 File: csquotes.cfg 
 ))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
@@ -392,7 +392,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip59
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\lineno\lineno.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\lineno\lineno.sty"
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count121
 \output=\toks22
@@ -414,9 +414,10 @@ LaTeX Warning: Command \@parboxrestore  has changed.
                Check if current package is valid.
 
 LaTeX Info: Redefining \\ on input line 3056.
-) (C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\setspace\setspace.sty
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\setspace\setspace.sty"
 Package: setspace 2011/12/19 v6.7a set line spacing
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\pdflscape.sty"
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\pdflscape.sty"
 Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\lscape.sty"
@@ -424,14 +425,14 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\natbib\natbib.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip60
 \bibsep=\skip61
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count128
 )
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\upquote\upquote.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 
@@ -522,7 +523,7 @@ Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review.aux)
+_et_al_2016_review2.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
 LaTeX Font Info:    ... okay on input line 79.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
@@ -543,7 +544,7 @@ LaTeX Font Info:    Try loading font information for TS1+cmr on input line 79.
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 79.
- (C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+ ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count129
 \scratchdimen=\dimen156
@@ -598,7 +599,7 @@ Package geometry Warning: The marginal notes overrun the paper.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
-(C:\Users\jelber2\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\ltcaption.sty
+("C:\Program Files\MiKTeX 2.9\tex\latex\caption\ltcaption.sty"
 Package: ltcaption 2013/02/03 v1.3-62 longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
@@ -618,9 +619,9 @@ LaTeX Info: Redefining \pageref on input line 79.
 LaTeX Info: Redefining \nameref on input line 79.
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review.out)
+_et_al_2016_review2.out)
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review.out)
+_et_al_2016_review2.out)
 \@outlinefile=\write3
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 84.
@@ -635,30 +636,59 @@ Overfull \hbox (56.277pt too wide) in paragraph at lines 84--84
 
 [1
 
-{C:/Users/jelber2/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[2] [3] [4]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4]
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 115.
 
- ("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 115.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 115.
- [5]
-[6] [7] [8] [9] [10] [11] [12]
+ [5] [6] [7] [8]
+[9] [10] [11] [12] [13]
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review.bbl [13]
+_et_al_2016_review2.bbl
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\babelb
 st.tex
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\englbs
-t.tex)) [14] [15] [16])
+t.tex)) [14] [15]
+
+! Package inputenc Error: Keyboard character used is undefined
+(inputenc)                in inputencoding `latin9'.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.281   shaping post‚Ä
+                      êbottleneck major histocompatibility complex variation...
+
+You need to provide a definition with \DeclareInputText 
+or \DeclareInputMath before using this key.
+
+
+! Package inputenc Error: Keyboard character used is undefined
+(inputenc)                in inputencoding `latin9'.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.281   shaping post‚Äê
+                       bottleneck major histocompatibility complex variation...
+
+You need to provide a definition with \DeclareInputText 
+or \DeclareInputMath before using this key.
+
+[16]) [17]
 Underfull \hbox (badness 10000) in paragraph at lines 204--216
 
  []
 
-[17] [18] [19] [20] <range_map.jpg, id=362, 541.3023pt x 420.6114pt>
+[18] [19] [20] [21] <range_map.jpg, id=389, 541.3023pt x 420.6114pt>
 File: range_map.jpg Graphic file (type jpg)
 
 <use range_map.jpg>
@@ -674,12 +704,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 285--289
 
  []
 
-[21 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/ra
+[22 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/ra
 nge_map.jpg>]
 
 Package xcolor Warning: Incompatible color definition on input line 293.
 
-<figure/Figure-2-1.pdf, id=367, 505.89pt x 505.89pt>
+<figure/Figure-2-1.pdf, id=394, 505.89pt x 505.89pt>
 File: figure/Figure-2-1.pdf Graphic file (type pdf)
 
 <use figure/Figure-2-1.pdf>
@@ -695,12 +725,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 297--299
 
  []
 
-[22 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/fi
+[23 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/fi
 gure/Figure-2-1.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 304.
 
-<figure/Figure-3-1.pdf, id=377, 505.89pt x 505.89pt>
+<figure/Figure-3-1.pdf, id=404, 505.89pt x 505.89pt>
 File: figure/Figure-3-1.pdf Graphic file (type pdf)
 
 <use figure/Figure-3-1.pdf>
@@ -717,26 +747,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 308--310
  []
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 311.
-[23 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/fi
+[24 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/fi
 gure/Figure-3-1.pdf>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 311.
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review.aux)
+_et_al_2016_review2.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 311.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 311.
-Package rerunfilecheck Info: File `Elbers_et_al_2016_review.out' has not change
-d.
+Package rerunfilecheck Info: File `Elbers_et_al_2016_review2.out' has not chang
+ed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 10105 strings out of 493921
- 152278 string characters out of 3147276
- 257380 words of memory out of 3000000
- 13128 multiletter control sequences out of 15000+200000
+ 10142 strings out of 493921
+ 152398 string characters out of 3147276
+ 257940 words of memory out of 3000000
+ 13155 multiletter control sequences out of 15000+200000
  15314 words of font info for 36 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,9n,43p,1819b,666s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,9n,43p,1820b,654s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
 0\tcrm1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
 pen\ec\dpi600\ecbx1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\
@@ -753,9 +783,9 @@ TeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk><C:/Program Files/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb>
-Output written on Elbers_et_al_2016_review.pdf (23 pages, 431005 bytes).
+Output written on Elbers_et_al_2016_review2.pdf (24 pages, 438407 bytes).
 PDF statistics:
- 820 PDF objects out of 1000 (max. 8388607)
- 107 named destinations out of 1000 (max. 500000)
+ 852 PDF objects out of 1000 (max. 8388607)
+ 117 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
