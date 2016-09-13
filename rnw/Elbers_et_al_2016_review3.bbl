@@ -72,8 +72,8 @@ De~Wit P, Pespeni MH, Ladner JT, \emph{\bbletal{}} (2012) The simple fool's
 \newblock \emph{Molecular Ecology Resources}, \textbf{12}, 1058--67.
 
 \bibitem[{DeFaveri \emph{\bbletal{}}(2013)DeFaveri, Viitaniemi, Leder, \&
-  Merilä}]{DeFaveri_et_al_2013}
-DeFaveri J, Viitaniemi H, Leder E, Merilä J (2013) Characterizing genic and
+  Merila}]{DeFaveri_et_al_2013}
+DeFaveri J, Viitaniemi H, Leder E, Merila J (2013) Characterizing genic and
   nongenic molecular markers: comparison of microsatellites and {SNP}s.
 \newblock \emph{Molecular Ecology Resources}, \textbf{13}, 377--392.
 
@@ -187,7 +187,7 @@ Jeffries DL, Copp GH, Lawson~Handley L, Olsen KH, Sayer CD, Hanfling B (2016)
   Comparing {RAD}seq and microsatellites to infer complex phylogeographic
   patterns, an empirical perspective in the {C}rucian carp, {C}arassius
   carassius, {L}.
-\newblock \emph{Molecular Ecology}, \bblp{} in press.
+\newblock \emph{Molecular Ecology}, \textbf{25}, 2997--3018.
 
 \bibitem[{Kopelman \emph{\bbletal{}}(2015)Kopelman, Mayzel, Jakobsson,
   Rosenberg, \& Mayrose}]{Kopelman_et_al_2015}
@@ -205,7 +205,7 @@ Kuo CH, Moran NA, Ochman H (2009) The consequences of genetic drift for
   von Schantz}]{Langefors_et_al_2001}
 Langefors A, Lohm J, Grahn M, Andersen O, von Schantz T (2001) Association
   between major histocompatibility complex class iib alleles and resistance to
-  {A}eromonas salmonicida in atlantic salmon.
+  {A}eromonas salmonicida in {A}tlantic salmon.
 \newblock \emph{Proceedings of the Royal Society of London B}, \textbf{268},
   479--485.
 
@@ -278,7 +278,7 @@ McKenna A, Hanna M, Banks E, \emph{\bbletal{}} (2010) The {G}enome {A}nalysis
 
 \bibitem[{Miller \& Lambert(2004)}]{Miller_and_Lambert_2004}
 Miller HC, Lambert DM (2004) Genetic drift outweighs balancing selection in
-  shaping post‐bottleneck major histocompatibility complex variation in {N}ew
+  shaping post-bottleneck major histocompatibility complex variation in {N}ew
   {Z}ealand robins ({P}etroicidae).
 \newblock \emph{Molecular Ecology}, \textbf{13}, 3709--3721.
 
@@ -375,11 +375,11 @@ Vali U, Einarsson A, Waits L, Ellegren H (2008) To what extent do
 \newblock \emph{Molecular Ecology}, \textbf{17}, 3808--3817.
 
 \bibitem[{Vasemagi \emph{\bbletal{}}(2005)Vasemagi, Gross, Paaver, Koljonen,
-  Säisä, \& Nilsson}]{Vasemagi_et_al_2005}
-Vasemagi A, Gross R, Paaver T, Koljonen ML, Säisä M, Nilsson J (2005)
-  Analysis of gene associated tandem repeat markers in atlantic salmon (salmo
-  salar l.) populations: implications for restoration and conservation in the
-  baltic sea.
+  Saisa, \& Nilsson}]{Vasemagi_et_al_2005}
+Vasemagi A, Gross R, Paaver T, Koljonen ML, Saisa M, Nilsson J (2005) Analysis
+  of gene associated tandem repeat markers in {A}tlantic salmon ({S}almo salar
+  {L}.) populations: implications for restoration and conservation in the
+  {B}altic {S}ea.
 \newblock \emph{Conservation Genetics}, \textbf{6}, 385--397.
 
 \bibitem[{Waples \& Do(2008)}]{Waples_and_Do_2008}

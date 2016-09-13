@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.1.19)  18 JUL 2016 19:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.1.19)  12 SEP 2016 21:38
 entering extended mode
-**Elbers_et_al_2016_review2.tex
+**Elbers_et_al_2016_review3.tex
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review2.tex
+_et_al_2016_review3.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -523,27 +523,27 @@ Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review2.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 79.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 79.
+_et_al_2016_review3.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 78.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    ... okay on input line 78.
  ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count129
@@ -604,7 +604,7 @@ Package: ltcaption 2013/02/03 v1.3-62 longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box32
-Package hyperref Info: Link coloring OFF on input line 79.
+Package hyperref Info: Link coloring OFF on input line 78.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -614,178 +614,147 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count135
 )
-LaTeX Info: Redefining \ref on input line 79.
-LaTeX Info: Redefining \pageref on input line 79.
-LaTeX Info: Redefining \nameref on input line 79.
+LaTeX Info: Redefining \ref on input line 78.
+LaTeX Info: Redefining \pageref on input line 78.
+LaTeX Info: Redefining \nameref on input line 78.
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review2.out)
+_et_al_2016_review3.out)
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review2.out)
+_et_al_2016_review3.out)
 \@outlinefile=\write3
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 84.
+(Font)              <12> on input line 83.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 84.
+(Font)              <8> on input line 83.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 84.
+(Font)              <6> on input line 83.
 
-Overfull \hbox (56.277pt too wide) in paragraph at lines 84--84
+Overfull \hbox (56.277pt too wide) in paragraph at lines 83--83
  [][] 
  []
 
 [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 115.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 114.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 115.
+(Font)              <7> on input line 114.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 115.
+(Font)              <5> on input line 114.
  [5] [6] [7] [8]
 [9] [10] [11] [12] [13]
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review2.bbl
+_et_al_2016_review3.bbl
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\babelb
 st.tex
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\englbs
-t.tex)) [14] [15]
-
-! Package inputenc Error: Keyboard character used is undefined
-(inputenc)                in inputencoding `latin9'.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.281   shaping post‚Ä
-                      êbottleneck major histocompatibility complex variation...
-
-You need to provide a definition with \DeclareInputText 
-or \DeclareInputMath before using this key.
-
-
-! Package inputenc Error: Keyboard character used is undefined
-(inputenc)                in inputencoding `latin9'.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.281   shaping post‚Äê
-                       bottleneck major histocompatibility complex variation...
-
-You need to provide a definition with \DeclareInputText 
-or \DeclareInputMath before using this key.
-
-[16]) [17]
-Underfull \hbox (badness 10000) in paragraph at lines 204--216
+t.tex)) [14] [15] [16]) [17]
+Underfull \hbox (badness 10000) in paragraph at lines 203--215
 
  []
 
-[18] [19] [20] [21] <range_map.jpg, id=389, 541.3023pt x 420.6114pt>
+[18] [19] [20] [21] <range_map.jpg, id=376, 541.3023pt x 420.6114pt>
 File: range_map.jpg Graphic file (type jpg)
 
 <use range_map.jpg>
-Package pdftex.def Info: range_map.jpg used on input line 286.
+Package pdftex.def Info: range_map.jpg used on input line 285.
 (pdftex.def)             Requested size: 541.30098pt x 420.61038pt.
 
-Overfull \hbox (69.26974pt too wide) in paragraph at lines 285--289
+Overfull \hbox (69.26974pt too wide) in paragraph at lines 284--288
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--289
+Underfull \hbox (badness 10000) in paragraph at lines 284--288
 
  []
 
 [22 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/ra
 nge_map.jpg>]
 
-Package xcolor Warning: Incompatible color definition on input line 293.
+Package xcolor Warning: Incompatible color definition on input line 292.
 
-<figure/Figure-2-1.pdf, id=394, 505.89pt x 505.89pt>
+<figure/Figure-2-1.pdf, id=381, 505.89pt x 505.89pt>
 File: figure/Figure-2-1.pdf Graphic file (type pdf)
 
 <use figure/Figure-2-1.pdf>
-Package pdftex.def Info: figure/Figure-2-1.pdf used on input line 294.
+Package pdftex.def Info: figure/Figure-2-1.pdf used on input line 293.
 (pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 291--295
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 290--294
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--299
+Underfull \hbox (badness 10000) in paragraph at lines 296--298
 
  []
 
 [23 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/fi
 gure/Figure-2-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 304.
+Package xcolor Warning: Incompatible color definition on input line 303.
 
-<figure/Figure-3-1.pdf, id=404, 505.89pt x 505.89pt>
+<figure/Figure-3-1.pdf, id=391, 505.89pt x 505.89pt>
 File: figure/Figure-3-1.pdf Graphic file (type pdf)
 
 <use figure/Figure-3-1.pdf>
-Package pdftex.def Info: figure/Figure-3-1.pdf used on input line 305.
+Package pdftex.def Info: figure/Figure-3-1.pdf used on input line 304.
 (pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 302--306
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 301--305
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 308--310
+Underfull \hbox (badness 10000) in paragraph at lines 307--309
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 311.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 310.
 [24 <C:/Users/jelber2/Dropbox/LSU/Dissertation/Manuscripts/immunome_2014/rnw/fi
 gure/Figure-3-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 311.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 310.
 
 (C:\Users\jelber2\Dropbox\LSU\Dissertation\Manuscripts\immunome_2014\rnw\Elbers
-_et_al_2016_review2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 311.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 311.
-Package rerunfilecheck Info: File `Elbers_et_al_2016_review2.out' has not chang
+_et_al_2016_review3.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 310.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 310.
+Package rerunfilecheck Info: File `Elbers_et_al_2016_review3.out' has not chang
 ed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 10142 strings out of 493921
- 152398 string characters out of 3147276
- 257940 words of memory out of 3000000
- 13155 multiletter control sequences out of 15000+200000
- 15314 words of font info for 36 fonts, out of 3000000 for 9000
+ 10135 strings out of 493921
+ 152324 string characters out of 3147276
+ 254865 words of memory out of 3000000
+ 13151 multiletter control sequences out of 15000+200000
+ 13438 words of font info for 33 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,9n,43p,1820b,654s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,9n,43p,1820b,641s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\tcrm1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\ecbx1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\
-ljfour\jknappen\ec\dpi600\ectt1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2
-.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\jelber2\AppData\Lo
-cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1000.pk> <C:\Users\jelber
-2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\
-Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1
-440.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
-dpi600\ecrm1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
-jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\font
-s\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\jelber2\AppData\Local\MiK
-TeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb>
-Output written on Elbers_et_al_2016_review2.pdf (24 pages, 438407 bytes).
+0\ecbx1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ectt1000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\
+ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2
+.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1000.pk> <C:\Users\jelber2\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\jelber
+2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\
+Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1
+000.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
+dpi600\ecrm1200.pk> <C:\Users\jelber2\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
+jknappen\ec\dpi600\ecrm1728.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb>
+Output written on Elbers_et_al_2016_review3.pdf (24 pages, 427114 bytes).
 PDF statistics:
- 852 PDF objects out of 1000 (max. 8388607)
+ 820 PDF objects out of 1000 (max. 8388607)
  117 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
