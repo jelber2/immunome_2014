@@ -152,6 +152,7 @@
 ###Got painted turtle reference genome
     cd /work/jelber2/reference/
     wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna.gz
+    # note move to ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/241/765/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna.gz
     gunzip GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna.gz
 ###Ran 01-make_indexes.sh on SuperMikeII to make indexes
     qsub ~/scripts/immunome_2014/01-make_indexes.sh
