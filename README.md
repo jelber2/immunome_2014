@@ -1,11 +1,11 @@
-#immunome_2014
+# immunome_2014
 ========
-###README.md for analytical methods for following manuscript:
+### README.md for analytical methods for following manuscript:
     Elbers, J.P., R.W. Clostio, and S.S. Taylor (2016) Population genetic
     inferences using immune gene SNPs mirror patterns inferred by microsatellites.
     Molecular Ecology Resources.
-####Python scripts for running PBS job submissions on LSU's SuperMikeII cluster.
-####Also bash code for analyzing resulting data on a CentOS 6.5 machine.
+#### Python scripts for running PBS job submissions on LSU's SuperMikeII cluster.
+#### Also bash code for analyzing resulting data on a CentOS 6.5 machine.
 #####NOTE:
     Microsatellite data used the following population abbreviations:
     FGP, SD, GG, FL
@@ -13,9 +13,9 @@
     occurred in, so populations are renamed (in order):
     LA, AL, GA, FL respectively.
 ========
-#STEPS FOR QUALITY CONTROL, MAPPING, & SNP CALLING
-##Download fastq.gz.zip files for the two MiSeq runs from BaseSpace
-###Copy data to supermikeII
+# STEPS FOR QUALITY CONTROL, MAPPING, & SNP CALLING
+## Download fastq.gz.zip files for the two MiSeq runs from BaseSpace
+### Copy data to supermikeII
     #run1 = miseq data from 9Sep2014
     rsync --archive --stats --progress /work/jelber2/immunome_2014/run1/analysis_13944931_fastq.zip \
     jelber2@mike.hpc.lsu.edu:/work/jelber2/immunome_2014/run1/ -n
@@ -25,7 +25,7 @@
     # create folder for combined data
     cd /work/jelber2/immunome_2014/
     mkdir combined
-###Unzip data (on SuperMikeII)
+### Unzip data (on SuperMikeII)
     #run1 data
     cd /work/jelber2/immunome_2014/run1/
     unzip /work/jelber2/immunome_2014/run1/analysis_13944931_fastq.zip
@@ -42,7 +42,7 @@
     mv * /work/jelber2/immunome_2014/run2/fastq
     cd /work/jelber2/immunome_2014/run2/
     rm -r Data/
-###Rename the data
+### Rename the data
     #rename run1 files
     cd /work/jelber2/immunome_2014/run1/fastq/
     #remove Undetermined reads
@@ -67,14 +67,14 @@
     #open the file with less and select everything with the mouse then press ctrl+shift+c
     less convert_base_filenames2.txt
     #press q to quit, then paste command into shell with ctrl+shift+v
-##Install program and get reference genome
-###trimmomatic-0.32
+## Install program and get reference genome
+### trimmomatic-0.32
     cd /home/jelber2/bin/
     wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.32.zip
     unzip Trimmomatic-0.32.zip
     mv Trimmomatic-0.32.zip Trimmomatic-0.32
     #PATH=~/home/jelber2/bin/Trimmomatic-0.32/trimmomatic-0.32.jar
-###bbmerge-5.4 (part of bbmap-34.33)
+### bbmerge-5.4 (part of bbmap-34.33)
     cd /home/jelber2/bin/
     mkdir bbmap-34.33
     cd bbmap-34.33/
@@ -86,7 +86,7 @@
     cd ..
     rm -r bbmap
     #PATH=~/bin/bbmap-34.33/bbmerge.sh
-###bwa-0.7.12
+### bwa-0.7.12
     cd /home/jelber2/bin/
     wget https://github.com/lh3/bwa/archive/0.7.12.tar.gz
     mv 0.7.12 bwa-0.7.12.tar.gz
@@ -95,14 +95,14 @@
     cd bwa-0.7.12/
     make
     #PATH=~/bin/bwa-0.7.12/bwa
-###stampy-1.0.23
+### stampy-1.0.23
     cd /home/jelber2/bin/
     wget http://www.well.ox.ac.uk/bioinformatics/Software/Stampy-latest.tgz
     tar xzf Stampy-latest.tgz
     cd stampy-1.0.23
     make
     #PATH=~/bin/stampy-1.0.23/stampy.py
-###java jre1.7.0
+### java jre1.7.0
     #had to download using firefox on my Centos machine
     #saved in /home/jelber2/bin/
     rsync --stats --archive --progress /home/jelber2/bin/jre-7-linux-x64.tar.gz jelber2@mike.hpc.lsu.edu:/home/jelber2/bin/ -n
@@ -115,7 +115,7 @@
     #then resoft
     #resoft
     #PATH=~/bin/jre1.7.0/bin
-###picard-1.128
+### picard-1.128
     #on my Centos machine
     cd /home/jelber2/bin/
     wget https://github.com/broadinstitute/picard/releases/download/1.128/picard-tools-1.128.zip
@@ -125,7 +125,7 @@
     unzip picard-tools-1.128.zip
     mv picard-tools-1.128.zip picard-tools-1.128
     #PATH=~/bin/picard-tools-1.128/picard.jar
-###GATK-3.3.0
+### GATK-3.3.0
     #had to download using firefox on my Centos machine
     #saved in /home/jelber2/bin/GATK-3.3.0
     rsync --stats --archive --progress /home/jelber2/bin/GATK-3.3.0/ jelber2@mike.hpc.lsu.edu:/home/jelber2/bin/GATK-3.3.0/ -n
@@ -134,7 +134,7 @@
     cd GATK-3.3.0
     tar xjf GenomeAnalysisTK-3.3-0.tar.bz2
     #PATH=~/bin/GATK-3.3.0/GenomeAnalysisTK.jar
-###samtools-1.1
+### samtools-1.1
     cd /home/jelber2/bin/
     wget http://downloads.sourceforge.net/project/samtools/samtools/1.1/samtools-1.1.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fsamtools%2Ffiles%2Fsamtools%2F1.1%2F&ts=1421967581&use_mirror=softlayer-dal
     tar xjf samtools-1.1.tar.bz2 
@@ -143,21 +143,21 @@
     make
     nano ~/.soft #add the following line to .soft file using nano
     PATH += /home/jelber2/bin/samtools-1.1/
-###parallel-20150122
+### parallel-20150122
     cd /home/jelber2/bin/
     wget ftp://ftp.gnu.org/gnu/parallel/parallel-20150122.tar.bz2
     tar xjf parallel-20150122.tar.bz2
     mv parallel-20150122.tar.bz2 parallel-20150122
     #PATH=~/bin/parallel-20150122/src/parallel
-###Got painted turtle reference genome
+### Got painted turtle reference genome
     cd /work/jelber2/reference/
     wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna.gz
     # note move to ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/241/765/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna.gz
     gunzip GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna.gz
-###Ran 01-make_indexes.sh on SuperMikeII to make indexes
+### Ran 01-make_indexes.sh on SuperMikeII to make indexes
     qsub ~/scripts/immunome_2014/01-make_indexes.sh
-##Quality Control
-###Ran 02-trimmomatic.py on fastq.gz in:
+## Quality Control
+### Ran 02-trimmomatic.py on fastq.gz in:
     # /work/jelber2/immunome_2014/run1/fastq/
     cd /work/jelber2/immunome_2014/run1/fastq/
     ~/scripts/immunome_2014/02-trimmomatic.py *.fastq.gz
@@ -167,8 +167,8 @@
     perl -pe "s/run1/run2/g" ~/scripts/immunome_2014/02-trimmomatic.py > \
     ~/scripts/immunome_2014/02-trimmomatic-run2.py
     python ~/scripts/immunome_2014/02-trimmomatic-run2.py *.fastq.gz
-##Mapping
-###Ran 03-bwa.py on trim.fastq.gz on trim.fastq.gz in:
+## Mapping
+### Ran 03-bwa.py on trim.fastq.gz on trim.fastq.gz in:
     # /work/jelber2/immunome_2014/run1/trimmed-data/
     cd /work/jelber2/immunome_2014/run1/trimmed-data/
     ~/scripts/immunome_2014/03-bwa.py *.trim.fastq.gz
@@ -178,7 +178,7 @@
     perl -pe "s/run1/run2/g" ~/scripts/immunome_2014/03-bwa.py > \
     ~/scripts/immunome_2014/03-bwa-run2.py
     python ~/scripts/immunome_2014/03-bwa-run2.py *.trim.fastq.gz
-###Ran 04-stampy.py on bwa.sam in:
+### Ran 04-stampy.py on bwa.sam in:
     # /work/jelber2/immunome_2014/run1/bwa-alignment/
     cd /work/jelber2/immunome_2014/run1/bwa-alignment/
     ~/scripts/immunome_2014/04-stampy.py *.bwa.sam
@@ -188,8 +188,8 @@
     perl -pe "s/run1/run2/g" ~/scripts/immunome_2014/04-stampy.py > \
     ~/scripts/immunome_2014/04-stampy-run2.py
     python ~/scripts/immunome_2014/04-stampy-run2.py *.bwa.sam
-##SNP Calling
-###Ran 05a-clean_sort_addRG.py stampy.bam in:
+## SNP Calling
+### Ran 05a-clean_sort_addRG.py stampy.bam in:
     # /work/jelber2/immunome_2014/run1/stampy-alignment/
     cd /work/jelber2/immunome_2014/run1/stampy-alignment/
     ~/scripts/immunome_2014/05a-clean_sort_addRG.py *.stampy.bam
@@ -200,19 +200,19 @@
     perl -pe "s/RGID=%s_9Sep2014/RGID=%s_15Sep2014/g" \
     > ~/scripts/immunome_2014/05a-clean_sort_addRG-run2.py
     python ~/scripts/immunome_2014/05a-clean_sort_addRG-run2.py *.stampy.bam
-###Ran 05b-clean_sort_addRG_markdup_realign.py
+### Ran 05b-clean_sort_addRG_markdup_realign.py
     cd /work/jelber2/immunome_2014/run1/clean-sort-addRG/
     ~/scripts/immunome_2014/05b-clean_sort_addRG_markdup_realign.py *-CL-RG.bam
-###Need to create interval list to call SNPs in the immunome_baits target region
+### Need to create interval list to call SNPs in the immunome_baits target region
     cd /work/jelber2/reference/
     java -Xmx8g -jar ~/bin/picard-tools-1.128/picard.jar BedToIntervalList \
     I=immunome_baits_C_picta-3.0.3.bed \
     SEQUENCE_DICTIONARY=GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.dict \
     O=immunome_baits_C_picta-3.0.3.interval.list
-###Ran 06-mergeBAM_callSNPs_initial.py
+### Ran 06-mergeBAM_callSNPs_initial.py
     cd /work/jelber2/immunome_2014/combined/realign-around-indels/
     ~/scripts/immunome_2014/06-mergeBAM_callSNPs_initial.py *-realigned.bam
-###Need to get gsalib for R in order to produce recalibration plots
+### Need to get gsalib for R in order to produce recalibration plots
     #see link below for further details
     #http://gatkforums.broadinstitute.org/discussion/1244/what-is-a-gatkreport
     #on SuperMikeII
@@ -229,31 +229,31 @@
     q()
     ##Hmm, the above trick didn't work!
     ##Will have to generate the plots on my Centos machine
-###Ran 07-qual_score_recal01.py
+### Ran 07-qual_score_recal01.py
     cd /work/jelber2/immunome_2014/combined/realign-around-indels/
     #excludes file ALL-samples-realigned.bam
     find . -name '*-realigned.bam' -not -name 'ALL-samples-*' \
     -exec ~/scripts/immunome_2014/07-qual_score_recal01.py {} \;
-###Ran 08-mergeBAM_callSNPs_recal01.py
+### Ran 08-mergeBAM_callSNPs_recal01.py
     cd /work/jelber2/immunome_2014/combined/call-SNPs-recal01/
     ~/scripts/immunome_2014/08-mergeBAM_callSNPs_recal01.py *-recal01.bam
-###Ran 09-qual_score_recal02.py
+### Ran 09-qual_score_recal02.py
     cd /work/jelber2/immunome_2014/combined/call-SNPs-recal01/
     #excludes file ALL-samples-recal01.bam
     find . -name '*-recal01.bam' -not -name 'ALL-samples-*' \
     -exec ~/scripts/immunome_2014/09-qual_score_recal02.py {} \;
-###Ran 10-mergeBAM_callSNPs_recal02.py
+### Ran 10-mergeBAM_callSNPs_recal02.py
     cd /work/jelber2/immunome_2014/combined/call-SNPs-recal02/
     ~/scripts/immunome_2014/10-mergeBAM_callSNPs_recal02.py *-recal02.bam
-###Ran 11-qual_score_recal03.py
+### Ran 11-qual_score_recal03.py
     cd /work/jelber2/immunome_2014/combined/call-SNPs-recal02/
     #excludes file ALL-samples-recal02.bam
     find . -name '*-recal02.bam' -not -name 'ALL-samples-*' \
     -exec ~/scripts/immunome_2014/11-qual_score_recal03.py {} \;
-###Ran 12-mergeBAM_callSNPs_recal03.py
+### Ran 12-mergeBAM_callSNPs_recal03.py
     cd /work/jelber2/immunome_2014/combined/call-SNPs-recal03/
     ~/scripts/immunome_2014/12-mergeBAM_callSNPs_recal03.py *-recal03.bam
-###Calculate seq_metrics.py
+### Calculate seq_metrics.py
     cd /work/jelber2/immunome_2014/combined/call-SNPs-recal03/
     java -Xmx4g -jar ~/bin/picard-tools-1.128/picard.jar CalculateHsMetrics \
     BAIT_INTERVALS=/work/jelber2/reference/immunome_baits_C_picta-3.0.3.interval.list \
@@ -263,8 +263,8 @@
     R=/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     I=ALL-samples-recal03.bam \
     O=ALL-samples-recal03-baitsonly.hsmetrics.txt
-###plot coverage for each sample
-####run bedtools coverage on all bam files, then keep only lines with 'all' on them
+### plot coverage for each sample
+#### run bedtools coverage on all bam files, then keep only lines with 'all' on them
     #FROM http://gettinggeneticsdone.blogspot.com/2014/03/visualize-coverage-exome-targeted-ngs-bedtools.html
     #ALSO FROM https://github.com/arq5x/bedtools-protocols/blob/master/bedtools.md
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/
@@ -277,15 +277,15 @@
     -b /media/immunome_2014/work/jelber2/reference/immunome_baits_C_picta-3.0.3.bed \
     -hist | grep ^all > $i.baitcoverage.all.txt
     done < ../call-SNPs-recal03/samplelist
-###Need to use featureCounts to summarize number of genes, reads per gene, etc
-####Get Subread
+### Need to use featureCounts to summarize number of genes, reads per gene, etc
+#### Get Subread
     #featureCounts is part of the Subread package http://bioinf.wehi.edu.au/featureCounts/
     cd ~/bin/
     wget http://downloads.sourceforge.net/project/subread/subread-1.4.6/subread-1.4.6-Linux-x86_64.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fsubread%2Ffiles%2Fsubread-1.4.6%2F&ts=1423446986&use_mirror=iweb
     mv subread-1.4.6-Linux-x86_64.tar.gz?r=http:%2F%2Fsourceforge.net%2Fprojects%2Fsubread%2Ffiles%2Fsubread-1.4.6%2F subread-1.4.6-Linux-x86_64.tar.gz
     tar xzf subread-1.4.6-Linux-x86_64.tar.gz
     mv subread-1.4.6-Linux-x86_64.tar.gz subread-1.4.6-Linux-x86_64
-####Get genometools-1.5.4 to annotate introns in gff file
+#### Get genometools-1.5.4 to annotate introns in gff file
     cd ~/bin/
     wget http://genometools.org/pub/genometools-1.5.4.tar.gz
     tar xzf genometools-1.5.4.tar.gz
@@ -309,14 +309,14 @@
     ~/bin/genometools-1.5.4/bin/gt gff3 -addintrons yes \
     -o /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.gff.introns \
     /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.gff
-####Need to prefilter the GFF file for immune genes
+#### Need to prefilter the GFF file for immune genes
     cd /media/immunome_2014/work/jelber2/reference/
     #intersect the gff file
     ~/bin/bedtools-2.22.1/bin/bedtools intersect \
     -a GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.gff.introns \
     -b immunome_baits_C_picta-3.0.3.bed \
     > GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic_immunome_baits.gff
-####Convert GFF file of gene annotations to GTF
+#### Convert GFF file of gene annotations to GTF
     cd /media/immunome_2014/work/jelber2/reference/
     perl -pe "s/\S+=GeneID:(\d+).+/gene_id \"\1\";/g" \
     GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic_immunome_baits.gff \
@@ -349,7 +349,7 @@
     -a /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic_immunome_baits.gtf \
     -o $i.exon -F GTF -T 2 -f --ignoreDup ../call-SNPs-recal03/$i-recal03.bam
     done < ../call-SNPs-recal03/samplelist
-####write an R function to do the following
+#### write an R function to do the following
 #####count number of possible immune genes
     wc -l AL102.gene
     #total genes = 632 (after subtracting 2 header lines)
@@ -383,12 +383,12 @@
     perl -ane '$sum += $F[0]; END {print $sum; print "\n"}' > $i.exon.count
     done < ../call-SNPs-recal03/samplelist
     cat *.exon.count > exon.counts.per.sample
-###Ran 14-haplotypecaller.py
+### Ran 14-haplotypecaller.py
     cd /work/jelber2/immunome_2014/combined/call-SNPs-recal03/
     #excludes file ALL-samples-recal03.bam
     find . -name '*-recal03.bam' -not -name 'ALL-samples-*' \
     -exec ~/scripts/immunome_2014/14-haplotypecaller.py {} \;
-###Ran GenotypeGVCFs to perform joint genotyping
+### Ran GenotypeGVCFs to perform joint genotyping
     #on Cenots machine
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/hc/
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
@@ -414,7 +414,7 @@
     --variant LA77-raw-snps-indels.vcf \
     --variant LA78-raw-snps-indels.vcf \
     -o ALL-samples-raw-snps-indels.vcf
-###Added expressions to filter variants
+### Added expressions to filter variants
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T VariantFiltration \
     -R /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
@@ -430,22 +430,22 @@
     --genotypeFilterExpression "GQ < 20.0" \
     --genotypeFilterName "Low_GenotypeQuality" \
     -o ALL-samples-Q30-snps-indels.vcf
-####Got only Indel variants
+#### Got only Indel variants
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -R /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -T SelectVariants \
     -V ALL-samples-Q30-snps-indels.vcf \
     -o ALL-samples-Q30-indels.vcf \
     -selectType INDEL
-####Got only SNP variants
+#### Got only SNP variants
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -R /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -T SelectVariants \
     -V ALL-samples-Q30-snps-indels.vcf \
     -o ALL-samples-Q30-snps.vcf \
     -selectType SNP
-###Got "Truthing" SNPs for Variant Quality Score Recalibration
-####First got concordant SNPs between HaplotypeCaller and UnifiedGenotyper
+### Got "Truthing" SNPs for Variant Quality Score Recalibration
+#### First got concordant SNPs between HaplotypeCaller and UnifiedGenotyper
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -R /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -T SelectVariants \
@@ -459,7 +459,7 @@
     --variant concordant-snps-HCvsUG.vcf \
     -o concordant-snps-HCvsUG-PASS.vcf \
     --excludeFiltered
-####Second got concordant Indels between HaplotypeCaller and UnifiedGenotyper
+#### Second got concordant Indels between HaplotypeCaller and UnifiedGenotyper
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -R /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
     -T SelectVariants \
@@ -477,7 +477,7 @@
     perl -pe "s/PASS/INDEL/g" \
     ../hc/concordant-indels-HCvsUG-PASS.vcf \
     > ../hc/concordant-indels-HCvsUG-PASS-renamed-INDEL.vcf
-####Ran Variant Recalibrator
+#### Ran Variant Recalibrator
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/
     mkdir vqsr
     cd vqsr
@@ -507,7 +507,7 @@
     --maxGaussians 2
     #COULD NOT GET TO WORK with --maxGaussians 4 or 3, presumably because the
     #indel dataset (~200 indels) is too small.
-####Applied the recalibration on snps
+#### Applied the recalibration on snps
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T ApplyRecalibration \
     -R /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
@@ -516,7 +516,7 @@
     -tranchesFile VQSR-snps.tranches \
     -recalFile VQSR-snps.recal \
     -o ALL-samples-Q30-snps-recal.vcf
-####Applied the recalibration on indels
+#### Applied the recalibration on indels
     java -Xmx8g -jar ~/bin/GATK-3.3.0/GenomeAnalysisTK.jar \
     -T ApplyRecalibration \
     -R /media/immunome_2014/work/jelber2/reference/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_genomic.fna \
@@ -525,11 +525,11 @@
     -tranchesFile VQSR-indels.tranches \
     -recalFile VQSR-indels.recal \
     -o ALL-samples-Q30-indels-recal.vcf
-###Needed to use beagle to improve SNPs (using Linkage Disequilibrium) called by Haplotype Caller
-####Downloaded beagle
+### Needed to use beagle to improve SNPs (using Linkage Disequilibrium) called by Haplotype Caller
+#### Downloaded beagle
     cd ~/bin
     wget http://faculty.washington.edu/browning/beagle/beagle.r1398.jar
-####Ran beagle on snps and indels separately
+#### Ran beagle on snps and indels separately
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/
     mkdir beagle
     cd beagle
@@ -544,14 +544,14 @@
     nthreads=2 \
     out=/media/immunome_2014/work/jelber2/immunome_2014/combined/beagle/ALL-samples-Q30-indels-recal-beagle
 ========
-#STEPS FOR POPGEN
+# STEPS FOR POPGEN
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/
     mkdir popgen
     mkdir popgen-msat
-##For SNPs
+## For SNPs
     cd popgen
-###Get only polymorphic loci
-####Downloaded vcftools
+### Get only polymorphic loci
+#### Downloaded vcftools
     cd /home/jelber2/bin/
     wget http://downloads.sourceforge.net/project/vcftools/vcftools_0.1.12b.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fvcftools%2Ffiles%2F&ts=1411515317&use_mirror=superb-dca2
     tar -xzf vcftools_0.1.12b.tar.gz 
@@ -565,7 +565,7 @@
     make #compile vcftools
     # Path to vcftools executable
     /home/jelber2/bin/vcftools_0.1.12b/bin/vcftools
-####Remove loci with AF=1
+#### Remove loci with AF=1
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen/
     #removes loci with AF=1
     zcat ../beagle/ALL-samples-Q30-snps-recal-beagle.vcf.gz | grep -v "AF=1" \
@@ -594,8 +594,8 @@
     done < multiallelic_or_nonpolymorphicloci
     grep -v "remove" ALL-samples-Q30-snps-recal-beagle2.vcf \
     > ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf
-###Check loci for linkage disequilibrium and Hardy-Weinberg Equilibrium
-####Had to make populations.txt file and population-specific files for vcf filtering
+### Check loci for linkage disequilibrium and Hardy-Weinberg Equilibrium
+#### Had to make populations.txt file and population-specific files for vcf filtering
     # e.g., format (\t=tab)
     #Sample\tpopulation1
     #populations.txt, so you have only torts from each population in a file, one per line
@@ -604,7 +604,7 @@
     grep "GG" populations.txt > Georgia
     grep "FL" populations.txt > Florida
     grep "LA" populations.txt > Louisiana
-####Hardy-Weinberg Equilibrium test
+#### Hardy-Weinberg Equilibrium test
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --hardy --out hwe.FL --keep Florida
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --hardy --out hwe.GG --keep Georgia
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --hardy --out hwe.LA --keep Louisiana
@@ -623,7 +623,7 @@
     GGhwe <-read.table(file ="hwe.GG.hwe", header = TRUE)
     GGhwe.fdr <- p.adjust(p = GGhwe$P_HWE, method = "fdr", n = length(GGhwe$P_HWE))
     summary(GGhwe.fdr)
-####outputs linkage disequilibrium pvalues
+#### outputs linkage disequilibrium pvalues
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --geno-chisq --out geno.FL --keep Florida
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --geno-chisq --out geno.GG --keep Georgia
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --geno-chisq --out geno.LA --keep Louisiana
@@ -647,12 +647,12 @@
     LAld.fdr=p.adjust(p = LAld$PVAL, method = "fdr", n = length(LAld$PVAL))
     summary(LAld.fdr)
     #summary(LAld$PVAL)
-###Calculate nucleotide diversity (pi per site)
+### Calculate nucleotide diversity (pi per site)
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --site-pi --out pi.FL --keep Florida
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --site-pi --out pi.GG --keep Georgia
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --site-pi --out pi.LA --keep Louisiana
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --site-pi --out pi.AL --keep Alabama
-###Calculate Tajima's D
+### Calculate Tajima's D
     #need to figure out "correct" window size
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --TajimaD 120 --out tajimaD.120.FL --keep Florida
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --TajimaD 1200 --out tajimaD.1200.FL --keep Florida
@@ -661,8 +661,8 @@
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --TajimaD 120 --out tajimaD.GG --keep Georgia
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --TajimaD 120 --out tajimaD.LA --keep Louisiana
     ~/bin/vcftools_0.1.12b/bin/vcftools --vcf ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf --TajimaD 120 --out tajimaD.AL --keep Alabama
-###Convert VCF file to structure, fstat, and smartpca input
-####VCF to Structure
+### Convert VCF file to structure, fstat, and smartpca input
+#### VCF to Structure
 #####use PGDSpider
     #get the program
     cd ~/bin/
@@ -729,7 +729,7 @@
     -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen/structure-input.txt \
     -outputformat STRUCTURE \
     -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen/vcf2structure.spid > structure-input.log
-####VCF to GENEPOP
+#### VCF to GENEPOP
 #####create the spid file
     #replace the STRUCTURE section of vcf2structure.spid with the following for GENEPOP
     #minus the leading spaces
@@ -748,7 +748,7 @@
     -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen/genepop-input.txt \
     -outputformat GENEPOP \
     -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen/vcf2genepop.spid > genepop-input.log
-####VCF to FSTAT
+#### VCF to FSTAT
 #####create the spid file
     #replace the STRUCTURE section of vcf2structure.spid with the following for FSTAT
     #minus the leading spaces
@@ -771,18 +771,18 @@
     -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen/fstat-input.txt \
     -outputformat FSTAT \
     -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen/vcf2fstat.spid > fstat-input.log
-##Look at population structure with structure
-###Installed structure from source, to run on SuperMikeII
-####Get source
+## Look at population structure with structure
+### Installed structure from source, to run on SuperMikeII
+#### Get source
     cd ~/bin/
     mkdir structure
     cd structure
     wget http://pritchardlab.stanford.edu/structure_software/release_versions/v2.3.4/structure_kernel_source.tar.gz
     tar xzf structure_kernel_source.tar.gz
     cd structure_kernel_src/
-####compile
+#### compile
     make
-####used the following setting for mainparams file created using Windows front-end version
+#### used the following setting for mainparams file created using Windows front-end version
         #define OUTFILE /work/jelber2/immunome_2014/combined/popgen/structure-results
         #define INFILE /work/jelber2/immunome_2014/combined/popgen/structure-input.txt
         #define NUMINDS 16
@@ -826,7 +826,7 @@
         #define STARTATPOPINFO 0
         #define METROFREQ 10
         #define UPDATEFREQ 1
-####Ran structure using the following command for k1,k2,k3,k4,k5
+#### Ran structure using the following command for k1,k2,k3,k4,k5
     cd /work/jelber2/immunome_2014/combined/popgen/
     ~/bin/structure/structure_kernel_src/structure \
     -m mainparams.test.k1 \
@@ -835,21 +835,21 @@
     #note we used default settings for extraparams
     #(i.e., the correlated allele frequency and the admixture ancestry models)
     #implemented on SuperMike II using /home/jelber2/scripts/immunome_2014/16-structure.py
-####Used STRUCTURE HARVESTER web v0.6.94 to select best K values
-####Used CLUMPAK web to visualize population assignments
+#### Used STRUCTURE HARVESTER web v0.6.94 to select best K values
+#### Used CLUMPAK web to visualize population assignments
     http://clumpak.tau.ac.il/
-###Calculated basic genetic stats and performed pca with r package hierfstat
+### Calculated basic genetic stats and performed pca with r package hierfstat
     #analyses detailed in hierfstat-snps-correct.R
-##For msats
-###Create input files for full and parital microsatellite dataset
-####Original
+## For msats
+### Create input files for full and parital microsatellite dataset
+#### Original
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/
     #original file = 11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-alldata-jpe-2015-02-25.arp
-####Same msats populations as for SNPs
+#### Same msats populations as for SNPs
     #kept only LA,SD,GG,FL populations, named file as:
     #11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-jpe-2015-02-25.arp
     # = full microsatellite dataset in /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review/
-####Same msats populations and individuals as for SNPs
+#### Same msats populations and individuals as for SNPs
     #used only same individuals (minus GG population, which contained GG462 but did not contain GG1044, GG1435, GG1835)
     #so used random selection of 3 others from within GG
     grep -Po "GG\d+" \
@@ -858,12 +858,12 @@
     # named file as:
     #11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp
     # = partial microsatellite dataset in /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/
-###Get only polymorphic loci
+### Get only polymorphic loci
     #they are all polymorphic
-###Check loci for linkage disequilibrium and Hardy-Weinberg Equilibrium
+### Check loci for linkage disequilibrium and Hardy-Weinberg Equilibrium
     # used Arlequin - see below, but all were in HWE and linkage equilibrium for both partial and full microsatellite datasets
-###Convert msat loci from ARLEQUIN to FSTAT,STRUCTURE FORMATS
-####ARLEQUIN to FSTAT
+### Convert msat loci from ARLEQUIN to FSTAT,STRUCTURE FORMATS
+#### ARLEQUIN to FSTAT
 #####remaining conversion steps only shown for partial microsatellite dataset, but the same was done for the full microsatellite dataset
     #first created template_SPID file
     java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.8.3/PGDSpider2-cli.jar \
@@ -892,7 +892,7 @@
     -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp \
     -outputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/fstat-msats-input.txt \
     -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/arlequin2fstat.spid > arlequin2fstat.log
-####ARLEQUIN to STRUCTURE
+#### ARLEQUIN to STRUCTURE
     java -Xmx1024m -Xms512m -jar ~/bin/PGDSpider_2.0.8.3/PGDSpider2-cli.jar \
     -inputfile /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/11.03.09-RWC-arlequin-inpt-for-animal-conserv-paper-LA_SD_GG_FLdata-same-jpe-2015-02-25.arp \
     -inputformat ARLEQUIN \
@@ -919,28 +919,28 @@
     -spid /media/immunome_2014/work/jelber2/immunome_2014/combined/popgen-msats-review2/arlequin2structure.spid > arlequin2structure.log
     #add loci names
     sed -i 1i"\\\t\t1 2 3 4 5 6 7 8 9 10" structure-msats-input.txt
-###Look at population structure with structure
+### Look at population structure with structure
     #copy mainparams files
     cp ../popgen-msats-review/mainparams.test.0* .
     #modify the directory and number of loci with perl
     perl -pi -e "s/popgen-msats-review/popgen-msats-review2/g" mainparams.test.0*
     perl -pi -e "s/101/16/g" mainparams.test.0*
-####Ran structure using the following command for k1,k2,k3,k4,k5 on SuperMikeII
+#### Ran structure using the following command for k1,k2,k3,k4,k5 on SuperMikeII
     cd /work/jelber2/immunome_2014/combined/popgen-msats-review2/
     ~/bin/structure/structure_kernel_src/structure \
     -m mainparams.test.0* \
     -e ~/bin/structure/structure_kernel_src/extraparams####Used STRUCTURE HARVESTER web v0.6.94 to select best K values
     #implemented in using 16-structure-msats.py
-####Used CLUMPAK web to visualize population assignments
+#### Used CLUMPAK web to visualize population assignments
     http://clumpak.tau.ac.il/
-###Calculated basic genetic stats with r package hierfstat and also pca
+### Calculated basic genetic stats with r package hierfstat and also pca
     #partial microsatellite dataset analyses detailed in hierfstat-part-msats.r saved results in hierfstat-part-msats.RData
     #full microsatellite dataset analyses detailed in hierfstat-msats.r saved results in hierfstat_msats_correct_R_workspace.RData
-###Subsampling power analysis
+### Subsampling power analysis
     #partial microsatellite dataset analyses detailed in power-analysis-part-msats.r saved results in power-analysis-part-msats.RData
     #full microstatellite dataset analyses detailed in power_analysis.r saved results in power_analysis.RData
 ========
-#STEPS FOR GETTING NAMES OF GENES WITH POLYMORPHIC SNPs
+# STEPS FOR GETTING NAMES OF GENES WITH POLYMORPHIC SNPs
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/
     mkdir snp_genes
     cd snp_genes
@@ -978,21 +978,21 @@
     TLR <- allgenes[grepl("toll",allgenes)]
     q()
 ========
-#STEPS FOR VARIANT ANNOTATION
-##Download Tools First
-###Downloaded snpEff
+# STEPS FOR VARIANT ANNOTATION
+## Download Tools First
+### Downloaded snpEff
     #ideally want to know if variants will affect protein structure and possibly immune gene function
     cd /work/jelber2/reference
     wget http://iweb.dl.sourceforge.net/project/snpeff/snpEff_latest_core.zip
     unzip snpEff_latest_core.zip
-###Added Chrysemys_picta_bellii-3.0.3 to snpEff.config using nano
+### Added Chrysemys_picta_bellii-3.0.3 to snpEff.config using nano
     cd /media/immunome_2014/work/jelber2/reference/snpEff
     nano snpEff.config # added the following four lines after the Capsella_rubella_v1.0 entry (remove 4 spaces on left if cut and pasting)
     # Chrysemys_picta_bellii-3.0.3
     Chrysemys_picta_bellii-3.0.3.genome : western painted turtle
     	Chrysemys_picta_bellii-3.0.3.reference : ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3/
     	Chrysemys_picta_bellii-3.0.3.M.codonTable : Standard
-###Created data directory for Chrysemys_picta_bellii-3.0.3 genome
+### Created data directory for Chrysemys_picta_bellii-3.0.3 genome
     cd /media/immunome_2014/work/jelber2/reference/snpEff
     mkdir data
     cd data
@@ -1014,17 +1014,17 @@
     wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3/GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_protein.faa.gz
     mv GCF_000241765.3_Chrysemys_picta_bellii-3.0.3_protein.faa.gz protein.fa.gz
     gunzip protein.fa.gz
-###Built snpEff database for Chrysemys_picta_bellii-3.0.3
+### Built snpEff database for Chrysemys_picta_bellii-3.0.3
     cd /media/immunome_2014/work/jelber2/reference/snpEff
     # used snpEff_build.py script to implement command below, which took < 30 minutes
     java -jar -Xmx8g /media/immunome_2014/work/jelber2/reference/snpEff/snpEff.jar build -gff3 -v Chrysemys_picta_bellii-3.0.3 2>&1 | tee Chrysemys_picta_bellii-3.0.3.build
-###Downloaded bcftools
+### Downloaded bcftools
     cd ~/bin/
     git clone --branch=develop git://github.com/samtools/htslib.git
     git clone --branch=develop git://github.com/samtools/bcftools.git
     cd bcftools; make
-#Need to look for protein altering variants shared by samples in the same population
-###Split vcf file from GATK for snpEff
+# Need to look for protein altering variants shared by samples in the same population
+### Split vcf file from GATK for snpEff
     #snpEff needs ALL-samples*.vcf file split by sample (i.e., into Sample1.vcf, Sample2.vcf)
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/call-SNPs-recal03/
     ls *-recal03.bam | grep -Po '^\w+'| sort -u | grep -v 'ALL' > samplelist
@@ -1040,7 +1040,7 @@
     do
     ~/bin/bcftools/bcftools view -s $i ALL-samples-Q30-snps-recal-beagle-polymorphic.vcf.gz > $i-snps.vcf
     done < ../call-SNPs-recal03/samplelist
-###Ran snpEff on each split vcf file
+### Ran snpEff on each split vcf file
     cd /media/immunome_2014/work/jelber2/immunome_2014/combined/split-vcfs/
     # command below to run snpEff on all samples in samplelist
     # not implemented on SuperMikeII b/c process was < 15 min
@@ -1053,7 +1053,7 @@
     mv snpEff_genes.txt $i-snps-snpeff-genes.txt
     mv snpEff_summary.html $i-snps-snpeff-summary.html
     done < ../call-SNPs-recal03/samplelist
-###Ran VariantAnnotator on each snpeff file
+### Ran VariantAnnotator on each snpeff file
     while read i
     do
     rm $i-snps.vcf.idx
@@ -1067,7 +1067,7 @@
     -L $i-snps.vcf \
     -o $i-snps-annotated.vcf
     done < ../call-SNPs-recal03/samplelist
-###Merge split, annotated vcfs
+### Merge split, annotated vcfs
     #compress then index split snp files
     while read i
     do
@@ -1080,8 +1080,8 @@
     -O v -m none \
      ../split-vcfs/*-snps-annotated.vcf.gz
 ========
-#STEPS for Number of Unpaired reads
-##Use statistics from Trimmomatic
+# STEPS for Number of Unpaired reads
+## Use statistics from Trimmomatic
     cd /media/immunome_2014/work/jelber2/immunome_2014/run1/trimmed-data/
     grep "Input Read Pairs" Trimmomatic-* > ~/Desktop/trimmomatic-data.txt
     cd /media/immunome_2014/work/jelber2/immunome_2014/run2/trimmed-data/
